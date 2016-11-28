@@ -1,26 +1,10 @@
 #turns off the license screen
 startup_message off
 
-# always use a login shell
-#shell -$SHELL
-
-# cleaner shell title
-#shelltitle ''
-
 # allows you to keep what was displayed on your terminal when exiting things like man, less rather than having your terminal cleared
 altscreen on
 
-# shows your sessions in utmp
-#deflogin on
-
-# Make screen messages stand out a little more - black on bright green.
-#sorendition "+b kG"
-
-# turn visual bell on
-#vbell on
-#vbell_msg "  !! Something interesting has happened !!  "
-#activity "%c activity -> %n%f %t"
-#bell "%c bell -> %n%f %t^G"
+# turn visual bell off
 vbell off
 
 # Never, ever turn this off.
@@ -49,12 +33,10 @@ defutf8 on
 #bind O login off
 #bind } history
 #
-# control + left; previous screen window
-bindkey ^[[1;5D prev
-bindkey ^[[D prev
-# control + right; next screen window
-bindkey ^[[1;5C next
-bindkey ^[[C next
+# shift + left; previous screen window
+bindkey ^[[1;2D prev
+# shift + right; next screen window
+bindkey ^[[1;2C next
 # home/end keys
 bindkey ^[[1~ beginning-of-line
 bindkey ^[[4~ end-of-line

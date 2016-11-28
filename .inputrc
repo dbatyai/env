@@ -1,4 +1,9 @@
 set bell-style none
 "\e[1~": beginning-of-line
 "\e[4~": end-of-line
-
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+"\e[1;2D": backward-char
+"\e[1;2C": forward-char
+"\e[1;6D": backward-char
+"\e[1;6C": forward-char
