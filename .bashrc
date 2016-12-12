@@ -53,3 +53,13 @@ function nanoline {
     done
 }
 alias nano="nanoline"
+
+function md {
+    if [ $# -lt 1 ]; then
+        echo 'No directory name given.'
+        return 1;
+    fi
+    mkdir -p $1;
+    cd $1;
+    return 0;
+}
