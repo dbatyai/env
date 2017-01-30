@@ -98,7 +98,7 @@ bindkey -k k8 screen
 defnonblock on
 
 ## Set correct term
-term xterm-256color
+term screen-256color
 
 ## Enable scrollbar
 #termcapinfo xterm* ti@:te@
