@@ -22,32 +22,22 @@ defutf8 on
 # SCREEN KEYBINDINGS
 # ------------------------------------------------------------------------------
 
-# Remove some stupid / dangerous key bindings
-#bind ^k
-##bind L
-#bind ^\
-## Make them better
 #bind \\ quit
-#bind K kill
-#bind I login on
-#bind O login off
-#bind } history
-#
+
 # shift + left; previous screen window
 bindkey ^[[1;2D prev
 # shift + right; next screen window
 bindkey ^[[1;2C next
+
 # home/end keys
 bindkey ^[[1~ beginning-of-line
 bindkey ^[[4~ end-of-line
-# control + up; previous split screen
-bindkey ^[[1;5A focus prev
-# control + down; next split screen
-bindkey ^[[1;5B focus next
-# F7 kill tab
-bindkey -k k7 kill
-## F2 write paste buffer to file
-#bindkey -k k2 writebuf
+
+# PgUp enters copy mode
+bindkey -d -k kP eval "copy" "stuff ^b"
+
+# split focus
+bindkey ^[[Z focus
 # F3 Split horizontally
 bindkey -k k3 split
 # F4 Split vertically
@@ -56,15 +46,7 @@ bindkey -k k4 split -v
 bindkey -k k5 remove
 # F6 Remove all splits
 bindkey -k k6 only
-## F7 Urlview
-#bindkey -k k7 eval "hardcopy_append off" "hardcopy -h $HOME/.screen-urlview" "screen urlview $HOME/.screen-urlview"
-# F8 New tab
-bindkey -k k8 screen
-## F9 resize -1 line
-#bindkey -k k9 resize -1
-## F10 resize +1 line
-#bindkey -k k; resize +1
-#
+
 ## ------------------------------------------------------------------------------
 ## TERMINAL SETTINGS
 ## ------------------------------------------------------------------------------
@@ -101,9 +83,8 @@ defnonblock on
 term screen-256color
 
 ## Enable scrollbar
-#termcapinfo xterm* ti@:te@
-#termcapinfo * ti=:te=
-termcapinfo xterm*|rxvt*  te=\E[H\E[2J:ti=\E[H\E[2J:
+#termcapinfo xterm* ti=:te=
+#termcapinfo xterm*|rxvt*  te=\E[H\E[2J:ti=\E[H\E[2J:
 
 ## Statusbar
 hardstatus off
