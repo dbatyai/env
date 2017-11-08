@@ -33,19 +33,28 @@ bindkey ^[[1;2C next
 bindkey ^[[1~ beginning-of-line
 bindkey ^[[4~ end-of-line
 
-# PgUp enters copy mode
-bindkey -d -k kP eval "copy" "stuff ^b"
+# shift + up enters copy mode
+bindkey -d ^[[1;2A eval "copy" "stuff ^b"
 
 # split focus
-bindkey ^[[Z focus
+#bindkey ^[[Z focus
 # F3 Split horizontally
-bindkey -k k3 split
+#bindkey -k k3 split
 # F4 Split vertically
-bindkey -k k4 split -v
+#bindkey -k k4 split -v
 # F5 Remove single split
-bindkey -k k5 remove
+#bindkey -k k5 remove
 # F6 Remove all splits
-bindkey -k k6 only
+#bindkey -k k6 only
+
+## ------------------------------------------------------------------------------
+## TABS
+## ------------------------------------------------------------------------------
+
+#screen -t irc 0
+#screen -t jerry 1
+#screen -t iotjs 2
+#screen -t
 
 ## ------------------------------------------------------------------------------
 ## TERMINAL SETTINGS
@@ -83,8 +92,8 @@ defnonblock on
 term screen-256color
 
 ## Enable scrollbar
-#termcapinfo xterm* ti=:te=
-#termcapinfo xterm*|rxvt*  te=\E[H\E[2J:ti=\E[H\E[2J:
+termcapinfo xterm* ti=:te=
+termcapinfo xterm*|rxvt*  te=\E[H\E[2J:ti=\E[H\E[2J:
 
 ## Statusbar
 hardstatus off
