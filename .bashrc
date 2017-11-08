@@ -7,52 +7,33 @@
 
 shopt -s checkwinsize
 
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+HISTSIZE=10000
+HISTFILESIZE=20000
+
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"
 alias ll='ls -al'
 
-# Git completion
-source /home/dbatyai/.git_completion.sh
-source /home/dbatyai/.git_prompt.sh
-
 # Grep coloring
 alias grep='grep --color=auto'
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 # Prompt color
-PS1='[\[\e[0;33m\]\t\[\e[0m\]]\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\[\e[31m\]$(__git_ps1)\[\e[0m\]$ '
+PS1='\[\033[33m\]\t\[\033[00m\] \[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[91m\]$(parse_git_branch)\[\033[00m\]] '
 
 # Set default editor
-export EDITOR=nano
-
-alias tnano="screen -t nano nano"
-alias t="screen -t tab"
+export EDITOR=vim
 
 # arm-none-eabi-gcc
 export PATH=$PATH:/home/dbatyai/Work/gcc-arm-none-eabi/bin
-
-# nano file:line
-function nanoline {
-    for f in "$@"
-    do
-        fname="$f"
-        line=0
-
-        index=`expr index "$f" : `
-        if [ "$index" -gt 0 ]
-            then
-                fname=${f:0:$index - 1}
-                linestr=${f:$index}
-                linenum=`expr "$linestr" : '\([0-9]*\)'`
-                if [ $linenum ]
-                    then
-                        line=$linenum
-                fi
-        fi
-
-        nano "+$line" "$fname"
-    done
-}
-alias nano="nanoline"
 
 function md {
     if [ $# -lt 1 ]; then
