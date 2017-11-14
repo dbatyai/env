@@ -27,7 +27,7 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 # Prompt color
-PS1='\[\033[33m\]\t\[\033[00m\] \[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[91m\]$(parse_git_branch)\[\033[00m\]] '
+PS1='\[\033[33m\]\t\[\033[00m\] \[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[91m\]$(parse_git_branch)\[\033[00m\]$ '
 
 # Set default editor
 export EDITOR=vim
