@@ -95,7 +95,6 @@ map <C-n> :NERDTreeFocus<CR>
 Plugin 'amix/open_file_under_cursor.vim'
 
 call vundle#end()
-filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -105,7 +104,7 @@ set history=500
 
 " Enable filetype plugins
 filetype plugin on
-filetype indent on
+filetype indent off
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -257,10 +256,11 @@ set tabstop=2
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
+" set ai "Auto indent
+" set si "Smart indent
 set wrap "Wrap lines
 
+let c_space_errors = 1
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -286,9 +286,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-map <M-Left> :bprev
-map <M-Right> :bnext
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -355,17 +352,13 @@ map [1;5C <C-Right>
 map [1;5A <C-Up>
 map [1;5B <C-Down>
 
-nnoremap <M-Left> :bprev<CR>==
-nnoremap <M-Right> :bnext<CR>==
-inoremap <M-Left> <Esc>:bprev<CR>==gi
-inoremap <M-Right> <Esc>:bnext<CR>==gi
+noremap <M-Left> <Esc>:bprev<CR>
+noremap <M-Right> <Esc>:bnext<CR>
+noremap <C-Left> <Esc>b
+noremap <C-Right> <Esc>w
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-nnoremap <C-Down> :m .+1<CR>==
-nnoremap <C-Up> :m .-2<CR>==
-inoremap <C-Down> <Esc>:m .+1<CR>==gi
-inoremap <C-Up> <Esc>:m .-2<CR>==gi
-vnoremap <C-Down> :m '>+1<CR>gv=gv
-vnoremap <C-Up> :m '<-2<CR>gv=gv
+noremap <C-Down> <Esc>:m .+1<CR>
+noremap <C-Up> <Esc>:m .-2<CR>
 " vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 " /vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
