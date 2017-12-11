@@ -54,40 +54,9 @@ let g:ycm_filter_diagnostics = {
   \      "regex": [ ".*used in an inline function with external linkage.*"],
   \    }
   \ } 
-
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/ycm_global_conf.py'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
-function BuffersList()
-    let all = range(1, bufnr('$'))
-    let res = " "
-    for b in all
-        if buflisted(b)
-            if b == bufnr('%')  
-                let res .= "("
-            endif
-            if getbufvar(b, '&mod')
-                let res .= '+'
-            endif
-            let res .= fnamemodify(bufname(b), ':t')
-            if b == bufnr('%')  
-                let res .= ")"
-            endif
-            let res .= ' '
-        endif
-    endfor
-    return res
-endfunction
-
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'buffers' ] ]
-      \ },
-      \ 'component_function': {
-      \   'buffers': 'BuffersList'
-      \ },
-      \ }
 
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
@@ -229,6 +198,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+set number
+hi LineNr ctermfg=DarkGray
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -256,8 +227,9 @@ set tabstop=2
 set lbr
 set tw=500
 
-" set ai "Auto indent
-" set si "Smart indent
+set noai "Auto indent
+set nosi "Smart indent
+filetype indent off
 set wrap "Wrap lines
 
 let c_space_errors = 1
@@ -333,9 +305,70 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Always show the status line
 set laststatus=2
 
-" Format the status line
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+function! PrecedingBuffers()
+  let all = range(1, bufnr('%') - 1)
+  let res = " "
+  for b in all
+    if buflisted(b)
+      let res .= fnamemodify(bufname(b), ':t')
+      let res .= " "
+    endif
+  endfor
+  return res
+endfunction
 
+function! FollowingBuffers()
+  let all = range(bufnr('%') + 1, bufnr('$'))
+  let res = " "
+  for b in all
+    if buflisted(b)
+      let res .= fnamemodify(bufname(b), ':t')
+      let res .= " "
+    endif
+  endfor
+  return res
+endfunction
+
+hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
+function! StatuslineAddMode()
+  let m = mode()
+  if m == "v" || m == "V" || m == "CTRL-V"
+    hi User1 cterm=bold ctermbg=Yellow ctermfg=Red
+    return "VISUAL"
+  elseif m == "i" || m == "R"
+    hi User1 cterm=bold ctermbg=Blue ctermfg=White
+    return "INSERT"
+  else
+    hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
+    return "NORMAL"
+  endif
+endfunction
+
+hi User2 ctermfg=White ctermbg=Black
+hi User3 cterm=bold ctermfg=DarkRed ctermbg=Black
+hi User4 cterm=bold ctermfg=DarkGray ctermbg=Black
+hi User5 cterm=bold ctermfg=LightGray ctermbg=DarkGray
+" Format the status line
+set statusline=
+set statusline+=%#User1#
+set statusline+=\ 
+set statusline+=%{StatuslineAddMode()}
+set statusline+=\ 
+set statusline+=%#User2#
+set statusline+=%{PrecedingBuffers()}
+set statusline+=%#User3#
+set statusline+={
+set statusline+=%#User2#
+set statusline+=%t
+set statusline+=%#User3#
+set statusline+=}
+set statusline+=%#User2#
+set statusline+=%{FollowingBuffers()}
+set statusline+=%=
+set statusline+=%#User4#
+set statusline+=\ %l:%c/%L\ 
+set statusline+=%#User5#
+set statusline+=\ %{&ft}\|%{&fenc}\|%{&fileformat}\ 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
