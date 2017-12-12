@@ -233,6 +233,7 @@ filetype indent off
 set wrap "Wrap lines
 
 let c_space_errors = 1
+let python_space_error_highlight = 1
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -305,32 +306,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Always show the status line
 set laststatus=2
 
-function! PrecedingBuffers()
-  let all = range(1, bufnr('%') - 1)
-  let res = " "
-  for b in all
-    if buflisted(b)
-      let res .= fnamemodify(bufname(b), ':t')
-      let res .= " "
-    endif
-  endfor
-  return res
-endfunction
-
-function! FollowingBuffers()
-  let all = range(bufnr('%') + 1, bufnr('$'))
-  let res = " "
-  for b in all
-    if buflisted(b)
-      let res .= fnamemodify(bufname(b), ':t')
-      let res .= " "
-    endif
-  endfor
-  return res
-endfunction
-
-hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
-function! StatuslineAddMode()
+function! StatuslineMode()
   let m = mode()
   if m == "v" || m == "V" || m == "CTRL-V"
     hi User1 cterm=bold ctermbg=Yellow ctermfg=Red
@@ -344,6 +320,7 @@ function! StatuslineAddMode()
   endif
 endfunction
 
+hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
 hi User2 ctermfg=White ctermbg=Black
 hi User3 cterm=bold ctermfg=DarkRed ctermbg=Black
 hi User4 cterm=bold ctermfg=DarkGray ctermbg=Black
@@ -352,23 +329,17 @@ hi User5 cterm=bold ctermfg=LightGray ctermbg=DarkGray
 set statusline=
 set statusline+=%#User1#
 set statusline+=\ 
-set statusline+=%{StatuslineAddMode()}
+set statusline+=%{StatuslineMode()}
 set statusline+=\ 
-set statusline+=%#User2#
-set statusline+=%{PrecedingBuffers()}
 set statusline+=%#User3#
-set statusline+={
+set statusline+=\ %m%r\ 
 set statusline+=%#User2#
-set statusline+=%t
-set statusline+=%#User3#
-set statusline+=}
-set statusline+=%#User2#
-set statusline+=%{FollowingBuffers()}
+set statusline+=%F
 set statusline+=%=
 set statusline+=%#User4#
 set statusline+=\ %l:%c/%L\ 
 set statusline+=%#User5#
-set statusline+=\ %{&ft}\|%{&fenc}\|%{&fileformat}\ 
+set statusline+=\ %{&ft}\ \|\ %{&fenc}\ \|\ %{&fileformat}\ 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
