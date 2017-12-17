@@ -324,7 +324,7 @@ hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
 hi User2 ctermfg=White ctermbg=Black
 hi User3 cterm=bold ctermfg=DarkRed ctermbg=Black
 hi User4 cterm=bold ctermfg=DarkGray ctermbg=Black
-hi User5 cterm=bold ctermfg=LightGray ctermbg=DarkGray
+hi User5 cterm=bold ctermfg=LightGray ctermbg=Black
 " Format the status line
 set statusline=
 set statusline+=%#User1#
