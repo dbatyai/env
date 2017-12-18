@@ -334,6 +334,7 @@ set statusline+=\
 set statusline+=%#User3#
 set statusline+=\ %m%r\ 
 set statusline+=%#User2#
+set statusline+=%<
 set statusline+=%F
 set statusline+=%=
 set statusline+=%#User4#
