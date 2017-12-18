@@ -305,8 +305,14 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
+let w:winenabled=1
 
 function! StatuslineMode()
+  if !w:winenabled == 1
+    hi User1 cterm=bold ctermbg=DarkGray ctermfg=LightGray
+    return "NORMAL"
+  endif
+
   let m = mode()
   if m == "v" || m == "V" || m == "CTRL-V"
     hi User1 cterm=bold ctermbg=Yellow ctermfg=Red
@@ -319,6 +325,9 @@ function! StatuslineMode()
     return "NORMAL"
   endif
 endfunction
+
+autocmd WinLeave * let w:winenabled=0
+autocmd WinEnter * let w:winenabled=1
 
 hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
 hi User2 ctermfg=White ctermbg=Black
