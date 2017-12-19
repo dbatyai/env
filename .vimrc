@@ -308,7 +308,8 @@ set laststatus=2
 let w:winenabled=1
 
 function! StatuslineMode()
-  if !w:winenabled == 1
+  let enabled = get(w:, 'winenabled', 0)
+  if !l:enabled == 1
     hi User1 cterm=bold ctermbg=DarkGray ctermfg=LightGray
     return "NORMAL"
   endif
