@@ -7,3 +7,6 @@ set bell-style none
 "\e[1;2C": forward-char
 "\e[1;6D": backward-char
 "\e[1;6C": forward-char
+
+"\eOc":forward-word
+"\eOd":backward-word
