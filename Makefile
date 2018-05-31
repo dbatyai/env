@@ -47,3 +47,7 @@ x11:
 	@sudo ln -srfv Xresources /etc/X11/xinit/.Xresources
 	@sudo ln -srfv Xresources /etc/X11/Xresources
 	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
+
+.PHONY: gnome-profile
+gnome-profile:
+	@dconf load /org/gnome/terminal/legacy/profiles:/ < terminal-profile.dconf

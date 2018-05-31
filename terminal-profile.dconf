@@ -1,0 +1,15 @@
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+foreground-color='rgb(196,196,196)'
+visible-name='raszkee'
+scrollbar-policy='never'
+palette=['rgb(0,0,0)', 'rgb(218,0,0)', 'rgb(2,147,2)', 'rgb(210,176,24)', 'rgb(8,78,216)', 'rgb(117,80,123)', 'rgb(0,171,205)', 'rgb(101,101,101)', 'rgb(166,166,166)', 'rgb(255,72,72)', 'rgb(58,184,58)', 'rgb(214,209,46)', 'rgb(97,147,249)', 'rgb(173,127,168)', 'rgb(76,204,230)', 'rgb(216,216,216)']
+use-system-font=false
+use-transparent-background=false
+use-theme-colors=false
+font='Monospace 10'
+use-theme-transparency=false
+cursor-blink-mode='off'
+background-color='rgb(9,9,9)'
+background-transparency-percent=36
+scrollback-lines=20000
+audible-bell=false
