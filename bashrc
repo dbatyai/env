@@ -34,6 +34,8 @@ PS1='\[\033[37m\]\t\[\033[00m\] \[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\
 # Set default editor
 export EDITOR=vim
 
+export PATH="/home/dbatyai/Work/depot_tools:$PATH"
+
 function md {
     if [ $# -lt 1 ]; then
         echo 'No directory name given.'
