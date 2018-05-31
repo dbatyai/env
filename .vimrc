@@ -48,13 +48,6 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_filter_diagnostics = {
-  \ "c": {
-  \      "regex": [ ".*used in an inline function with external linkage.*"],
-  \    }
-  \ } 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/ycm_global_conf.py'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -62,6 +55,9 @@ Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'amix/open_file_under_cursor.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mkitt/tabline.vim'
+Plugin 'ap/vim-buftabline'
 
 call vundle#end()
 
@@ -303,6 +299,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
+:set cmdheight=1
+
 " Always show the status line
 set laststatus=2
 let w:winenabled=1
@@ -352,6 +350,11 @@ set statusline+=\ %l:%c/%L\
 set statusline+=%#User5#
 set statusline+=\ %{&ft}\ \|\ %{&fenc}\ \|\ %{&fileformat}\ 
 
+set tags=./tags;tags;/
+
+hi TabLine      ctermfg=Gray  ctermbg=Black     cterm=NONE
+hi TabLineFill  ctermfg=Gray  ctermbg=Black     cterm=NONE
+hi TabLineSel   ctermfg=Green  ctermbg=Black  cterm=bold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

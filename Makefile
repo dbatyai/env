@@ -45,3 +45,4 @@ xinit:
 	@sudo ln -srfv xinitrc /etc/X11/xinit/xinitrc
 	@sudo ln -srfv xserverrc /etc/X11/xinit/xserverrc
 	@sudo ln -srfv .Xresources /etc/X11/xinit/.Xresources
+	@sudo ln -srfv .Xresources /etc/X11/Xresources

@@ -5,6 +5,6 @@ XTerm.vt100.saveLines: 10240
 *foreground: white
 *background: black
 
-URxvt.font: xft:consolas:size=9
+URxvt.font: xft:Inconsolata:size=10
 URxvt.letterSpace: -1
 URxvt.scrollBar: false
