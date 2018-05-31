@@ -1,8 +1,8 @@
 .PHONY: basic
-basic: bashrc bash_profile gitconfig inputrc nanorc vimrc screenrc
+basic: bashrc bash_profile gitconfig inputrc nanorc vimrc screenrc gnome-profile
 
 .PHONY: all
-all: basic i3 xinit
+all: basic i3 xinit vundle
 
 .PHONY: bashrc
 bashrc:
