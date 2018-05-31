@@ -51,3 +51,7 @@ x11:
 .PHONY: gnome-profile
 gnome-profile:
 	@dconf load /org/gnome/terminal/legacy/profiles:/ < terminal-profile.dconf
+
+.PHONY: vundle
+vundle:
+	@git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
