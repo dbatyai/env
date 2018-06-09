@@ -104,11 +104,6 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
 
 "Always show current position
 set ruler
@@ -350,8 +345,6 @@ set statusline+=\ %l:%c/%L\
 set statusline+=%#User5#
 set statusline+=\ %{&ft}\ \|\ %{&fenc}\ \|\ %{&fileformat}\ 
 
-set tags=./tags;tags;/
-
 hi TabLine      ctermfg=Gray  ctermbg=Black     cterm=NONE
 hi TabLineFill  ctermfg=Gray  ctermbg=Black     cterm=NONE
 hi TabLineSel   ctermfg=Green  ctermbg=Black  cterm=bold
@@ -369,6 +362,9 @@ map [1;5D <C-Left>
 map [1;5C <C-Right>
 map [1;5A <C-Up>
 map [1;5B <C-Down>
+
+map <leader>g <C-]>
+map <leader>t <C-t>
 
 noremap <M-Left> <Esc>:bprev<CR>
 noremap <M-Right> <Esc>:bnext<CR>
