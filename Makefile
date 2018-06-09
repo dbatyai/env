@@ -15,6 +15,7 @@ bash_profile:
 .PHONY: gitconfig
 gitconfig:
 	@ln -srbv gitconfig ~/.gitconfig
+	@ln -srbv git-template ~/.git-template
 
 .PHONY: inputrc
 inputrc:

@@ -364,7 +364,7 @@ map [1;5A <C-Up>
 map [1;5B <C-Down>
 
 map <leader>g <C-]>
-map <leader>t <C-t>
+map <leader>z <C-T>
 
 noremap <M-Left> <Esc>:bprev<CR>
 noremap <M-Right> <Esc>:bnext<CR>
