@@ -363,6 +363,15 @@ map [1;5C <C-Right>
 map [1;5A <C-Up>
 map [1;5B <C-Down>
 
+map OD <M-Left>
+map OC <M-Right>
+map OA <M-Up>
+map OB <M-Down>
+map Od <C-Left>
+map Oc <C-Right>
+map Oa <C-Up>
+map Ob <C-Down>
+
 map <leader>g <C-]>
 map <leader>z <C-T>
 
