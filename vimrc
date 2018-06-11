@@ -373,7 +373,9 @@ map Oa <C-Up>
 map Ob <C-Down>
 
 map <leader>g <C-]>
-map <leader>z <C-T>
+map <leader>t <C-T>
+map g <C-]>
+map t <C-T>
 
 noremap <M-Left> <Esc>:bprev<CR>
 noremap <M-Right> <Esc>:bnext<CR>
