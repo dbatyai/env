@@ -22,7 +22,7 @@ alias systemctl="sudo systemctl"
 alias ll='ls -al'
 
 # Grep coloring
-alias grep='grep --color=auto'
+alias grep='grep --color=auto --exclude-dir=.git'
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
