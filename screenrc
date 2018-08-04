@@ -94,7 +94,7 @@ bindkey -d ^[[1;2A eval "copy" "stuff ^b"
 defnonblock on
 
 ## Set correct term
-term screen-256color
+term xterm-256color
 
 ## Enable scrollbar
 termcapinfo xterm* ti=:te=
