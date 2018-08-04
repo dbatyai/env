@@ -25,23 +25,19 @@ alias ll='ls -al'
 alias grep='grep --color=auto --exclude-dir=.git'
 
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+
+if [ -n "$SSH_CONNECTION" ]; then
+   _ssh_host="@`echo $SSH_CONNECTION | cut -d ' ' -f 3` "
+fi
+
 # Prompt color
-PS1='\[\033[37m\]\t\[\033[00m\] \[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[91m\]$(parse_git_branch)\[\033[00m\]$ '
+PS1='\[\033[37m\]\t \[\033[32m\]$_ssh_host\[\033[01;32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[91m\]$(parse_git_branch)\[\033[00m\]$ '
 
 # Set default editor
 export EDITOR=vim
 
 export PATH="/home/dbatyai/Work/depot_tools:$PATH"
 
-function md {
-    if [ $# -lt 1 ]; then
-        echo 'No directory name given.'
-        return 1;
-    fi
-    mkdir -p $1;
-    cd $1;
-    return 0;
-}
