@@ -315,7 +315,7 @@ function! StatuslineMode()
   endif
 
   let m = mode()
-  if m == "v" || m == "V" || m == "CTRL-V"
+  if m == "v" || m == "V" || m == "CTRL-V" || m == ""
     hi User1 cterm=bold ctermbg=Yellow ctermfg=Red
     return "VISUAL"
   elseif m == "i" || m == "R"
@@ -374,10 +374,18 @@ map OD <M-Left>
 map OC <M-Right>
 map OA <M-Up>
 map OB <M-Down>
+imap Od <C-Left>
+imap Oc <C-Right>
+imap Oa <C-Up>
+imap Ob <C-Down>
 map Od <C-Left>
 map Oc <C-Right>
 map Oa <C-Up>
 map Ob <C-Down>
+map [a <S-Up>
+map [b <S-Down>
+map [c <S-Right>
+map [d <S-Left>
 
 map <leader>g <C-]>
 map <leader>t <C-T>
