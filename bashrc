@@ -8,13 +8,13 @@
 shopt -s checkwinsize
 
 # don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-HISTSIZE=10000
-HISTFILESIZE=20000
+HISTSIZE=10000000
+HISTFILESIZE=5000000
 
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"
