@@ -18,3 +18,6 @@ XTerm.vt100.saveLines: 10240
 URxvt.font: xft:Inconsolata:size=10
 URxvt.letterSpace: -1
 URxvt.scrollBar: false
+
+XTerm*bellIsUrgent: True
+URxvt.urgentOnBell: True
