@@ -59,6 +59,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mkitt/tabline.vim'
 Plugin 'ap/vim-buftabline'
 
+Plugin 'vim-scripts/OmniCppComplete'
+set completeopt-=preview
+let OmniCpp_MayCompleteArrow = 0
+let OmniCpp_MayCompleteDot = 0
+let OmniCpp_MayCompleteScope = 0
+let OmniCpp_NamespaceSearch = 2
+
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -374,8 +381,10 @@ map Ob <C-Down>
 
 map <leader>g <C-]>
 map <leader>t <C-T>
-map g <C-]>
-map t <C-T>
+noremap <C-g> <C-]>
+noremap g <C-]>
+noremap t <C-T>
+
 
 noremap <M-Left> <Esc>:bprev<CR>
 noremap <M-Right> <Esc>:bnext<CR>
