@@ -108,6 +108,7 @@ source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
+set wildmode=longest,list
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
