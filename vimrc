@@ -50,7 +50,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ctrlpvim/ctrlp.vim'
-
+Plugin 'leafgarland/typescript-vim'
+let g:typescript_indent_disable = 1
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
@@ -58,13 +59,7 @@ Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mkitt/tabline.vim'
 Plugin 'ap/vim-buftabline'
-
-Plugin 'vim-scripts/OmniCppComplete'
-set completeopt-=preview
-let OmniCpp_MayCompleteArrow = 0
-let OmniCpp_MayCompleteDot = 0
-let OmniCpp_MayCompleteScope = 0
-let OmniCpp_NamespaceSearch = 2
+Plugin 'zxqfl/tabnine-vim'
 
 call vundle#end()
 
@@ -208,7 +203,6 @@ set nobackup
 set nowb
 set noswapfile
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -336,6 +330,9 @@ hi User2 ctermfg=White ctermbg=Black
 hi User3 cterm=bold ctermfg=DarkRed ctermbg=Black
 hi User4 cterm=bold ctermfg=DarkGray ctermbg=Black
 hi User5 cterm=bold ctermfg=LightGray ctermbg=Black
+hi ErrorMsg ctermfg=Red ctermbg=Black
+hi Error ctermfg=Black ctermbg=Red
+
 " Format the status line
 set statusline=
 set statusline+=%#User1#
@@ -415,7 +412,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+    autocmd BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 
