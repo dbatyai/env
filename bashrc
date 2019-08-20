@@ -15,6 +15,8 @@ shopt -s histappend
 
 HISTSIZE=10000000
 HISTFILESIZE=5000000
+HISTIGNORE='ls.*'
+PROPT_COMMAND='history -a'
 
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"

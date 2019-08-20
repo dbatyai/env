@@ -2,16 +2,6 @@ XTerm.termName: xterm-256color
 XTerm.vt100.metaSendEscape: true
 XTerm.vt100.saveLines: 10240
 
-!! red
-*color1: #DA0000
-*color9: #FF4848
-
-!! green
-
-!! blue
-*color4: #083Ee8
-*color12: #6193F9
-
 *foreground: white
 *background: black
 
