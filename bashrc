@@ -16,7 +16,8 @@ shopt -s histappend
 HISTSIZE=10000000
 HISTFILESIZE=5000000
 HISTIGNORE='ls.*'
-PROPT_COMMAND='history -a'
+PROMPT_COMMAND='history -a'
+PROMPT_DIRTRIM=2
 
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"
@@ -30,7 +31,6 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-
 if [ -n "$SSH_CONNECTION" ]; then
    _ssh_host="@`echo $SSH_CONNECTION | cut -d ' ' -f 3` "
 fi
@@ -43,3 +43,4 @@ export EDITOR=vim
 
 export PATH="/home/dbatyai/Work/depot_tools:$PATH"
 
+eval "$(thefuck --alias)"
