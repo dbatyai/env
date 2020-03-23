@@ -50,8 +50,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'leafgarland/typescript-vim'
-let g:typescript_indent_disable = 1
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
@@ -60,6 +58,21 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mkitt/tabline.vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'zxqfl/tabnine-vim'
+
+Plugin 'rust-lang/rust.vim'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+let g:typescript_indent_disable = 1
+
+Plugin 'itchyny/calendar.vim'
+let g:calendar_first_day = 'monday'
+let g:calendar_date_endian = 'big'
+let g:calendar_date_month_name = 1
+let g:calendar_date_full_month_name = 1
+let g:calendar_week_number = 1
+let g:calendar_task = 1
+let g:calendar_calendar = 'hungary'
 
 call vundle#end()
 
@@ -88,7 +101,7 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
-
+set tags^=./.git/tags;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,6 +232,8 @@ set tabstop=2
 " Linebreak on 500 characters
 set lbr
 set tw=500
+
+set textwidth=120
 
 set noai "Auto indent
 set nosi "Smart indent
