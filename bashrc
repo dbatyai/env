@@ -41,6 +41,8 @@ PS1='\[\033[37m\]\t \[\033[32m\]$_ssh_host\[\033[01;32m\]\u\[\033[00m\]:\[\033[3
 # Set default editor
 export EDITOR=vim
 
-export PATH="/home/dbatyai/Work/depot_tools:$PATH"
-
 eval "$(thefuck --alias)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
