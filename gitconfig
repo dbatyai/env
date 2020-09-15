@@ -9,3 +9,5 @@
 	templatedir = ~/.git-template
 [color]
 	ui = auto
+[http]
+	cookiefile = /home/dbatyai/.gitcookies

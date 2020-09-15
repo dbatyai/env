@@ -57,10 +57,11 @@ Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mkitt/tabline.vim'
 Plugin 'ap/vim-buftabline'
-Plugin 'zxqfl/tabnine-vim'
+Plugin 'codota/tabnine-vim'
 
 Plugin 'rust-lang/rust.vim'
 " Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 let g:typescript_indent_disable = 1
@@ -79,6 +80,9 @@ call vundle#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Re-open buffers on startup
+set viminfo='1024,<1000,%
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -406,9 +410,9 @@ noremap <C-g> <C-]>
 noremap g <C-]>
 noremap t <C-T>
 
-
-noremap <M-Left> <Esc>:bprev<CR>
-noremap <M-Right> <Esc>:bnext<CR>
+nnoremap <silent> <M-Home> :BufExplorer<CR>
+nnoremap <silent> <M-Left> <Esc>:bp<CR>
+nnoremap <silent> <M-Right> <Esc>:bn<CR>
 noremap <C-Left> <Esc>b
 noremap <C-Right> <Esc>w
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
@@ -416,6 +420,10 @@ noremap <C-Down> <Esc>:m .+1<CR>
 noremap <C-Up> <Esc>:m .-2<CR>
 " vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 " /vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+nnoremap x "_d
+
+map <leader>b <Esc>:Bclose<CR>
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()

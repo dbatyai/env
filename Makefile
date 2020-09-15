@@ -2,7 +2,7 @@
 basic: bashrc bash_profile gitconfig inputrc nanorc vimrc screenrc gnome-profile
 
 .PHONY: all
-all: basic i3 xinit vundle
+all: basic i3 vundle x11
 
 .PHONY: bashrc
 bashrc:

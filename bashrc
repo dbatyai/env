@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-shopt -s checkwinsize
+shopt -q -s checkwinsize
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:erasedups
@@ -14,7 +14,7 @@ HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 
 HISTSIZE=10000000
-HISTFILESIZE=5000000
+HISTFILESIZE=10000000
 HISTIGNORE='ls.*'
 PROMPT_COMMAND='history -a'
 PROMPT_DIRTRIM=2
