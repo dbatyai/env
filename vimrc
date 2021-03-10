@@ -106,6 +106,8 @@ nmap <leader>w :w!<cr>
 command! W w !sudo tee % > /dev/null
 
 set tags^=./.git/tags;
+
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,6 +240,7 @@ set lbr
 set tw=500
 
 set textwidth=120
+set formatoptions="croqbj"
 
 set noai "Auto indent
 set nosi "Smart indent
