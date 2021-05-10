@@ -61,6 +61,11 @@ map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_confirm_extra_conf = 0
+set updatetime=1000
+nnoremap <leader>D <plug>(YCMHover)
+set completeopt=menuone,noinsert
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '--'
 
 Plugin 'rust-lang/rust.vim'
 Plugin 'pangloss/vim-javascript'
@@ -216,7 +221,12 @@ set ffs=unix,dos,mac
 
 set number
 hi LineNr ctermfg=DarkGray
-hi Pmenu cterm=None ctermfg=Black ctermbg=Blue
+hi Pmenu cterm=None ctermfg=DarkCyan ctermbg=Black
+hi SignColumn ctermbg=Black
+hi YcmErrorSection ctermfg=Black ctermbg=DarkRed
+hi YcmErrorSign ctermfg=Black ctermbg=DarkRed
+hi YcmWarningSection ctermfg=Black ctermbg=DarkBlue
+hi YcmWarningSign ctermfg=Black ctermbg=DarkBlue
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
