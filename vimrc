@@ -48,23 +48,26 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'mkitt/tabline.vim'
+Plugin 'ap/vim-buftabline'
 Plugin 'vim-scripts/bufexplorer.zip'
+
+Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
-Plugin 'amix/open_file_under_cursor.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mkitt/tabline.vim'
-Plugin 'ap/vim-buftabline'
-Plugin 'codota/tabnine-vim'
+Plugin 'ycm-core/YouCompleteMe'
+let g:ycm_confirm_extra_conf = 0
 
 Plugin 'rust-lang/rust.vim'
-" Plugin 'octol/vim-cpp-enhanced-highlight'
-" Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 let g:typescript_indent_disable = 1
+
+Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'itchyny/calendar.vim'
 let g:calendar_first_day = 'monday'
@@ -213,6 +216,7 @@ set ffs=unix,dos,mac
 
 set number
 hi LineNr ctermfg=DarkGray
+hi Pmenu cterm=None ctermfg=Black ctermbg=Blue
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
