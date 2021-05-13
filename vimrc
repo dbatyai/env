@@ -72,7 +72,13 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 let g:typescript_indent_disable = 1
 
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'yegappan/grep'
 
 Plugin 'itchyny/calendar.vim'
 let g:calendar_first_day = 'monday'
