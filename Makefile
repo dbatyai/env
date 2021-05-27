@@ -1,44 +1,46 @@
-.PHONY: basic
-basic: bashrc bash_profile gitconfig inputrc nanorc vimrc screenrc gnome-profile
+.PHONY: help
+help:
+	@echo "Available targets:"
+	@grep -o '^[a-z]*:' Makefile
 
-.PHONY: all
-all: basic i3 vundle x11
+.PHONY: terminal
+terminal: rcfiles git vim gnome-profile
 
-.PHONY: bashrc
-bashrc:
-	@ln -srbv bashrc ~/.bashrc
+.PHONY: desktop
+desktop: terminal i3 x11
 
-.PHONY: bash_profile
-bash_profile:
-	@ln -srbv bash_profile ~/.bash_profile
+.PHONY: rcfiles
+rcfiles:
+	@ln -srfv bashrc ~/.bashrc
+	@ln -srfv bash_profile ~/.bash_profile
+	@ln -srfv inputrc ~/.inputrc
+	@ln -srfv nanorc ~/.nanorc
+	@ln -srfv vimrc ~/.vimrc
+	@ln -srfv screenrc ~/.screenrc
 
-.PHONY: gitconfig
-gitconfig:
-	@ln -srbv gitconfig ~/.gitconfig
-	@ln -srbv git-template ~/.git-template
+.PHONY: git
+git:
+	@ln -srfv gitconfig ~/.gitconfig
+	@ln -srfnv git-template ~/.git-template
 
-.PHONY: inputrc
-inputrc:
-	@ln -srbv inputrc ~/.inputrc
+.PHONY: vim
+vim: rcfiles
+	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	@vim +PluginInstall +qall
+	@ln -srfv vim/lightlinecolors.vim ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim
+	@mkdir -p ~/.vim/after
+	@ln -srfnv vim/after/syntax ~/.vim/after/syntax
 
-.PHONY: nanorc
-nanorc:
-	@ln -srbv nanorc ~/.nanorc
-
-.PHONY: vimrc
-vimrc:
-	@ln -srbv vimrc ~/.vimrc
-
-.PHONY: screenrc
-screenrc:
-	@ln -srbv screenrc ~/.screenrc
+.PHONY: gnome-profile
+gnome-profile:
+	@dconf load /org/gnome/terminal/legacy/profiles:/ < terminal-profile.dconf
 
 .PHONY: i3
 i3:
 	@mkdir -p ~/.config/i3
 	@mkdir -p ~/.config/i3status
-	@ln -srbv i3.conf ~/.config/i3/config
-	@ln -srbv i3status.conf ~/.config/i3status/config
+	@ln -srv i3.conf ~/.config/i3/config
+	@ln -srv i3status.conf ~/.config/i3status/config
 
 .PHONY: x11
 x11:
@@ -49,10 +51,3 @@ x11:
 	@sudo ln -srbv Xresources /etc/X11/Xresources
 	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
 
-.PHONY: gnome-profile
-gnome-profile:
-	@dconf load /org/gnome/terminal/legacy/profiles:/ < terminal-profile.dconf
-
-.PHONY: vundle
-vundle:
-	@git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
