@@ -20,10 +20,11 @@ Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'ycm-core/YouCompleteMe'
+let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_auto_hover = ''
 nnoremap <leader>d <plug>(YCMHover)
-set completeopt=menuone,noinsert
+set completeopt=menuone
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '--'
 
@@ -90,7 +91,7 @@ set hidden " Hide buffer when abandoned
 set nobackup
 set nowb
 set noswapfile
-set viminfo='1024,<1000,% "i Re-open buffers on startup
+set viminfo='1024,<1000,% "Re-open buffers on startup
 set autoread "Auto read when a file is changed from the outside
 set autowriteall
 
@@ -189,8 +190,8 @@ map [c <S-Right>
 map [d <S-Left>
 
 " Tags
-map <leader>g <C-]>
-map <leader>t <C-T>
+noremap <leader>g <C-]>
+noremap <leader>t <C-T>
 noremap <C-g> <C-]>
 noremap g <C-]>
 noremap t <C-T>
@@ -198,12 +199,13 @@ noremap t <C-T>
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
-map <leader>b <Esc>:Bclose<CR>
-map <leader>q :e ~/buffer<cr>
-map <leader>x :e ~/buffer.md<cr>
+nnoremap <silent> <leader>b :Bclose<CR>
+nnoremap <silent> <leader>B :%bd <bar> e# <bar> bd#<CR>
+nnoremap <silent> <leader>q :e ~/buffer<cr>
+nnoremap <silent> <leader>x :e ~/buffer.md<cr>
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nnoremap <leader>w :w!<cr>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -223,14 +225,14 @@ au TabLeave * let g:lasttab = tabpagenr()
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Window movement
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-map <C-Up> <C-W>k
-map <C-Down> <C-W>j
-map <C-Left> <C-W>h
-map <C-Right> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+noremap <C-Up> <C-W>k
+noremap <C-Down> <C-W>j
+noremap <C-Left> <C-W>h
+noremap <C-Right> <C-W>l
 
 " Text manipulation
 nnoremap x "_dd
