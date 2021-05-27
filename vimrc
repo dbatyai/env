@@ -34,7 +34,7 @@ let g:typescript_indent_disable = 1
 
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
-      \   'colorscheme': 'raszke',
+      \   'colorscheme': 'lightlinecolors',
       \   'component': {
       \     'lineinfo': '%4l:%-2v|%4L%<',
       \     'modified': '[%M]',
@@ -172,15 +172,13 @@ map [1;5D <C-Left>
 map [1;5C <C-Right>
 map [1;5A <C-Up>
 map [1;5B <C-Down>
+map [1;2A <S-Up>
+map [1;2B <S-Down>
 
 map OD <M-Left>
 map OC <M-Right>
 map OA <M-Up>
 map OB <M-Down>
-imap Od <C-Left>
-imap Oc <C-Right>
-imap Oa <C-Up>
-imap Ob <C-Down>
 map Od <C-Left>
 map Oc <C-Right>
 map Oa <C-Up>
