@@ -1,52 +1,12 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version: 
-"       6.0 - 01/04/17 14:24:34 
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'mkitt/tabline.vim'
@@ -61,8 +21,8 @@ map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_confirm_extra_conf = 0
-set updatetime=1000
-nnoremap <leader>D <plug>(YCMHover)
+let g:ycm_auto_hover = ''
+nnoremap <leader>d <plug>(YCMHover)
 set completeopt=menuone,noinsert
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '--'
@@ -74,7 +34,16 @@ let g:typescript_indent_disable = 1
 
 Plugin 'itchyny/lightline.vim'
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \   'colorscheme': 'raszke',
+      \   'component': {
+      \     'lineinfo': '%4l:%-2v|%4L%<',
+      \     'modified': '[%M]',
+      \   },
+      \   'active': {
+      \     'left': [
+      \       ['mode', 'paste'], ['readonly', 'modified'], ['filename']
+      \     ]
+      \   }
       \ }
 
 Plugin 'nanotech/jellybeans.vim'
@@ -91,141 +60,92 @@ let g:calendar_calendar = 'hungary'
 
 call vundle#end()
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
+" => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Re-open buffers on startup
-set viminfo='1024,<1000,%
-
-" Sets how many lines of history VIM has to remember
-set history=500
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent off
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
 
-" Fast saving
-nmap <leader>w :w!<cr>
-
-" :W sudo saves the file 
-" (useful for handling the permission-denied error)
-command! W w !sudo tee % > /dev/null
-
+set history=5000
 set tags^=./.git/tags;
+set scrolloff=7 " Minimum number of line above or below the cursor
 
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Turn on the WiLd menu
 set wildmenu
 set wildmode=longest,list
-
-" Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 
-"Always show current position
-set ruler
+set showtabline=2
+set laststatus=2
+set cmdheight=1
+set foldcolumn=1
 
-" Height of the command bar
-set cmdheight=2
+set switchbuf=useopen,usetab,newtab
+set hidden " Hide buffer when abandoned
+set nobackup
+set nowb
+set noswapfile
+set viminfo='1024,<1000,% "i Re-open buffers on startup
+set autoread "Auto read when a file is changed from the outside
+set autowriteall
 
-" A buffer becomes hidden when it is abandoned
-set hid
+filetype plugin on
+filetype indent off
 
-" Configure backspace so it acts as it should act
+set updatetime=1000
+set timeoutlen=500
+
+set number " Line numbers
+set expandtab " Use spaces instead of tabs
+set smarttab " Enable smart tabs
+set shiftwidth=2
+set tabstop=2
+set noai
+set nosi
+let c_space_errors = 1
+let python_space_error_highlight = 1
+
+set linebreak
+set textwidth=120
+set formatoptions="croqbj"
 set backspace=eol,start,indent
+set wrap
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Highlight search results
 set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+set magic " Enable special characters in regex
+set showmatch " Show matching brackets
+set matchtime=2
 
-" Makes search act like search in modern browsers
-set incsearch 
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch 
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
-
-" Add a bit extra margin to the left
-set foldcolumn=1
+set lazyredraw " Don't redraw while executing macros
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable 
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+syntax enable " Enable syntax highlighting
+set t_Co=256 " Enable 256 colors palette
+set encoding=utf8
+set ffs=unix,dos,mac " Use Unix as the standard file type
+set background=dark
 
 try
     colorscheme desert
 catch
 endtry
 
-set background=dark
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-set number
 hi LineNr ctermfg=DarkGray
 hi Pmenu cterm=None ctermfg=DarkCyan ctermbg=Black
 hi SignColumn ctermbg=Black
@@ -234,173 +154,16 @@ hi YcmErrorSign ctermfg=Black ctermbg=DarkRed
 hi YcmWarningSection ctermfg=Black ctermbg=DarkBlue
 hi YcmWarningSign ctermfg=Black ctermbg=DarkBlue
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=2
-set tabstop=2
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set textwidth=120
-set formatoptions="croqbj"
-
-set noai "Auto indent
-set nosi "Smart indent
-filetype indent off
-set wrap "Wrap lines
-
-let c_space_errors = 1
-let python_space_error_highlight = 1
-
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+" Tabline
+hi TabLine      ctermfg=Gray   ctermbg=Black  cterm=NONE
+hi TabLineFill  ctermfg=Gray   ctermbg=Black  cterm=NONE
+hi TabLineSel   ctermfg=DarkGreen  ctermbg=Black  cterm=bold
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
+" => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
-
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers 
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
-
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-:set cmdheight=1
-
-" Always show the status line
-set laststatus=2
-let w:winenabled=1
-
-function! StatuslineMode()
-  let enabled = get(w:, 'winenabled', 0)
-  if !l:enabled == 1
-    hi User1 cterm=bold ctermbg=DarkGray ctermfg=LightGray
-    return "NORMAL"
-  endif
-
-  let m = mode()
-  if m == "v" || m == "V" || m == "CTRL-V" || m == ""
-    hi User1 cterm=bold ctermbg=Yellow ctermfg=Red
-    return "VISUAL"
-  elseif m == "i" || m == "R"
-    hi User1 cterm=bold ctermbg=Blue ctermfg=White
-    return "INSERT"
-  else
-    hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
-    return "NORMAL"
-  endif
-endfunction
-
-autocmd WinLeave * let w:winenabled=0
-autocmd WinEnter * let w:winenabled=1
-
-hi User1 cterm=bold ctermbg=DarkGreen ctermfg=White
-hi User2 ctermfg=White ctermbg=Black
-hi User3 cterm=bold ctermfg=DarkRed ctermbg=Black
-hi User4 cterm=bold ctermfg=DarkGray ctermbg=Black
-hi User5 cterm=bold ctermfg=LightGray ctermbg=Black
-hi ErrorMsg ctermfg=Red ctermbg=Black
-hi Error ctermfg=Black ctermbg=Red
-
-" Format the status line
-set statusline=
-set statusline+=%#User1#
-set statusline+=\ 
-set statusline+=%{StatuslineMode()}
-set statusline+=\ 
-set statusline+=%#User3#
-set statusline+=\ %m%r\ 
-set statusline+=%#User2#
-set statusline+=%<
-set statusline+=%F
-set statusline+=%=
-set statusline+=%#User4#
-set statusline+=\ %l:%c/%L\ 
-set statusline+=%#User5#
-set statusline+=\ %{&ft}\ \|\ %{&fenc}\ \|\ %{&fileformat}\ 
-
-hi TabLine      ctermfg=Gray  ctermbg=Black     cterm=NONE
-hi TabLineFill  ctermfg=Gray  ctermbg=Black     cterm=NONE
-hi TabLineSel   ctermfg=Green  ctermbg=Black  cterm=bold
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
+" Keycode mappings
 map [1;3D <M-Left>
 map [1;3C <M-Right>
 map [1;3A <M-Up>
@@ -427,28 +190,103 @@ map [b <S-Down>
 map [c <S-Right>
 map [d <S-Left>
 
+" Tags
 map <leader>g <C-]>
 map <leader>t <C-T>
 noremap <C-g> <C-]>
 noremap g <C-]>
 noremap t <C-T>
 
-nnoremap <silent> <M-Home> :BufExplorer<CR>
+" Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
-noremap <C-Left> <Esc>b
-noremap <C-Right> <Esc>w
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-noremap <C-Down> <Esc>:m .+1<CR>
-noremap <C-Up> <Esc>:m .-2<CR>
-" vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-" /vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-nnoremap x "_d
-
 map <leader>b <Esc>:Bclose<CR>
+map <leader>q :e ~/buffer<cr>
+map <leader>x :e ~/buffer.md<cr>
 
-" Delete trailing white space on save, useful for some filetypes ;)
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Tab management
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+map <leader>tn :tabnew<cr>
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Window movement
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+map <C-Up> <C-W>k
+map <C-Down> <C-W>j
+map <C-Left> <C-W>h
+map <C-Right> <C-W>l
+
+" Text manipulation
+nnoremap x "_dd
+nnoremap <S-x> "_D
+vnoremap x "_d
+vnoremap <S-x> "_D
+noremap <silent> <S-Up> <Esc>:m .-2<CR>
+noremap <silent> <S-Down> <Esc>:m .+1<CR>
+
+" Remove the Windows ^M
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Toggle paste mode on and off
+map <leader>p :setlocal paste!<cr>
+
+" First non-blank character
+map 0 ^
+
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" Map <Space> to / (search) and Shift-<Space> to ? (backwards search)
+map <space> /
+map <S-space> ?
+
+" Clear highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Custom commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
+  " Delete trailing whitespace when writing buffer contents of certain file types
+  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc :call CleanExtraSpaces()
+
+  " Return to last edit position when opening files (You want this!)
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+  " Reset position when writing commit messages
+  au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+endif
+
+" :W sudo saves the file
+command! W w !sudo tee % > /dev/null
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Delete trailing white space
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -457,53 +295,7 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
+" Delete buffer without closing window
 function! <SID>BufcloseCloseIt()
    let l:currentBufNum = bufnr("%")
    let l:alternateBufNum = bufnr("#")
@@ -527,7 +319,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"

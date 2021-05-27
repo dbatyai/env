@@ -1,107 +1,25 @@
-#turns off the license screen
 startup_message off
-
-# allows you to keep what was displayed on your terminal when exiting things like man, less rather than having your terminal cleared
 altscreen on
-
-# turn visual bell off
 vbell off
-
-# Never, ever turn this off.
 autodetach on
-
-# define a bigger scrollback, default is 100 lines.  Too big and you start getting into memory issues when you have many screens open.
 defscrollback 10000
-
 msgwait 0
-
-# Run everything in UTF-8.
 defutf8 on
 
-# ------------------------------------------------------------------------------
-# SCREEN KEYBINDINGS
-# ------------------------------------------------------------------------------
-
-#bind \\ quit
-
-# shift + left; previous screen window
-bindkey ^[[d prev
-bindkey ^[[1;2D prev
-# shift + right; next screen window
-bindkey ^[[c next
-bindkey ^[[1;2C next
-
-#focus
-bindkey ^[[Z focus
-
-# home/end keys
-bindkey ^[[1~ beginning-of-line
-bindkey ^[[4~ end-of-line
-
-# shift + up enters copy mode
-bindkey -d ^[[1;2A eval "copy" "stuff ^b"
-
-# split focus
-#bindkey ^[[Z focus
-# F3 Split horizontally
-#bindkey -k k3 split
-# F4 Split vertically
-#bindkey -k k4 split -v
-# F5 Remove single split
-#bindkey -k k5 remove
-# F6 Remove all splits
-#bindkey -k k6 only
-
-## ------------------------------------------------------------------------------
-## TABS
-## ------------------------------------------------------------------------------
-
-#screen -t irc 0
-#screen -t jerry 1
-#screen -t iotjs 2
-#screen -t
-
-## ------------------------------------------------------------------------------
-## TERMINAL SETTINGS
-## ------------------------------------------------------------------------------
-#
-## The vt100 description does not mention "dl". *sigh*
-#termcapinfo vt100 dl=5\E[M
-#
-## Set the hardstatus prop on gui terms to set the titlebar/icon title
-#termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
-#
-## An alternative hardstatus to display a bar at the bottom listing the
-## windownames and highlighting the current windowname in blue. (This is only
-## enabled if there is no hardstatus setting for your terminal)
-#hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{G}%l %{W}%c %{g}]'
-#
-## set these terminals up to be 'optimal' instead of vt100
-#termcapinfo xterm*|linux*|rxvt*|Eterm* OP
-#
-## Change the xterm initialization string from is2=\E[!p\E[?3;4l\E[4l\E>
-## (This fixes the "Aborted because of window size change" konsole symptoms found
-##  in bug #134198)
-#termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
-#
-## To get screen to add lines to xterm's scrollback buffer, uncomment the
-## following termcapinfo line which tells xterm to use the normal screen buffer
-## (which has scrollback), not the alternate screen buffer.
-##
-##termcapinfo xterm|xterms|xs|rxvt ti@:te@
-#
-## Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock on
+term screen-256color-bce
+defbce on
 
-## Set correct term
-term xterm-256color
-
-## Enable scrollbar
-termcapinfo xterm* ti=:te=
-termcapinfo xterm*|rxvt*  te=\E[H\E[2J:ti=\E[H\E[2J:
-
-## Statusbar
 hardstatus off
 hardstatus alwayslastline
 hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c:%s %{g}]'
 
+bindkey ^[[d prev
+bindkey ^[[1;2D prev
+bindkey ^[[c next
+bindkey ^[[1;2C next
+
+bindkey ^[[Z focus
+
+bindkey ^[[1~ beginning-of-line
+bindkey ^[[4~ end-of-line
