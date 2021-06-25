@@ -12,7 +12,7 @@ defbce on
 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c:%s %{g}]'
+hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{K} %l %{B} %m-%d %{W} %c:%s %{g}]'
 
 bindkey ^[[d prev
 bindkey ^[[1;2D prev
