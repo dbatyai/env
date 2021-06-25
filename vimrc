@@ -19,12 +19,16 @@ Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
+Plugin 'rhysd/vim-clang-format'
+au FileType c,cpp ClangFormatAutoEnable
+
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_auto_hover = ''
 nnoremap <leader>d <plug>(YCMHover)
 set completeopt=menuone
+let g:ycm_clangd_args=['--header-insertion=never']
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '--'
 
@@ -71,6 +75,7 @@ let g:mapleader = ","
 set history=5000
 set tags^=./.git/tags;
 set scrolloff=7 " Minimum number of line above or below the cursor
+set shm+=I "Don't show into screen
 
 let $LANG='en'
 set langmenu=en
@@ -268,7 +273,7 @@ map <silent> <leader><cr> :noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
   " Delete trailing whitespace when writing buffer contents of certain file types
-  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc :call CleanExtraSpaces()
+  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim :call CleanExtraSpaces()
 
   " Return to last edit position when opening files (You want this!)
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
