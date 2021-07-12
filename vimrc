@@ -2,71 +2,6 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'mkitt/tabline.vim'
-Plugin 'ap/vim-buftabline'
-Plugin 'vim-scripts/bufexplorer.zip'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'amix/open_file_under_cursor.vim'
-Plugin 'scrooloose/nerdtree'
-map <C-n> :NERDTreeFocus<CR>
-
-Plugin 'rhysd/vim-clang-format'
-au FileType c,cpp ClangFormatAutoEnable
-
-Plugin 'ycm-core/YouCompleteMe'
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_auto_hover = ''
-nnoremap <leader>d <plug>(YCMHover)
-set completeopt=menuone
-let g:ycm_clangd_args=['--header-insertion=never']
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '--'
-
-Plugin 'rust-lang/rust.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-let g:typescript_indent_disable = 1
-
-Plugin 'itchyny/lightline.vim'
-let g:lightline = {
-      \   'colorscheme': 'lightlinecolors',
-      \   'component': {
-      \     'lineinfo': '%4l:%-2v|%4L%<',
-      \     'modified': '[%M]',
-      \   },
-      \   'active': {
-      \     'left': [
-      \       ['mode', 'paste'], ['readonly', 'modified'], ['filename']
-      \     ]
-      \   }
-      \ }
-
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'yegappan/grep'
-
-Plugin 'itchyny/calendar.vim'
-let g:calendar_first_day = 'monday'
-let g:calendar_date_endian = 'big'
-let g:calendar_date_month_name = 1
-let g:calendar_date_full_month_name = 1
-let g:calendar_week_number = 1
-let g:calendar_task = 1
-let g:calendar_calendar = 'hungary'
-
-call vundle#end()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -85,6 +20,7 @@ source $VIMRUNTIME/menu.vim
 set wildmenu
 set wildmode=longest,list
 set wildignore=*.o,*~,*.pyc
+set completeopt=menuone
 
 set showtabline=2
 set laststatus=2
@@ -137,6 +73,72 @@ set t_vb=
 
 set lazyredraw " Don't redraw while executing macros
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'mkitt/tabline.vim'
+Plugin 'ap/vim-buftabline'
+Plugin 'vim-scripts/bufexplorer.zip'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'amix/open_file_under_cursor.vim'
+Plugin 'scrooloose/nerdtree'
+map <C-n> :NERDTreeFocus<CR>
+
+Plugin 'rhysd/vim-clang-format'
+au FileType c,cpp ClangFormatAutoEnable
+
+Plugin 'ycm-core/YouCompleteMe'
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_max_diagnostics_to_display = 0
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_auto_hover = ''
+let g:ycm_clangd_args=['--header-insertion=never']
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '--'
+nnoremap <silent> <leader>d <plug>(YCMHover)
+nnoremap <silent> <leader>D :YcmDiags<CR>
+nnoremap <silent> <leader>f :YcmCompleter FixIt<CR>
+nnoremap <silent> <leader>n :lnext<CR>
+
+Plugin 'rust-lang/rust.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+let g:typescript_indent_disable = 1
+
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+      \   'colorscheme': 'lightlinecolors',
+      \   'component': {
+      \     'lineinfo': '%4l:%-2v|%4L%<',
+      \     'modified': '[%M]',
+      \   },
+      \   'active': {
+      \     'left': [
+      \       ['mode', 'paste'], ['readonly', 'modified'], ['filename']
+      \     ]
+      \   }
+      \ }
+
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'yegappan/grep'
+
+Plugin 'itchyny/calendar.vim'
+let g:calendar_first_day = 'monday'
+let g:calendar_date_endian = 'big'
+let g:calendar_date_month_name = 1
+let g:calendar_date_full_month_name = 1
+let g:calendar_week_number = 1
+let g:calendar_task = 1
+let g:calendar_calendar = 'hungary'
+
+call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -204,8 +206,9 @@ noremap t <C-T>
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
+nnoremap <silent> <leader>B :BufExplorer<CR>
 nnoremap <silent> <leader>b :Bclose<CR>
-nnoremap <silent> <leader>B :%bd <bar> e# <bar> bd#<CR>
+nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd#<CR>
 nnoremap <silent> <leader>q :e ~/buffer<cr>
 nnoremap <silent> <leader>x :e ~/buffer.md<cr>
 
