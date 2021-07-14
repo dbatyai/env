@@ -172,37 +172,10 @@ hi TabLineSel   ctermfg=DarkGreen  ctermbg=Black  cterm=bold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Keycode mappings
-map [1;3D <M-Left>
-map [1;3C <M-Right>
-map [1;3A <M-Up>
-map [1;3B <M-Down>
-map [1;5D <C-Left>
-map [1;5C <C-Right>
-map [1;5A <C-Up>
-map [1;5B <C-Down>
-map [1;2A <S-Up>
-map [1;2B <S-Down>
-
-map OD <M-Left>
-map OC <M-Right>
-map OA <M-Up>
-map OB <M-Down>
-map Od <C-Left>
-map Oc <C-Right>
-map Oa <C-Up>
-map Ob <C-Down>
-map [a <S-Up>
-map [b <S-Down>
-map [c <S-Right>
-map [d <S-Left>
-
 " Tags
 noremap <leader>g <C-]>
 noremap <leader>t <C-T>
 noremap <C-g> <C-]>
-noremap g <C-]>
-noremap t <C-T>
 
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
