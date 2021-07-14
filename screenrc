@@ -7,7 +7,6 @@ msgwait 0
 defutf8 on
 
 defnonblock on
-term screen-256color-bce
 defbce on
 
 hardstatus off

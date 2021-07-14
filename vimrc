@@ -41,6 +41,7 @@ filetype indent off
 
 set updatetime=1000
 set timeoutlen=500
+set ttimeoutlen=5
 
 set number " Line numbers
 set expandtab " Use spaces instead of tabs
