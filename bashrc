@@ -16,7 +16,7 @@ shopt -s histappend
 HISTSIZE=10000000
 HISTFILESIZE=10000000
 HISTIGNORE='ls.*'
-PROMPT_COMMAND='history -a; history -n'
+PROMPT_COMMAND='history -a'
 PROMPT_DIRTRIM=2
 
 alias ls='ls --color=auto'
