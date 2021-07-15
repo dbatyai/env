@@ -252,11 +252,8 @@ if has("autocmd")
   " Delete trailing whitespace when writing buffer contents of certain file types
   au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim :call CleanExtraSpaces()
 
-  " Return to last edit position when opening files (You want this!)
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-  " Reset position when writing commit messages
-  au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+  " Return to last edit position when opening files
+  au BufReadPost * if &ft !~# 'commit' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " :W sudo saves the file
