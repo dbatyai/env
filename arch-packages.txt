@@ -1,30 +1,30 @@
-man-db
-man-pages
-sudo
-dhcpcd
-
-systemctl enable dhcpcd.service
-
+base-devel
 bash
 bash-completion
+clang
 cmake
 ctags
 dconf
+dhcpcd
 dmenu
 gcc
 gdb
 git
 htop
-iotop
 make
+man-db
+man-pages
 screen
+sudo
 vim
+wget
 
-xorg
-xorg-xinit
-gnome-terminal
+systemctl enable dhcpcd.service
+
+bdf-unifont
 dunst
-i3-vm
+gnome-terminal
+i3-wm
 i3lock
 i3status
 imagemagick
@@ -32,12 +32,8 @@ intel-ucode
 lm_sensors
 scrot
 ttf-dejavu
-ttf-incosolata
-ttf-liberation
 weechat
-wget
 xautolock
-usb-utils
+xorg
+xorg-xinit
 
-(aur)
-ttf-ms-fonts
