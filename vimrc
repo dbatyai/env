@@ -17,6 +17,9 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
+filetype plugin on
+filetype indent off
+
 set wildmenu
 set wildmode=longest,list
 set wildignore=*.o,*~,*.pyc
@@ -36,8 +39,7 @@ set viminfo='1024,<1000,% "Re-open buffers on startup
 set autoread "Auto read when a file is changed from the outside
 set autowriteall
 
-filetype plugin on
-filetype indent off
+au FileType gitcommit set viminfo=
 
 set updatetime=1000
 set timeoutlen=500
@@ -103,10 +105,10 @@ let g:ycm_auto_hover = ''
 let g:ycm_clangd_args=['--header-insertion=never']
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '--'
-nnoremap <silent> <leader>d <plug>(YCMHover)
-nnoremap <silent> <leader>D :YcmDiags<CR>
-nnoremap <silent> <leader>f :YcmCompleter FixIt<CR>
-nnoremap <silent> <leader>n :lnext<CR>
+nmap <silent> <leader>d <plug>(YCMHover)
+nmap <silent> <leader>D :YcmDiags<CR>
+nmap <silent> <leader>f :YcmCompleter FixIt<CR>
+nmap <silent> <leader>n :lnext<CR>
 
 Plugin 'rust-lang/rust.vim'
 Plugin 'pangloss/vim-javascript'
@@ -180,11 +182,9 @@ noremap <C-g> <C-]>
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
-nnoremap <silent> <leader>B :BufExplorer<CR>
-nnoremap <silent> <leader>b :Bclose<CR>
+nnoremap <silent> <leader>b :BufExplorer<CR>
+nnoremap <silent> <leader>x :Bclose<CR>
 nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd#<CR>
-nnoremap <silent> <leader>q :e ~/buffer<cr>
-nnoremap <silent> <leader>x :e ~/buffer.md<cr>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -217,7 +217,7 @@ noremap <C-Left> <C-W>h
 noremap <C-Right> <C-W>l
 
 " Text manipulation
-nnoremap x "_dd
+nnoremap xx "_dd
 nnoremap <S-x> "_D
 vnoremap x "_d
 vnoremap <S-x> "_D
