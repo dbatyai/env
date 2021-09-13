@@ -64,6 +64,5 @@ x11:
 	$(call slink, xinitrc, /etc/X11/xinit/xinitrc)
 	$(call slink, xserverrc, /etc/X11/xinit/xserverrc)
 	$(call slink, Xresources, /etc/X11/xinit/.Xresources)
-	$(call slink, Xresources, /etc/X11/Xresources)
 	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
 
