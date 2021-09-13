@@ -8,21 +8,20 @@
 shopt -q -s checkwinsize
 
 # don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth:erasedups
+HISTCONTROL=ignorespace:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 HISTSIZE=10000000
 HISTFILESIZE=10000000
-HISTIGNORE='ls.*'
+HISTIGNORE='ls:cd ..:cd ../:cd -:pwd:exit'
 PROMPT_COMMAND='history -a'
 PROMPT_DIRTRIM=2
 
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
-alias ll='ls -al'
 
 # Grep coloring
 alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache'
@@ -40,3 +39,7 @@ PS1='\[\033[37m\]\t \[\033[32m\]$_ssh_host\[\033[01;32m\]\u\[\033[00m\]:\[\033[3
 
 # Set default editor
 export EDITOR=vim
+
+if [ `which most` ]; then
+  alias man='PAGER=most man'
+fi
