@@ -99,7 +99,7 @@ au FileType c,cpp ClangFormatAutoEnable
 
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_max_diagnostics_to_display = 0
+let g:ycm_max_diagnostics_to_display = 100
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_auto_hover = ''
 let g:ycm_clangd_args=['--header-insertion=never']
