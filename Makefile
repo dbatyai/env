@@ -15,7 +15,7 @@ help:
 terminal: rcfiles git vim
 
 .PHONY: desktop
-desktop: i3 x11
+desktop: i3 x11 kitty
 
 .PHONY: etc
 etc:
@@ -44,6 +44,11 @@ vim: rcfiles
 							  ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 	@mkdir -p ~/.vim/after
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
+
+.PHONY: kitty
+kitty:
+	@mkdir -p ~/.config/kitty
+	$(call link, kitty.conf, ~/.config/kitty/kitty.conf)
 
 .PHONY: dconf
 dconf:
