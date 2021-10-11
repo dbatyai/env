@@ -184,7 +184,7 @@ nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
 nnoremap <silent> <leader>b :BufExplorer<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
-nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd#<CR>
+nnoremap <silent> <leader>o :%bd <bar> e#<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
