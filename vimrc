@@ -250,7 +250,7 @@ map <silent> <leader><cr> :noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
   " Delete trailing whitespace when writing buffer contents of certain file types
-  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim :call CleanExtraSpaces()
+  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim,*.conf :call CleanExtraSpaces()
 
   " Return to last edit position when opening files
   au BufReadPost * if &ft !~# 'commit' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
