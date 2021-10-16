@@ -72,3 +72,7 @@ x11:
 	$(call slink, Xresources, /etc/X11/xinit/.Xresources)
 	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
 
+.PHONY: yay
+yay:
+	@git clone https://aur.archlinux.org/yay /tmp/yay
+	@cd /tmp/yay && yes | makepkg -sircC
