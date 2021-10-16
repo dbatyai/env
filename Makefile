@@ -62,7 +62,7 @@ i3:
 	$(call link, i3.conf, ~/.config/i3/config)
 	$(call link, i3status.conf, ~/.config/i3status/config)
 	$(call link, dunstrc, ~/.config/dunst/dunstrc)
-	$(call link, lock.sh, ~/lock.sh)
+	$(call link, lock.sh, ~/.lock.sh)
 
 .PHONY: x11
 x11:
