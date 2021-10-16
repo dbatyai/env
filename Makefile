@@ -12,7 +12,7 @@ help:
 	@grep -o '^[a-z0-9]*:' Makefile
 
 .PHONY: terminal
-terminal: rcfiles git vim
+terminal: rcfiles git vim etc
 
 .PHONY: desktop
 desktop: i3 x11 kitty
