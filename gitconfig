@@ -1,13 +1,12 @@
 [user]
-	name = Dániel Bátyai
-	email = dbatyai@inf.u-szeged.hu
+  name = Dániel Bátyai
+  email = dbatyai@inf.u-szeged.hu
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  fw = pull -p --ff-only
 [push]
-	default = simple
+  default = simple
 [init]
-	templatedir = ~/.git-template
+  templatedir = ~/.git-template
 [color]
-	ui = auto
-[http]
-	cookiefile = /home/dbatyai/.gitcookies
+  ui = auto
