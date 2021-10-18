@@ -5,6 +5,7 @@ autodetach on
 defscrollback 10000
 msgwait 0
 defutf8 on
+maptimeout 0
 
 defnonblock on
 defbce on
