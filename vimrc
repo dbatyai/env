@@ -160,16 +160,16 @@ endtry
 hi LineNr ctermfg=DarkGray
 hi Pmenu cterm=None ctermfg=DarkCyan ctermbg=Black
 hi SignColumn ctermbg=Black
+hi ErrorMsg ctermfg=DarkRed ctermbg=None
 hi YcmErrorSection ctermfg=Black ctermbg=DarkRed
 hi YcmErrorSign ctermfg=Black ctermbg=DarkRed
 hi YcmWarningSection ctermfg=Black ctermbg=DarkBlue
 hi YcmWarningSign ctermfg=Black ctermbg=DarkBlue
 
 " Tabline
-hi TabLine      ctermfg=Gray   ctermbg=Black  cterm=NONE
-hi TabLineFill  ctermfg=Gray   ctermbg=Black  cterm=NONE
-hi TabLineSel   ctermfg=DarkGreen  ctermbg=Black  cterm=bold
-
+hi TabLine      ctermfg=Gray   ctermbg=None  cterm=None
+hi TabLineFill  ctermfg=Gray   ctermbg=None  cterm=None
+hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=bold
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
