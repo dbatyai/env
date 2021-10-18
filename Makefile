@@ -74,5 +74,7 @@ x11:
 
 .PHONY: yay
 yay:
+	@mkdir -p ~/.config/yay
+	$(call link, yay.json, ~/.config/yay/config.json)
 	@git clone https://aur.archlinux.org/yay /tmp/yay
 	@cd /tmp/yay && yes | makepkg -sircC
