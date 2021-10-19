@@ -8,11 +8,10 @@ defutf8 on
 maptimeout 0
 
 defnonblock on
-defbce on
 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{K} %l %{B} %m-%d %{W} %c:%s %{g}]'
+hardstatus string '%{= g}[ %{G}%H%{g} ][%= %{= w}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{K} %l %{B} %m-%d %{W} %c:%s %{g}]'
 
 bindkey ^[[d prev
 bindkey ^[[1;2D prev
