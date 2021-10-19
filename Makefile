@@ -49,6 +49,7 @@ vim: rcfiles
 kitty:
 	@mkdir -p ~/.config/kitty
 	$(call link, kitty.conf, ~/.config/kitty/kitty.conf)
+	@sudo tic screen.xterm-kitty.terminfo
 
 .PHONY: dconf
 dconf:

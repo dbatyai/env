@@ -9,6 +9,7 @@ gcc
 gdb
 git
 htop
+kitty-terminfo
 make
 man-db
 man-pages
@@ -21,13 +22,13 @@ systemctl enable dhcpcd.service
 
 bdf-unifont
 dunst
-gnome-terminal
 dmenu
 i3-wm
 i3lock
 i3status
 imagemagick
 intel-ucode
+kitty
 lm_sensors
 scrot
 ttf-dejavu
