@@ -3,7 +3,7 @@
   email = dbatyai@inf.u-szeged.hu
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  fw = pull -p --ff-only
+  ff = pull -p --ff-only
 [push]
   default = simple
 [init]
