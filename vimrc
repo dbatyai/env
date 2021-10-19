@@ -7,6 +7,17 @@ filetype off                  " required
 let mapleader = ","
 let g:mapleader = ","
 
+set nottybuiltin
+
+if &term =~ '^\%(screen\|tmux\)'
+  set ttymouse=sgr
+
+  execute "silent! set <xUp>=\<Esc>[@;*A"
+  execute "silent! set <xDown>=\<Esc>[@;*B"
+  execute "silent! set <xRight>=\<Esc>[@;*C"
+  execute "silent! set <xLeft>=\<Esc>[@;*D"
+endif
+
 set history=5000
 set tags^=./.git/tags;
 set scrolloff=7 " Minimum number of line above or below the cursor
