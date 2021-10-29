@@ -25,11 +25,11 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-if [ -n "$SSH_CONNECTION" ]; then
-   _ssh_host="@`echo $SSH_CONNECTION | cut -d ' ' -f 3` "
-fi
-
-PS1='\[\033[0;90m\]\t \[\033[32m\]$_ssh_host\[\033[01m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
+PS1='\[\033[0;90m\]\t \[\033[32m\]\[\033[01m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
 
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
+
+if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
+  screen -RR ssh
+fi
