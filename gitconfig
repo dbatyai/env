@@ -1,6 +1,3 @@
-[user]
-  name = Dániel Bátyai
-  email = dbatyai@inf.u-szeged.hu
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   ff = pull -p --ff-only
@@ -10,3 +7,5 @@
   templatedir = ~/.git-template
 [color]
   ui = auto
+[include]
+  path = ~/.git-user
