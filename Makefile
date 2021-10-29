@@ -27,7 +27,6 @@ rcfiles:
 	$(call link, bash_profile, ~/.bash_profile)
 	$(call link, inputrc, ~/.inputrc)
 	$(call link, nanorc, ~/.nanorc)
-	$(call link, vimrc, ~/.vimrc)
 	$(call link, screenrc, ~/.screenrc)
 
 .PHONY: git
@@ -36,10 +35,11 @@ git:
 	$(call link, git-template, ~/.git-template)
 
 .PHONY: vim
-vim: rcfiles
-	@test -d ~/.vim/bundle/Vundle.vim \
-	 || (git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
-	 		 && vim +PluginInstall +qall)
+vim:
+	$(call link, vimrc, ~/.vimrc)
+	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	@vim +PluginInstall +qall
+	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
 	$(call link, vim/lightlinecolors.vim, \
 							  ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 	@mkdir -p ~/.vim/after
