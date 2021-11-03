@@ -106,7 +106,16 @@ Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'rhysd/vim-clang-format'
-au FileType c,cpp ClangFormatAutoEnable
+
+fun! EnableAutoFormat()
+  if !empty(findfile('.clang-format', expand('%:p:h').';'))
+    execute 'ClangFormatAutoEnable'
+  else
+    execute 'ClangFormatAutoDisable'
+  endif
+endfun
+
+au FileType c,cc,cpp :call EnableAutoFormat()
 
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
