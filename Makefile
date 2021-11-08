@@ -12,14 +12,10 @@ help:
 	@grep -o '^[a-z0-9]*:' Makefile
 
 .PHONY: terminal
-terminal: rcfiles git vim etc
+terminal: rcfiles etc git vim ycm
 
 .PHONY: desktop
 desktop: i3 x11 kitty
-
-.PHONY: etc
-etc:
-	$(call slink, pacman.conf, /etc/pacman.conf)
 
 .PHONY: rcfiles
 rcfiles:
@@ -28,6 +24,10 @@ rcfiles:
 	$(call link, inputrc, ~/.inputrc)
 	$(call link, nanorc, ~/.nanorc)
 	$(call link, screenrc, ~/.screenrc)
+
+.PHONY: etc
+etc:
+	$(call slink, pacman.conf, /etc/pacman.conf)
 
 .PHONY: git
 git:
@@ -38,13 +38,16 @@ git:
 .PHONY: vim
 vim:
 	$(call link, vimrc, ~/.vimrc)
-	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	@vim +PluginInstall +qall
-	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
 	$(call link, vim/lightlinecolors.vim, \
 							  ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 	@mkdir -p ~/.vim/after
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
+	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	@vim +PluginInstall +qall
+
+.PHONE: ycm
+ycm:
+	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
 
 .PHONY: kitty
 kitty:
