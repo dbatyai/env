@@ -32,5 +32,5 @@ export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
-  screen -RR ssh
+  screen -dRR ssh
 fi
