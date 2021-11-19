@@ -33,7 +33,7 @@ filetype indent off
 
 set wildmenu
 set wildmode=longest,list
-set wildignore=*.o,*~,*.pyc
+set wildignore=*.o,*~,*.pyc,*/build/*
 set completeopt=menuone
 
 set showtabline=2
@@ -49,8 +49,6 @@ set noswapfile
 set viminfo='1024,<1000,% "Re-open buffers on startup
 set autoread "Auto read when a file is changed from the outside
 set autowriteall
-
-au FileType gitcommit set viminfo=
 
 set updatetime=1000
 set timeoutlen=500
@@ -95,18 +93,20 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'mkitt/tabline.vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'vim-scripts/bufexplorer.zip'
-
 Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'yegappan/grep'
 Plugin 'amix/open_file_under_cursor.vim'
+
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_match_window='min:10,max:10'
+let g:ctrlp_line_prefix='  '
+
 Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'rhysd/vim-clang-format'
-
 fun! EnableAutoFormat()
   if !empty(findfile('.clang-format', expand('%:p:h').';'))
     execute 'ClangFormatAutoEnable'
@@ -114,7 +114,6 @@ fun! EnableAutoFormat()
     execute 'ClangFormatAutoDisable'
   endif
 endfun
-
 au FileType c,cc,cpp :call EnableAutoFormat()
 
 Plugin 'ycm-core/YouCompleteMe'
@@ -149,9 +148,6 @@ let g:lightline = {
       \   }
       \ }
 
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'yegappan/grep'
-
 Plugin 'itchyny/calendar.vim'
 let g:calendar_first_day = 'monday'
 let g:calendar_date_endian = 'big'
@@ -167,9 +163,9 @@ call vundle#end()
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable " Enable syntax highlighting
-set t_Co=256 " Enable 256 colors palette
-set encoding=utf8
+
 set ffs=unix,dos,mac " Use Unix as the standard file type
+set encoding=utf8
 set background=dark
 
 try
@@ -177,19 +173,26 @@ try
 catch
 endtry
 
-hi LineNr ctermfg=DarkGray
-hi Pmenu cterm=None ctermfg=DarkCyan ctermbg=Black
-hi SignColumn ctermbg=Black
-hi ErrorMsg ctermfg=DarkRed ctermbg=None
-hi YcmErrorSection ctermfg=Black ctermbg=DarkRed
-hi YcmErrorSign ctermfg=Black ctermbg=DarkRed
-hi YcmWarningSection ctermfg=Black ctermbg=DarkBlue
-hi YcmWarningSign ctermfg=Black ctermbg=DarkBlue
+hi LineNr      ctermfg=DarkGray  guifg=DarkGray
+hi ErrorMsg    ctermfg=DarkRed   ctermbg=None
+hi Error       ctermfg=DarkRed   ctermbg=None
+hi SignColumn  ctermbg=None
+
+" CtrlP
+hi StatusLine  ctermfg=White  ctermbg=None  cterm=None
+hi Cursorline  ctermfg=Gray   ctermbg=None  cterm=Bold,Reverse
+
+" YCM
+hi Pmenu              ctermfg=DarkCyan  ctermbg=Black
+hi YcmErrorSection    ctermfg=Black     ctermbg=DarkRed
+hi YcmErrorSign       ctermfg=Black     ctermbg=DarkRed
+hi YcmWarningSection  ctermfg=Black     ctermbg=DarkBlue
+hi YcmWarningSign     ctermfg=Black     ctermbg=DarkBlue
 
 " Tabline
-hi TabLine      ctermfg=Gray   ctermbg=None  cterm=None
-hi TabLineFill  ctermfg=Gray   ctermbg=None  cterm=None
-hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=bold
+hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
+hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
+hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=bold,reverse
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
@@ -269,6 +272,8 @@ map <silent> <leader><cr> :noh<cr>
 " => Custom commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
+  au FileType gitcommit set viminfo=
+
   " Delete trailing whitespace when writing buffer contents of certain file types
   au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim,*.conf :call CleanExtraSpaces()
 
@@ -277,7 +282,7 @@ if has("autocmd")
 endif
 
 " :W sudo saves the file
-command! W w !sudo tee % > /dev/null
+command! W execute 'silent! w !sudo tee % > /dev/null' <bar> e!
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
