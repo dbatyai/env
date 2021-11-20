@@ -1,12 +1,10 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 let g:mapleader = ","
 
+set nocompatible
 set nottybuiltin
 
 if &term =~ '^\%(screen\|tmux\)'
@@ -21,7 +19,7 @@ endif
 set history=5000
 set tags^=./.git/tags;
 set scrolloff=7 " Minimum number of line above or below the cursor
-set shm+=I "Don't show into screen
+set shm+=I "Don't show intro screen
 
 let $LANG='en'
 set langmenu=en
@@ -108,13 +106,13 @@ map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'rhysd/vim-clang-format'
 fun! EnableAutoFormat()
-  if !empty(findfile('.clang-format', expand('%:p:h').';'))
+  if !empty(findfile('.clang-format', '.;'))
     execute 'ClangFormatAutoEnable'
   else
     execute 'ClangFormatAutoDisable'
   endif
 endfun
-au FileType c,cc,cpp :call EnableAutoFormat()
+au FileType c,cc,cpp call EnableAutoFormat()
 
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
@@ -175,12 +173,12 @@ endtry
 
 hi LineNr      ctermfg=DarkGray  guifg=DarkGray
 hi ErrorMsg    ctermfg=DarkRed   ctermbg=None
-hi Error       ctermfg=DarkRed   ctermbg=None
+hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
 hi SignColumn  ctermbg=None
 
 " CtrlP
-hi StatusLine  ctermfg=White  ctermbg=None  cterm=None
-hi Cursorline  ctermfg=Gray   ctermbg=None  cterm=Bold,Reverse
+hi StatusLine  ctermfg=White     ctermbg=None  cterm=None
+hi Cursorline  ctermfg=DarkGray  ctermbg=None  cterm=Bold,Reverse
 
 " YCM
 hi Pmenu              ctermfg=DarkCyan  ctermbg=Black
@@ -257,8 +255,8 @@ map <leader>p :setlocal paste!<cr>
 map 0 ^
 
 " Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :call VisualSelection()<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :call VisualSelection()<CR>?<C-R>=@/<CR><CR>
 
 " Map <Space> to / (search) and Shift-<Space> to ? (backwards search)
 map <space> /
@@ -266,7 +264,6 @@ map <S-space> ?
 
 " Clear highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom commands
@@ -285,7 +282,7 @@ endif
 command! W execute 'silent! w !sudo tee % > /dev/null' <bar> e!
 
 " Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
+command! Bclose call <SID>BufferClose()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -300,7 +297,7 @@ fun! CleanExtraSpaces()
 endfun
 
 " Delete buffer without closing window
-function! <SID>BufcloseCloseIt()
+function! <SID>BufferClose()
    let l:currentBufNum = bufnr("%")
    let l:alternateBufNum = bufnr("#")
 
@@ -314,29 +311,14 @@ function! <SID>BufcloseCloseIt()
      new
    endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
+   exe "bdelete! ".l:currentBufNum
 endfunction
 
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
-
-function! VisualSelection(direction, extra_filter) range
+function! VisualSelection() range
     let l:saved_reg = @"
     execute "normal! vgvy"
 
     let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
 
     let @/ = l:pattern
     let @" = l:saved_reg
