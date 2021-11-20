@@ -55,10 +55,6 @@ kitty:
 	$(call link, kitty.conf, ~/.config/kitty/kitty.conf)
 	@sudo tic screen.xterm-kitty.terminfo
 
-.PHONY: dconf
-dconf:
-	@dconf load /org/gnome/terminal/legacy/profiles:/ < terminal-profile.dconf
-
 .PHONY: i3
 i3:
 	@mkdir -p ~/.config/i3
@@ -74,7 +70,6 @@ x11:
 	@sudo mkdir -p /etc/X11/xinit
 	$(call slink, xinitrc, /etc/X11/xinit/xinitrc)
 	$(call slink, xserverrc, /etc/X11/xinit/xserverrc)
-	$(call slink, Xresources, /etc/X11/xinit/.Xresources)
 	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
 
 .PHONY: yay
