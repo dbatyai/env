@@ -1,7 +1,12 @@
-hi Comment cterm=bold ctermfg=Red
-hi Statement cterm=bold ctermfg=Cyan
-hi Constant ctermfg=Gray
-hi Number cterm=bold ctermfg=Gray
-hi Search ctermfg=White
-hi String cterm=bold ctermfg=Green
-hi Special ctermfg=Magenta
+syn match pythonStringFormat '%s' containedin=pythonString
+syn match pythonParens '[(){}[\].:]'
+syn match pythonOps '[+\-*%=|&^]'
+syn match cDiv '\s/\s'
+
+hi link pythonStringFormat Special
+hi link pythonParens Delimiter
+hi link pythonOps Operator
+hi link pythonDiv Operator
+
+"hi pythonStatement cterm=bold ctermfg=LightBlue
+hi pythonString cterm=bold ctermfg=DarkGreen

@@ -1,9 +1,9 @@
 define link
-	@test -L $2 || ln -srfbnv $1 $2
+	@test -L $2 || ln -sfbnrvT $1 $2
 endef
 
 define slink
-	@test -L $2 || sudo ln -srfbnv $1 $2
+	@test -L $2 || sudo ln -sfbnrvT $1 $2
 endef
 
 .PHONY: help
@@ -42,6 +42,7 @@ vim:
 							  ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 	@mkdir -p ~/.vim/after
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
+	$(call link, vim/colors, ~/.vim/colors)
 	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	@vim +PluginInstall +qall
 

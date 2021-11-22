@@ -29,6 +29,12 @@ source $VIMRUNTIME/menu.vim
 filetype plugin on
 filetype indent off
 
+set ffs=unix,dos,mac
+set encoding=utf8
+
+syntax enable
+colorscheme obscure
+
 set wildmenu
 set wildmode=longest,list
 set wildignore=*.o,*~,*.pyc,*/build/*
@@ -158,41 +164,6 @@ let g:calendar_calendar = 'hungary'
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable " Enable syntax highlighting
-
-set ffs=unix,dos,mac " Use Unix as the standard file type
-set encoding=utf8
-set background=dark
-
-try
-    colorscheme desert
-catch
-endtry
-
-hi LineNr      ctermfg=DarkGray  guifg=DarkGray
-hi ErrorMsg    ctermfg=DarkRed   ctermbg=None
-hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
-hi SignColumn  ctermbg=None
-
-" CtrlP
-hi StatusLine  ctermfg=White     ctermbg=None  cterm=None
-hi Cursorline  ctermfg=DarkGray  ctermbg=None  cterm=Bold,Reverse
-
-" YCM
-hi Pmenu              ctermfg=DarkCyan  ctermbg=Black
-hi YcmErrorSection    ctermfg=Black     ctermbg=DarkRed
-hi YcmErrorSign       ctermfg=Black     ctermbg=DarkRed
-hi YcmWarningSection  ctermfg=Black     ctermbg=DarkBlue
-hi YcmWarningSign     ctermfg=Black     ctermbg=DarkBlue
-
-" Tabline
-hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
-hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
-hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=bold,reverse
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tags
@@ -205,7 +176,7 @@ nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
 nnoremap <silent> <leader>b :BufExplorer<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
-nnoremap <silent> <leader>o :%bd <bar> e#<CR>
+nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
