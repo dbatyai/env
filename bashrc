@@ -19,7 +19,7 @@ PROMPT_DIRTRIM=2
 alias ls='ls --color=auto'
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
-alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache'
+alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclude-dir=build'
 alias v='vim'
 
 parse_git_branch() {
