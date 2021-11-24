@@ -45,7 +45,7 @@ set laststatus=2
 set cmdheight=1
 set foldcolumn=1
 
-set switchbuf=useopen,usetab,newtab
+set switchbuf=useopen,usetab,uselast
 set hidden " Hide buffer when abandoned
 set nobackup
 set nowb
@@ -123,15 +123,15 @@ au FileType c,cc,cpp call EnableAutoFormat()
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_diagnostics_to_display = 100
+let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_auto_hover = ''
 let g:ycm_clangd_args=['--header-insertion=never']
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '--'
 nmap <silent> <leader>d <plug>(YCMHover)
-nmap <silent> <leader>D :YcmDiags<CR>
+nmap <silent> <leader>D :exe "YcmDiags" <bar> ll1 <CR>
 nmap <silent> <leader>f :YcmCompleter FixIt<CR>
-nmap <silent> <leader>n :lnext<CR>
 
 Plugin 'rust-lang/rust.vim'
 Plugin 'pangloss/vim-javascript'
@@ -171,6 +171,10 @@ noremap <leader>g <C-]>
 noremap <leader>t <C-T>
 noremap <C-g> <C-]>
 
+" Lists
+nmap <silent> <leader>n :lnext<CR>
+nmap <silent> <leader>c :cnext<CR>
+
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
@@ -180,23 +184,6 @@ nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Tab management
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
-map <leader>tn :tabnew<cr>
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-" Opens a new tab with the current buffer's path
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Window movement
 noremap <C-j> <C-W>j
