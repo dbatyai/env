@@ -230,10 +230,10 @@ if has("autocmd")
   au FileType gitcommit set viminfo=
 
   " Delete trailing whitespace when writing buffer contents of certain file types
-  au BufWritePre *.txt,*.js,*.ts,*.py,*.wiki,*.sh,*.coffee,*rc,*.vim,*.conf :call CleanExtraSpaces()
+  au BufWritePre * :call CleanTrailingSpaces()
 
   " Return to last edit position when opening files
-  au BufReadPost * if &ft !~# 'commit' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au BufReadPost * exe "normal! g'\""
 endif
 
 " :W sudo saves the file
@@ -246,7 +246,7 @@ command! Bclose call <SID>BufferClose()
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space
-fun! CleanExtraSpaces()
+fun! CleanTrailingSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
     silent! %s/\s\+$//e
