@@ -102,6 +102,7 @@ Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'tpope/vim-fugitive'
 Plugin 'yegappan/grep'
 Plugin 'amix/open_file_under_cursor.vim'
+Plugin 'majutsushi/tagbar'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
@@ -151,15 +152,6 @@ let g:lightline = {
       \     ]
       \   }
       \ }
-
-Plugin 'itchyny/calendar.vim'
-let g:calendar_first_day = 'monday'
-let g:calendar_date_endian = 'big'
-let g:calendar_date_month_name = 1
-let g:calendar_date_full_month_name = 1
-let g:calendar_week_number = 1
-let g:calendar_task = 1
-let g:calendar_calendar = 'hungary'
 
 call vundle#end()
 
