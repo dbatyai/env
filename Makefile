@@ -1,9 +1,9 @@
 define link
-	@test -L $2 || ln -sfbnrvT $1 $2
+	@test -L $2 || ln -sfbnvT `readlink -f $1` $2
 endef
 
 define slink
-	@test -L $2 || sudo ln -sfbnrvT $1 $2
+	@test -L $2 || sudo ln -sfbnvT `readlink -f $1` $2
 endef
 
 .PHONY: help
