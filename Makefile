@@ -33,7 +33,7 @@ etc:
 git:
 	$(call link, gitconfig, ~/.gitconfig)
 	$(call link, git-template, ~/.git-template)
-	@sh git-user.sh
+	@test -f ~/.git-user || sh git-user.sh
 
 .PHONY: vim
 vim:

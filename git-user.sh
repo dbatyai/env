@@ -1,9 +1,12 @@
+#! /bin/bash
+
 user_file=~/.git-user
 
 echo -n "Git user name: "
-read name
+read name || exit 1
+
 echo -n "Git user email: "
-read email
+read email || exit 1
 
 echo "[user]" > $user_file
 echo "  name = $name" >> $user_file
