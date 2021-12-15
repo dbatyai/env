@@ -33,5 +33,5 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
-  screen -dRR ssh
+  screen -dRR ssh-`echo $SSH_CONNECTION | cut -d ' ' -f 1`
 fi
