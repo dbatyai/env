@@ -1,15 +1,16 @@
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   ff = pull -p --ff-only
+  fr = pull -p -r
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   hidden = !git ls-files -v | grep "^[[:lower:]]"
   ignore = "! \
-_f() { \
-  dir=`git rev-parse --git-dir`; \
-  test -n \"$dir\" && $EDITOR \"$dir/info/exclude\"; \
-  unset -f _f;}; \
-_f"
+    _f() { \
+      dir=`git rev-parse --git-dir`; \
+      test -n \"$dir\" && $EDITOR \"$dir/info/exclude\"; \
+      unset -f _f;}; \
+    _f"
 [push]
   default = simple
 [init]
