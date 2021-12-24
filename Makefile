@@ -24,6 +24,7 @@ rcfiles:
 	$(call link, inputrc, ~/.inputrc)
 	$(call link, nanorc, ~/.nanorc)
 	$(call link, screenrc, ~/.screenrc)
+	$(call link, zshrc, ~/.zshrc)
 
 .PHONY: etc
 etc:
