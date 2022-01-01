@@ -134,6 +134,9 @@ nmap <silent> <leader>d <plug>(YCMHover)
 nmap <silent> <leader>D :exe "YcmDiags" <bar> ll1 <CR>
 nmap <silent> <leader>f :YcmCompleter FixIt<CR>
 
+Plugin 'tikhomirov/vim-glsl'
+au BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
+
 Plugin 'rust-lang/rust.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
