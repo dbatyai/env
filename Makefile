@@ -53,6 +53,7 @@ vim: ## vim config, colorscheme, syntax highlight and plugins
 
 .PHONY: ycm
 ycm: vim ## install ycm completer
+	@vim +PluginUpdate +qall
 	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
 
 .PHONY: kitty
