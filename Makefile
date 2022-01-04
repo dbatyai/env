@@ -42,14 +42,15 @@ git: ## git config and template
 
 .PHONY: vim
 vim: ## vim config, colorscheme, syntax highlight and plugins
-	$(call link, vimrc, ~/.vimrc)
-	$(call link, vim/lightlinecolors.vim, \
-							  ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 	@mkdir -p ~/.vim/after
-	$(call link, vim/after/syntax, ~/.vim/after/syntax)
-	$(call link, vim/colors, ~/.vim/colors)
+	@mkdir -p ~/.vim/bundle
 	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	$(call link, vimrc, ~/.vimrc)
+	$(call link, vim/colors, ~/.vim/colors)
+	$(call link, vim/after/syntax, ~/.vim/after/syntax)
 	@vim +PluginInstall +qall
+	$(call link, vim/lightlinecolors.vim, \
+        ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 
 .PHONY: ycm
 ycm: vim ## install ycm completer
