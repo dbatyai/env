@@ -80,3 +80,7 @@ yay:
 	$(call link, yay.json, ~/.config/yay/config.json)
 	@git clone https://aur.archlinux.org/yay /tmp/yay
 	@cd /tmp/yay && yes | makepkg -sircC
+
+.PHONY: grub
+grub:
+	$(call slink, grub, /etc/default/grub)
