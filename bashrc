@@ -23,10 +23,13 @@ parse_git_branch() {
 PS1='\[\033[0;90m\]\t \[\033[32m\]$_SSH_HOST\[\033[01m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
 
 alias ls='ls --color=auto'
-alias pacman="sudo pacman"
-alias systemctl="sudo systemctl"
 alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclude-dir=build --exclude=compile_commands.json'
 alias v='vim'
+
+alias mount="sudo mount"
+alias pacman="sudo pacman"
+alias systemctl="sudo systemctl"
+alias umount="sudo umount"
 
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
