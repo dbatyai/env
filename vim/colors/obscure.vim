@@ -97,7 +97,7 @@ hi Visual cterm=Reverse
 hi VisualNOS cterm=Bold,Underline
 
 " Diff
-hi DiffAdd ctermbg=4
-hi DiffChange ctermbg=5
-hi DiffDelete cterm=Bold ctermfg=4 ctermbg=6
-hi DiffText cterm=Bold ctermbg=1
+hi DiffAdd cterm=Bold ctermfg=Black ctermbg=DarkGreen
+hi DiffChange ctermfg=Black ctermbg=DarkGray
+hi DiffDelete ctermfg=Black ctermbg=DarkRed
+hi DiffText cterm=Bold ctermfg=Black ctermbg=DarkBlue
