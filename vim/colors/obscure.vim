@@ -66,7 +66,7 @@ hi YcmWarningSign ctermfg=Black ctermbg=DarkBlue
 
 " Editor
 hi StatusLine ctermfg=White ctermbg=None cterm=None
-hi Cursorline ctermfg=DarkGray ctermbg=None cterm=Bold,Reverse
+hi Cursorline ctermfg=None ctermbg=None cterm=Bold
 
 hi LineNr ctermfg=DarkGray guifg=DarkGray
 hi SignColumn ctermbg=None
