@@ -2,6 +2,7 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   ff = pull -p --ff-only
   fr = pull -p -r
+  fp = push --force-with-lease
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   hidden = !git ls-files -v | grep "^[[:lower:]]"
