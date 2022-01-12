@@ -190,6 +190,10 @@ noremap <C-Down> <C-W>j
 noremap <C-Left> <C-W>h
 noremap <C-Right> <C-W>l
 
+" Window splitting
+noremap <leader>v :vsplit<CR>
+noremap <leader>s :split<CR>
+
 " Text manipulation
 nnoremap xx "_dd
 nnoremap <S-x> "_D
@@ -210,6 +214,9 @@ map 0 ^
 " Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :call VisualSelection()<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :call VisualSelection()<CR>?<C-R>=@/<CR><CR>
+
+" Visual mode sort lines
+vnoremap <silent> s :sort<CR>
 
 " Map <Space> to / (search) and Shift-<Space> to ? (backwards search)
 map <space> /
