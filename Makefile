@@ -78,7 +78,7 @@ x11: ## x11 config files
 	@sudo mkdir -p /etc/X11/xinit
 	$(call slink, xinitrc, /etc/X11/xinit/xinitrc)
 	$(call slink, xserverrc, /etc/X11/xinit/xserverrc)
-	@sudo cp -v xorg-conf/* /etc/X11/xorg.conf.d/
+	@sudo cp -bv xorg-conf/* /etc/X11/xorg.conf.d/
 
 .PHONY: yay
 yay: ## install yay pacman wrapper
