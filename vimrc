@@ -45,7 +45,7 @@ set laststatus=2
 set cmdheight=1
 set foldcolumn=1
 
-set switchbuf=useopen,usetab,uselast
+set switchbuf=useopen,usetab
 set hidden " Hide buffer when abandoned
 set nobackup
 set nowb
@@ -173,7 +173,7 @@ nmap <silent> <leader>c :cnext<CR>
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
-nnoremap <silent> <leader>b :BufExplorer<CR>
+nnoremap <silent> <leader><Space> :BufExplorer<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
 nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
 
@@ -235,7 +235,7 @@ if has("autocmd")
   au BufWritePre * :call RemoveTrailingSpaces()
 
   " Return to last edit position when opening files
-  au BufReadPost * exe "normal! g'\""
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " :W sudo saves the file
