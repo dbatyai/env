@@ -23,6 +23,7 @@ desktop: i3 x11 kitty ## config files for desktop usage
 
 .PHONY: rcfiles
 rcfiles: ## common rc files in $HOME
+	$(call link, ackrc, ~/.ackrc)
 	$(call link, bashrc, ~/.bashrc)
 	$(call link, bash_profile, ~/.bash_profile)
 	$(call link, inputrc, ~/.inputrc)
