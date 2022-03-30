@@ -21,7 +21,6 @@ set tags^=./.git/tags;
 set scrolloff=7 " Minimum number of line above or below the cursor
 set shm+=I "Don't show intro screen
 
-let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -65,8 +64,6 @@ set shiftwidth=2
 set tabstop=2
 set noai
 set nosi
-let c_space_errors = 1
-let python_space_error_highlight = 1
 
 set linebreak
 set textwidth=120
@@ -98,18 +95,18 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ap/vim-buftabline'
+Plugin 'preservim/tagbar'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'tpope/vim-fugitive'
-Plugin 'yegappan/grep'
 Plugin 'amix/open_file_under_cursor.vim'
-Plugin 'majutsushi/tagbar'
 
+Plugin 'preservim/nerdcommenter'
+Plugin 'kqito/vim-easy-replace'
+
+Plugin 'yegappan/grep'
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
 let g:ctrlp_line_prefix='  '
-
-Plugin 'scrooloose/nerdtree'
-map <C-n> :NERDTreeFocus<CR>
 
 Plugin 'rhysd/vim-clang-format'
 fun! EnableAutoFormat()
@@ -157,6 +154,18 @@ let g:lightline = {
       \ }
 
 call vundle#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Config variables
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let c_space_errors = 1
+let python_space_error_highlight = 1
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 15
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
