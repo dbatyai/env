@@ -1,4 +1,3 @@
-#
 #zshrc
 
 HISTFILE=~/.histfile
@@ -36,6 +35,8 @@ alias v='vim'
 
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
+
+fpath=(~/.zsh $fpath)
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
