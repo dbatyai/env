@@ -7,14 +7,10 @@ let g:mapleader = ","
 set nocompatible
 set nottybuiltin
 
-if &term =~ '^\%(screen\|tmux\)'
-  set ttymouse=sgr
-
-  execute "silent! set <xUp>=\<Esc>[@;*A"
-  execute "silent! set <xDown>=\<Esc>[@;*B"
-  execute "silent! set <xRight>=\<Esc>[@;*C"
-  execute "silent! set <xLeft>=\<Esc>[@;*D"
-endif
+execute "silent! set <xUp>=\<Esc>[1;*A"
+execute "silent! set <xDown>=\<Esc>[1;*B"
+execute "silent! set <xRight>=\<Esc>[1;*C"
+execute "silent! set <xLeft>=\<Esc>[1;*D"
 
 set history=5000
 set tags^=./.git/tags;
