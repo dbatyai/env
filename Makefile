@@ -54,7 +54,7 @@ ycm: vim ## install ycm completer
 kitty: ## kitty terminal config and screen terminfo
 	@mkdir -p ~/.config/kitty
 	$(call link, config/kitty.conf, ~/.config/kitty/kitty.conf)
-	@sudo tic util/screen.xterm-kitty.terminfo
+	@tic util/screen.xterm-kitty.terminfo
 
 .PHONY: yay
 yay: ## install yay pacman wrapper
@@ -75,10 +75,10 @@ i3: ## i3 and dunst config files
 
 .PHONY: x11
 x11: root ## x11 config files
-	@sudo mkdir -p /etc/X11/xinit
+	@mkdir -p /etc/X11/xinit
 	$(call link, x11/xinitrc, /etc/X11/xinit/xinitrc)
 	$(call link, x11/xserverrc, /etc/X11/xinit/xserverrc)
-	@sudo cp -bv x11/xorg-conf/* /etc/X11/xorg.conf.d/
+	@cp -bv x11/xorg-conf/* /etc/X11/xorg.conf.d/
 
 .PHONY: etc
 etc: root ## config files in /etc
