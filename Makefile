@@ -9,6 +9,11 @@ define install
 	@cp -buv $1 $2
 endef
 
+# Append line to file if it not yet contains it
+define append
+	@test -e $1 && grep -Fqx $2 $1 || echo $2 >> $1
+endef
+
 .PHONY: help
 help: ## print this help message
 	@echo "Usage: make TARGET..."
@@ -96,6 +101,13 @@ network: root ## systemd-networkd config
 .PHONY: grub
 grub: root ## install grub config
 	$(call install, etc/grub, /etc/default/grub)
+
+.PHONY: zram
+zram: root
+	@sh etc/zram-rule.sh /etc/udev/rules.d/99-zram.rules
+	$(call append, /etc/modules-load.d/zram.conf, "zram")
+	$(call append, /etc/fstab, "/dev/zram0 none swap sw 0 0")
+	@modprobe zram && sleep 0.5 && swapon -a # sleep is needed to allow udev to initialize device
 
 .PHONY: root
 root:
