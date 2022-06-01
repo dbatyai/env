@@ -4,6 +4,11 @@ define link
 	@ln -sfnvT `readlink -f $1` $2
 endef
 
+# Install target file to a destination, unless the destination is newer
+define install
+	@cp -buv $1 $2
+endef
+
 .PHONY: help
 help: ## print this help message
 	@echo "Usage: make TARGET..."
@@ -78,7 +83,7 @@ x11: root ## x11 config files
 	@mkdir -p /etc/X11/xinit
 	$(call link, x11/xinitrc, /etc/X11/xinit/xinitrc)
 	$(call link, x11/xserverrc, /etc/X11/xinit/xserverrc)
-	@cp -bv x11/xorg-conf/* /etc/X11/xorg.conf.d/
+	$(call install, x11/xorg-conf/*, /etc/X11/xorg.conf.d/)
 
 .PHONY: etc
 etc: root ## config files in /etc
