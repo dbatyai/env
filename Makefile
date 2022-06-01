@@ -86,12 +86,19 @@ x11: root ## x11 config files
 	$(call install, x11/xorg-conf/*, /etc/X11/xorg.conf.d/)
 
 .PHONY: etc
-etc: root ## config files in /etc
-	$(call link, etc/pacman.conf, /etc/pacman.conf)
+etc: pacman network grub ## config files in /etc
+
+.PHONY: pacman
+pacman: root ## config files in /etc
+	$(call install, etc/pacman.conf, /etc/pacman.conf)
+
+.PHONY: network
+network: root ## systemd-networkd config
+	$(call install, etc/network/*, /etc/systemd/network/)
 
 .PHONY: grub
 grub: root ## install grub config
-	$(call link, etc/grub, /etc/default/grub)
+	$(call install, etc/grub, /etc/default/grub)
 
 .PHONY: root
 root:
