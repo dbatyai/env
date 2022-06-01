@@ -19,9 +19,6 @@ help: ## print this help message
 .PHONY: user
 user: rcfiles git vim ycm kitty yay ## install user specific configs
 
-.PHONY: desktop
-desktop: i3 x11 kitty ## config files for desktop usage
-
 .PHONY: rcfiles
 rcfiles: ## common rc files in $HOME
 	$(call link, config/ackrc, ~/.ackrc)
