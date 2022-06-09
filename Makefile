@@ -9,6 +9,11 @@ define install
 	@cp -buv $1 $2
 endef
 
+# Install target file to destination, replacing if present
+define replace
+	@cp -v $1 $2
+endef
+
 # Append line to file if it not yet contains it
 define append
 	@test -e $1 && grep -Fqx $2 $1 || echo $2 >> $1
@@ -75,9 +80,10 @@ i3: ## i3 and dunst config files
 	@mkdir -p ~/.config/i3
 	@mkdir -p ~/.config/i3status
 	@mkdir -p ~/.config/dunst
-	$(call link, i3/i3.conf, ~/.config/i3/config)
+	$(call link, i3/config, ~/.config/i3/config)
 	$(call link, i3/i3status.conf, ~/.config/i3status/config)
 	$(call link, i3/lock.sh, ~/.lock.sh)
+	$(call replace, i3/displayrc, ~/.displayrc)
 	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
 
 .PHONY: x11
