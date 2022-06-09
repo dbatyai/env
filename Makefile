@@ -75,6 +75,15 @@ yay: ## install yay pacman wrapper
 	@git clone https://aur.archlinux.org/yay /tmp/yay
 	@cd /tmp/yay && yes | makepkg -sircC
 
+.PHONY: sway
+sway: ## sway and mako config files
+	@mkdir -p ~/.config/sway/config.d
+	@mkdir -p ~/.config/mako
+	$(call link, sway/config, ~/.config/sway/config)
+	$(call install, sway/config.d/*, ~/.config/sway/config.d/)
+	$(call replace, sway/displayrc, ~/.displayrc)
+	$(call link, config/mako, ~/.config/mako/config)
+
 .PHONY: i3
 i3: ## i3 and dunst config files
 	@mkdir -p ~/.config/i3

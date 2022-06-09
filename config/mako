@@ -1,0 +1,36 @@
+# mako config
+
+output=""
+font=Monospace 9
+margin=10
+padding=8
+border-size=2
+border-radius=0
+icons=1
+icon-path=""
+icon-location=left
+markup=1
+actions=1
+history=1
+text-alignment=left
+default-timeout=20000
+layer=top
+anchor=top-right
+
+[urgency=low]
+background-color=#222222
+text-color=#888888
+border-color=#888888
+default-timeout=3000
+
+[urgency=normal]
+background-color=#222222
+text-color=#67a0c6
+border-color=#67a0c6
+
+[urgency=critical]
+background-color=#222222
+text-color=#ce0404
+border-color=#ce0404
+
+# vim: ft=cfg
