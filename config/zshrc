@@ -1,4 +1,4 @@
-#zshrc
+# ~/.zshrc
 
 HISTFILE=~/.histfile
 HISTSIZE=1000000
