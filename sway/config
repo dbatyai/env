@@ -124,3 +124,4 @@ bar {
 }
 
 include config.d/*
+workspace 1
