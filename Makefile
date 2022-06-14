@@ -5,7 +5,7 @@ endef
 
 # Install target file to a destination, unless the destination is newer
 define install
-	@cp -buv $1 $2
+	@cmp -s $1 $2 || cp -buv $1 $2
 endef
 
 # Install target file to destination, replacing if present
@@ -79,7 +79,10 @@ sway: ## sway and mako config files
 	@mkdir -p ~/.config/sway/config.d
 	@mkdir -p ~/.config/mako
 	$(call link, sway/config, ~/.config/sway/config)
-	$(call install, sway/config.d/*, ~/.config/sway/config.d/)
+	$(call install, sway/config.d/10-monitor.conf, ~/.config/sway/config.d/10-monitor.conf)
+	$(call install, sway/config.d/20-input.conf, ~/.config/sway/config.d/20-input.conf)
+	$(call install, sway/config.d/30-idle.conf, ~/.config/sway/config.d/30-idle.conf)
+	$(call install, sway/config.d/40-mako.conf, ~/.config/sway/config.d/40-mako.conf)
 	$(call replace, sway/displayrc, ~/.displayrc)
 	$(call link, config/mako, ~/.config/mako/config)
 
@@ -99,7 +102,9 @@ x11: root ## x11 config files
 	@mkdir -p /etc/X11/xinit
 	$(call link, x11/xinitrc, /etc/X11/xinit/xinitrc)
 	$(call link, x11/xserverrc, /etc/X11/xinit/xserverrc)
-	$(call install, x11/xorg-conf/*, /etc/X11/xorg.conf.d/)
+	$(call install, x11/xorg-conf/00-keyboard.conf, /etc/X11/xorg.conf.d/00-keyboard.conf)
+	$(call install, x11/xorg-conf/10-monitor.conf, /etc/X11/xorg.conf.d/10-monitor.conf)
+	$(call install, x11/xorg-conf/20-mouse.conf, /etc/X11/xorg.conf.d/20-mouse.conf)
 
 .PHONY: etc
 etc: pacman network grub ## config files in /etc
@@ -110,7 +115,8 @@ pacman: root ## config files in /etc
 
 .PHONY: network
 network: root ## systemd-networkd config
-	$(call install, etc/network/*, /etc/systemd/network/)
+	$(call install, etc/network/20-wired.network, /etc/systemd/network/20-wired.network)
+	$(call install, etc/network/25-wireless.network, /etc/systemd/network/25-wireless.network)
 
 .PHONY: grub
 grub: root ## install grub config
