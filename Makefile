@@ -100,8 +100,8 @@ i3: ## i3 and dunst config files
 .PHONY: x11
 x11: root ## x11 config files
 	@mkdir -p /etc/X11/xinit
-	$(call link, x11/xinitrc, /etc/X11/xinit/xinitrc)
-	$(call link, x11/xserverrc, /etc/X11/xinit/xserverrc)
+	$(call install, x11/xinitrc, /etc/X11/xinit/xinitrc)
+	$(call install, x11/xserverrc, /etc/X11/xinit/xserverrc)
 	$(call install, x11/xorg-conf/00-keyboard.conf, /etc/X11/xorg.conf.d/00-keyboard.conf)
 	$(call install, x11/xorg-conf/10-monitor.conf, /etc/X11/xorg.conf.d/10-monitor.conf)
 	$(call install, x11/xorg-conf/20-mouse.conf, /etc/X11/xorg.conf.d/20-mouse.conf)
