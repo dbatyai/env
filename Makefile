@@ -1,7 +1,6 @@
 # Create a symlink if target is not yet a link, backing up the original
 define link
-	@test ! -e $2 -o -L $2 || cp $2 $2.save
-	@ln -sfnvT `readlink -f $1` $2
+	@test ! -e $2 -o -L $2 || (cp $2 $2.save && ln -sfnvT `readlink -f $1` $2)
 endef
 
 # Install target file to a destination, unless the destination is newer
