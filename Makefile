@@ -9,7 +9,7 @@ define install
 endef
 
 # Install target file to destination, replacing if present
-define replace
+define copy
 	@cp -v $1 $2
 endef
 
@@ -83,7 +83,7 @@ sway: ## sway and mako config files
 	$(call install, sway/config.d/20-input.conf, ~/.config/sway/config.d/20-input.conf)
 	$(call install, sway/config.d/30-idle.conf, ~/.config/sway/config.d/30-idle.conf)
 	$(call install, sway/config.d/40-mako.conf, ~/.config/sway/config.d/40-mako.conf)
-	$(call replace, sway/displayrc, ~/.displayrc)
+	$(call copy, sway/displayrc, ~/.displayrc)
 	$(call link, config/mako, ~/.config/mako/config)
 
 .PHONY: i3
@@ -94,7 +94,7 @@ i3: ## i3 and dunst config files
 	$(call link, i3/config, ~/.config/i3/config)
 	$(call link, i3/i3status.conf, ~/.config/i3status/config)
 	$(call link, i3/lock.sh, ~/.lock.sh)
-	$(call replace, i3/displayrc, ~/.displayrc)
+	$(call copy, i3/displayrc, ~/.displayrc)
 	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
 
 .PHONY: x11
