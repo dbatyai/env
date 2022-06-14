@@ -1,4 +1,5 @@
 set bell-style none
+set enable-bracketed-paste off
 
 "\e[1~": beginning-of-line
 "\e[4~": end-of-line
