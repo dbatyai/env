@@ -10,7 +10,7 @@ endef
 
 # Install target file to destination, replacing if present
 define copy
-	@cp -v $1 $2
+	@cmp -s $1 $2 || cp -v $1 $2
 endef
 
 # Append line to file if it not yet contains it
