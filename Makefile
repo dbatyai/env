@@ -80,12 +80,12 @@ sway: ## sway and mako config files
 	@mkdir -p ~/.config/sway/config.d
 	@mkdir -p ~/.config/mako
 	$(call link, sway/config, ~/.config/sway/config)
+	$(call link, config/mako, ~/.config/mako/config)
 	$(call install, sway/config.d/10-monitor.conf, ~/.config/sway/config.d/10-monitor.conf)
 	$(call install, sway/config.d/20-input.conf, ~/.config/sway/config.d/20-input.conf)
 	$(call install, sway/config.d/30-idle.conf, ~/.config/sway/config.d/30-idle.conf)
 	$(call install, sway/config.d/40-mako.conf, ~/.config/sway/config.d/40-mako.conf)
 	$(call copy, sway/displayrc, ~/.displayrc)
-	$(call link, config/mako, ~/.config/mako/config)
 
 .PHONY: i3
 i3: ## i3 and dunst config files
@@ -94,9 +94,9 @@ i3: ## i3 and dunst config files
 	@mkdir -p ~/.config/dunst
 	$(call link, i3/config, ~/.config/i3/config)
 	$(call link, i3/i3status.conf, ~/.config/i3status/config)
+	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
 	$(call link, i3/lock.sh, ~/.lock.sh)
 	$(call copy, i3/displayrc, ~/.displayrc)
-	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
 
 .PHONY: x11
 x11: root ## x11 config files
