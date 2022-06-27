@@ -71,6 +71,7 @@ vim: vim-config vim-plugins ycm ## everything vim related
 
 .PHONY: nvim
 nvim: vim ## neovim config
+	@mkdir -p ~/.config/nvim
 	$(call link, config/nvim.vim, ~/.config/nvim/init.vim)
 
 .PHONY: kitty
