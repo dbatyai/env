@@ -45,22 +45,33 @@ git: ## git config and template
 	$(call link, git/git-template, ~/.git-template)
 	@test -f ~/.git-user || sh git/git-user.sh
 
-.PHONY: vim
-vim: ## vim config, colorscheme, syntax highlight and plugins
+.PHONY: vim-config
+vim-config: ## vim config, colorscheme, syntax highlight
 	@mkdir -p ~/.vim/after
+	@mkdir -p ~/.vim/colors
+	$(call link, vim/vimrc, ~/.vimrc)
+	$(call link, vim/obscure.vim, ~/.vim/colors/obscure.vim)
+	$(call link, vim/after/syntax, ~/.vim/after/syntax)
+
+.PHONY: vim-plugins
+vim-plugins: vim-config ## vim plugins
 	@mkdir -p ~/.vim/bundle
 	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	$(call link, vim/vimrc, ~/.vimrc)
-	$(call link, vim/colors, ~/.vim/colors)
-	$(call link, vim/after/syntax, ~/.vim/after/syntax)
 	@vim +PluginInstall +qall
 	$(call link, vim/lightlinecolors.vim, \
         ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 
 .PHONY: ycm
-ycm: vim ## install ycm completer
+ycm: vim-plugins ## install ycm completer
 	@vim +PluginUpdate +qall
 	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
+
+.PHONY: vim
+vim: vim-config vim-plugins ycm ## everything vim related
+
+.PHONY: nvim
+nvim: vim ## neovim config
+	$(call link, config/nvim.vim, ~/.config/nvim/init.vim)
 
 .PHONY: kitty
 kitty: ## kitty terminal config and screen terminfo

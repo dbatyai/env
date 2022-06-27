@@ -5,7 +5,6 @@ let mapleader = ","
 let g:mapleader = ","
 
 set nocompatible
-set nottybuiltin
 
 execute "silent! set <xUp>=\<Esc>[1;*A"
 execute "silent! set <xDown>=\<Esc>[1;*B"
@@ -16,6 +15,7 @@ set history=5000
 set tags^=./.git/tags;
 set scrolloff=7 " Minimum number of line above or below the cursor
 set shm+=I "Don't show intro screen
+set guicursor=i:block
 
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
