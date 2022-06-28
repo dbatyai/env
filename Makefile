@@ -24,7 +24,7 @@ help: ## print this help message
 	@echo "Usage: make TARGET..."
 	@echo ""
 	@echo "Available targets:"
-	@sed -n 's/^\(\w*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
+	@sed -n 's/^\([[:alnum:]-]*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
 
 .PHONY: user
 user: rcfiles git vim ycm kitty yay ## install user specific configs
@@ -123,7 +123,7 @@ x11: root ## x11 config files
 etc: pacman network grub ## config files in /etc
 
 .PHONY: pacman
-pacman: root ## config files in /etc
+pacman: root ## pacman config
 	$(call install, etc/pacman.conf, /etc/pacman.conf)
 
 .PHONY: network
@@ -136,7 +136,7 @@ grub: root ## install grub config
 	$(call install, etc/grub, /etc/default/grub)
 
 .PHONY: zram
-zram: root
+zram: root ## zram config
 	@sh etc/zram-rule.sh /etc/udev/rules.d/99-zram.rules
 	$(call append, /etc/modules-load.d/zram.conf, "zram")
 	$(call append, /etc/fstab, "/dev/zram0 none swap sw 0 0")
