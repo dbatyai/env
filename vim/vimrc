@@ -31,7 +31,20 @@ set ffs=unix,dos,mac
 set encoding=utf8
 
 syntax enable
-colorscheme obscure
+try
+  colorscheme obscure
+catch
+  colorscheme default
+  hi LineNr      ctermfg=DarkGray  guifg=DarkGray
+  hi FoldColumn  ctermbg=None
+  hi SignColumn  ctermbg=None
+  hi ErrorMsg    ctermfg=DarkRed   ctermbg=None
+  hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
+
+  hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=bold,reverse
+endtry
 
 set wildmenu
 set wildmode=longest,list
