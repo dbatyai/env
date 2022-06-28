@@ -238,6 +238,7 @@ vnoremap <silent> # :call VisualSelection()<CR>?<C-R>=@/<CR><CR>
 
 " Visual mode sort lines
 vnoremap <silent> s :sort<CR>
+vnoremap <silent> f :ClangFormat<CR>
 
 " Map <Space> to / (search) and Shift-<Space> to ? (backwards search)
 map <space> /
