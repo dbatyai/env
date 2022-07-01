@@ -88,7 +88,7 @@ yay: ## install yay pacman wrapper
 	@cd /tmp/yay && yes | makepkg -sircC
 
 .PHONY: sway
-sway: ## sway and mako config files
+sway: i3status ## sway and mako config files
 	@mkdir -p ~/.config/sway/config.d
 	@mkdir -p ~/.config/mako
 	$(call link, sway/config, ~/.config/sway/config)
@@ -99,13 +99,16 @@ sway: ## sway and mako config files
 	$(call install, sway/config.d/40-mako.conf, ~/.config/sway/config.d/40-mako.conf)
 	$(call copy, sway/displayrc, ~/.displayrc)
 
+.PHONY: i3status
+i3status: ## i3status config
+	$(call link, config/i3status.conf, ~/.config/i3status/config)
+
 .PHONY: i3
-i3: ## i3 and dunst config files
+i3: i3status ## i3 and dunst config files
 	@mkdir -p ~/.config/i3
 	@mkdir -p ~/.config/i3status
 	@mkdir -p ~/.config/dunst
 	$(call link, i3/config, ~/.config/i3/config)
-	$(call link, i3/i3status.conf, ~/.config/i3status/config)
 	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
 	$(call link, i3/lock.sh, ~/.lock.sh)
 	$(call copy, i3/displayrc, ~/.displayrc)
