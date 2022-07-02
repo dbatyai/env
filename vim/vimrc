@@ -17,8 +17,10 @@ set scrolloff=7 " Minimum number of line above or below the cursor
 set shm+=I "Don't show intro screen
 set guicursor=i:block
 
-set mouse=a
-set clipboard=unnamed,unnamedplus
+if empty($STY) " Enable mouse support if not running in ssh
+  set mouse=a
+  set clipboard=unnamed,unnamedplus
+endif
 
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
