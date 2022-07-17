@@ -132,6 +132,10 @@ fun! EnableAutoFormat()
 endfun
 au FileType c,cc,cpp call EnableAutoFormat()
 
+Plugin 'github/copilot.vim'
+let g:copilot_assume_mapped = v:true
+imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
+
 Plugin 'ycm-core/YouCompleteMe'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_diagnostics_to_display = 100
