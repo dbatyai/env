@@ -3,7 +3,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-shopt -q -s checkwinsize
+[[ $DISPLAY ]] && shopt -q -s checkwinsize
 shopt -s histappend
 
 HISTCONTROL=ignorespace:erasedups
@@ -37,3 +37,5 @@ if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
   screen -dRR ssh-`echo $SSH_CONNECTION | cut -d ' ' -f 1`
 fi
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
