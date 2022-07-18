@@ -16,7 +16,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start program launcher
-bindsym $mod+d exec bemenu-run --hf=#479dd6 --tf=#479dd6 -p ""
+bindsym $mod+d exec bemenu-run --hf=#479dd6 --tf=#479dd6 --hp=5 -p ""
 
 # start a terminal
 bindsym $mod+Return exec kitty
