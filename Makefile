@@ -43,6 +43,7 @@ rcfiles: ## common rc files in $HOME
 git: ## git config and template
 	$(call link, git/gitconfig, ~/.gitconfig)
 	$(call link, git/git-template, ~/.git-template)
+	$(call link, git/ctags-hook, ~/.ctags-hook)
 	@test -f ~/.git-user || sh git/git-user.sh
 
 .PHONY: vim-config
