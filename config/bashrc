@@ -24,7 +24,7 @@ export EDITOR=nvim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 alias ls='ls --color=auto'
-alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclude-dir=build --exclude=compile_commands.json'
+alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclude=compile_commands.json'
 alias e='$EDITOR'
 alias v='$EDITOR'
 
