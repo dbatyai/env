@@ -117,7 +117,7 @@ Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'preservim/nerdcommenter'
 Plugin 'kqito/vim-easy-replace'
 
-Plugin 'yegappan/grep'
+Plugin 'dkprice/vim-easygrep'
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
 let g:ctrlp_line_prefix='  '
