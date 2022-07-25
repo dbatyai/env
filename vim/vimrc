@@ -277,6 +277,10 @@ command! Bclose call <SID>BufferClose()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space
 fun! RemoveTrailingSpaces()
+    if (&ft=="diff" || &ft=="patch" || &ft=="gitsendemail")
+        return
+    endif
+
     let l:save_cursor = getpos(".")
     keepp %s/\s\+$//e
     call setpos('.', l:save_cursor)
