@@ -21,7 +21,7 @@ bindsym $mod+d exec bemenu-run --hf=#479dd6 --tf=#479dd6 --hp=5 -p ""
 # start a terminal
 bindsym $mod+Return exec kitty
 
-bindsym --release $mod+Shift+p exec systemctl poweroff
+bindsym $mod+Shift+p exec systemctl poweroff
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
