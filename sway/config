@@ -19,7 +19,7 @@ floating_modifier $mod
 bindsym $mod+d exec bemenu-run --hf=#479dd6 --tf=#479dd6 --hp=5 -p ""
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 bindsym $mod+Shift+p exec systemctl poweroff
 

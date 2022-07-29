@@ -75,6 +75,11 @@ nvim: vim ## neovim config
 	@mkdir -p ~/.config/nvim
 	$(call link, config/nvim.vim, ~/.config/nvim/init.vim)
 
+.PHONY: alacritty
+alacritty: ## alacritty terminal config
+	@mkdir -p ~/.config/alacritty
+	$(call link, config/alacritty.yml, ~/.config/alacritty/alacritty.yml)
+
 .PHONY: kitty
 kitty: ## kitty terminal config and screen terminfo
 	@mkdir -p ~/.config/kitty
