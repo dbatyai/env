@@ -107,6 +107,7 @@ sway: i3status ## sway and mako config files
 
 .PHONY: i3status
 i3status: ## i3status config
+	@mkdir -p ~/.config/i3status
 	$(call link, config/i3status.conf, ~/.config/i3status/config)
 
 .PHONY: i3
