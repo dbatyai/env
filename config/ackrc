@@ -1,7 +1,0 @@
-# ~/.ackrc
-
---color-filename=magenta
---color-match=bold red
---color-colno=green
---color-lineno=green
---no-group

@@ -31,7 +31,6 @@ user: rcfiles git vim ycm kitty yay ## install user specific configs
 
 .PHONY: rcfiles
 rcfiles: ## common rc files in $HOME
-	$(call link, config/ackrc, ~/.ackrc)
 	$(call link, config/bashrc, ~/.bashrc)
 	$(call link, config/bash_profile, ~/.bash_profile)
 	$(call link, config/inputrc, ~/.inputrc)
