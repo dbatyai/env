@@ -37,6 +37,7 @@ rcfiles: ## common rc files in $HOME
 	$(call link, config/inputrc, ~/.inputrc)
 	$(call link, config/nanorc, ~/.nanorc)
 	$(call link, config/screenrc, ~/.screenrc)
+	$(call link, config/tmux.conf, ~/.tmux.conf)
 	$(call link, config/zshrc, ~/.zshrc)
 
 .PHONY: git
