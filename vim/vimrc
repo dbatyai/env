@@ -4,6 +4,8 @@
 let mapleader = ","
 let g:mapleader = ","
 
+set grepprg=rg\ --vimgrep\ -S
+
 set nocompatible
 
 execute "silent! set <xUp>=\<Esc>[1;*A"
@@ -117,7 +119,6 @@ Plugin 'amix/open_file_under_cursor.vim'
 Plugin 'preservim/nerdcommenter'
 Plugin 'kqito/vim-easy-replace'
 
-Plugin 'dkprice/vim-easygrep'
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
 let g:ctrlp_line_prefix='  '
@@ -271,6 +272,8 @@ command! W execute 'silent! w !sudo tee % > /dev/null' <bar> e!
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufferClose()
+
+command! -nargs=+ Rg execute 'silent lgr! <args>' <bar> lopen
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
