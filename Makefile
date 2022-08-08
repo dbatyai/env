@@ -27,7 +27,7 @@ help: ## print this help message
 	@sed -n 's/^\([[:alnum:]-]*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
 
 .PHONY: user
-user: rcfiles git vim ycm kitty yay ## install user specific configs
+user: rcfiles git vim ycm yay ## install user specific configs
 
 .PHONY: rcfiles
 rcfiles: ## common rc files in $HOME
@@ -84,7 +84,6 @@ alacritty: ## alacritty terminal config
 kitty: ## kitty terminal config and screen terminfo
 	@mkdir -p ~/.config/kitty
 	$(call link, config/kitty.conf, ~/.config/kitty/kitty.conf)
-	@tic util/screen.xterm-kitty.terminfo
 
 .PHONY: yay
 yay: ## install yay pacman wrapper
