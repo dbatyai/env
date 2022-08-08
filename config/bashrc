@@ -39,9 +39,9 @@ alias umount="sudo umount"
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
 
-if [ -n "$SSH_CONNECTION" -a -z "$STY" ]; then
+if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
-  screen -dRR ssh-`echo $SSH_CONNECTION | cut -d ' ' -f 1`
+  tmux new -A -s ssh-`echo $SSH_CONNECTION | cut -d ' ' -f 1`
 fi
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
