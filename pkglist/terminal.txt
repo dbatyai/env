@@ -1,4 +1,3 @@
-ack
 base-devel
 bash
 bash-completion
@@ -9,12 +8,13 @@ gcc
 gdb
 git
 htop
-kitty-terminfo
 make
 man-db
 man-pages
 meson
+ripgrep
 screen
 sudo
+tmux
 vim
 wget
