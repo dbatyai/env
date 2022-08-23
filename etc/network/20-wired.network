@@ -6,6 +6,7 @@ DHCP=yes
 IPv6PrivacyExtensions=true
 
 [DHCPv4]
+UseDomains=true
 RouteMetric=10
 
 [IPv6AcceptRA]
