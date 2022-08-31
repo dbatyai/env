@@ -1,28 +1,20 @@
 # GRUB boot loader configuration
 
-GRUB_DISTRIBUTOR="Arch"
-
-GRUB_DEFAULT=0
+GRUB_DEFAULT=2
 GRUB_TIMEOUT=2
-# Set to 'countdown' or 'hidden' to change timeout behavior, press ESC key to display menu.
-GRUB_TIMEOUT_STYLE=countdown
-# Uncomment to make GRUB remember the last selection. This requires setting 'GRUB_DEFAULT=saved' above.
-#GRUB_SAVEDEFAULT=true
-
-GRUB_COLOR_NORMAL="dark-gray/black"
-GRUB_COLOR_HIGHLIGHT="light-blue/black"
-
-#GRUB_BACKGROUND="/boot/grub/arch.png"
-#GRUB_THEME="/path/to/gfxtheme"
-
+GRUB_DISTRIBUTOR="Arch"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
-GRUB_CMDLINE_LINUX=""
+GRUB_CMDLINE_LINUX="aduit=0 nvidia-drm.modeset=1"
 
 # Preload both GPT and MBR modules so that they are not missed
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 
 # Uncomment to enable booting from LUKS encrypted devices
 #GRUB_ENABLE_CRYPTODISK=y
+
+# Set to 'countdown' or 'hidden' to change timeout behavior,
+# press ESC key to display menu.
+GRUB_TIMEOUT_STYLE=countdown
 
 # Uncomment to use basic console
 GRUB_TERMINAL_INPUT=console
@@ -45,11 +37,23 @@ GRUB_GFXPAYLOAD_LINUX=keep
 # Uncomment to disable generation of recovery mode menu entries
 GRUB_DISABLE_RECOVERY=true
 
+# Uncomment and set to the desired menu colors.  Used by normal and wallpaper
+# modes only.  Entries specified as foreground/background.
+GRUB_COLOR_NORMAL="dark-gray/black"
+GRUB_COLOR_HIGHLIGHT="light-blue/black"
+
+# Uncomment one of them for the gfx desired, a image background or a gfxtheme
+GRUB_BACKGROUND="/boot/grub/arch.png"
+#GRUB_THEME="/path/to/gfxtheme"
+
 # Uncomment to get a beep at GRUB start
 #GRUB_INIT_TUNE="480 440 1"
+
+# Uncomment to make GRUB remember the last selection. This requires
+# setting 'GRUB_DEFAULT=saved' above.
+#GRUB_SAVEDEFAULT=true
 
 # Uncomment to disable submenus in boot menu
 #GRUB_DISABLE_SUBMENU=y
 
-# Enable os-prober
 GRUB_DISABLE_OS_PROBER=false
