@@ -151,6 +151,11 @@ zram: root ## zram config
 	$(call append, /etc/fstab, "/dev/zram0 none swap sw 0 0")
 	@modprobe zram && sleep 0.5 && swapon -a # sleep is needed to allow udev to initialize device
 
+.PHONY: htop
+htop: ## htop config
+	@mkdir -p ~/.config/htop
+	$(call link, config/htoprc, ~/.config/htop/htoprc)
+
 .PHONY: root
 root:
 	@if ! [ "$(shell id -u)" = 0 ]; then echo "This target requires root priviledge"; exit 1; fi
