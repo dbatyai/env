@@ -154,7 +154,7 @@ zram: root ## zram config
 .PHONY: htop
 htop: ## htop config
 	@mkdir -p ~/.config/htop
-	$(call link, config/htoprc, ~/.config/htop/htoprc)
+	$(call copy, config/htoprc, ~/.config/htop/htoprc)
 
 .PHONY: root
 root:
