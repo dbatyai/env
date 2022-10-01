@@ -1,8 +1,16 @@
 # Create a symlink if target is not yet a link, backing up the original
+ifndef HARDCOPY
 define link
 	@test ! -e $2 || test -L $2 || cp $2 $2~
 	@ln -sfvT `readlink -f $1` $2
 endef
+else
+define link
+	@test ! -e $2 || test -d $2 || cmp -s $1 $2 || cp $2 $2~
+	@test ! -L $2 || unlink $2
+	@cp -vTr `readlink -f $1` $2
+endef
+endif
 
 # Install target file to a destination, unless the destination is newer
 define install
@@ -68,7 +76,7 @@ ycm: vim-plugins ## install ycm completer
 	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
 
 .PHONY: vim
-vim: vim-config vim-plugins ycm ## everything vim related
+vim: vim-config vim-plugins ## everything vim related
 
 .PHONY: nvim
 nvim: vim ## neovim config
