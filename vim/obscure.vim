@@ -76,7 +76,7 @@ hi SpecialKey ctermfg=DarkGreen
 
 hi Error ctermfg=DarkRed ctermbg=None cterm=Bold,Reverse
 hi ErrorMsg ctermfg=DarkRed ctermbg=None
-hi WarningMsg ctermfg=1
+hi WarningMsg ctermfg=DarkYellow ctermbg=None
 
 hi FoldColumn ctermfg=DarkGray ctermbg=None
 hi Folded ctermfg=DarkGray ctermbg=None
