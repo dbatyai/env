@@ -18,14 +18,13 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-PS1='\[\033[0;90m\]\t \[\033[32m\]$_SSH_HOST\[\033[01m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
+PS1='\[\033[0;90m\]\t \[\033[32m\]$_SSH_HOST\[\033[01;32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
 
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 if command -v nvim &> /dev/null
 then
-  alias vim='nvim'
   export EDITOR='nvim'
 fi
 
@@ -34,10 +33,13 @@ alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclu
 alias e='$EDITOR'
 alias v='$EDITOR'
 
-alias mount="sudo mount"
-alias umount="sudo umount"
-alias pacman="sudo pacman"
-alias systemctl="sudo systemctl"
+if command -v sudo &> /dev/null && [[ $EUID -ne 0 ]]
+then
+  alias mount="sudo mount"
+  alias umount="sudo umount"
+  alias pacman="sudo pacman"
+  alias systemctl="sudo systemctl"
+fi
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
