@@ -6,6 +6,9 @@
 [[ $DISPLAY ]] && shopt -q -s checkwinsize
 shopt -s histappend
 
+STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+mkdir -p $STATE_HOME/bash
+HISTFILE=$STATE_HOME/bash/history
 HISTCONTROL=ignorespace:erasedups
 HISTSIZE=10000000
 HISTFILESIZE=10000000
