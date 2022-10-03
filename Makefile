@@ -48,9 +48,12 @@ config: ## common rc files in $HOME
 	$(call link, config/bashrc, ~/.bashrc)
 	$(call link, config/bash_profile, ~/.bash_profile)
 	$(call link, config/inputrc, ~/.inputrc)
-	$(call link, config/nanorc, ~/.nanorc)
 	$(call link, config/screenrc, ~/.screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
+
+.PHONY: nano
+nano: ## nano config
+	$(call link, config/nanorc, ~/.nanorc)
 
 .PHONY: git
 git: ## git config and template
