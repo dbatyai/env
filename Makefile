@@ -54,10 +54,10 @@ rcfiles: ## common rc files in $HOME
 
 .PHONY: git
 git: ## git config and template
-	$(call link, git/gitconfig, ~/.gitconfig)
-	$(call link, git/git-template, ~/.git-template)
-	$(call link, git/ctags-hook, ~/.ctags-hook)
-	@test -f ~/.git-user || sh git/git-user.sh
+	$(call link, git/gitconfig, ${XDG_CONFIG_HOME}/git/config)
+	$(call link, git/git-template, ${XDG_CONFIG_HOME}/git/git-template)
+	$(call link, git/ctags-hook, ${XDG_CONFIG_HOME}/git/ctags-hook)
+	@test -f ${XDG_CONFIG_HOME}/git/git-user || sh git/git-user.sh
 
 .PHONY: vim-config
 vim-config: ## vim config, colorscheme, syntax highlight

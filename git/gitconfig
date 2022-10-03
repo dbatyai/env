@@ -16,8 +16,8 @@
 [push]
   default = simple
 [init]
-  templatedir = ~/.git-template
+  templatedir = git-template
 [color]
   ui = auto
 [include]
-  path = ~/.git-user
+  path = git-user

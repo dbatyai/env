@@ -1,6 +1,7 @@
 #! /bin/bash
 
-user_file=~/.git-user
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+user_file=$XDG_CONFIG_HOME/git/git-user
 
 echo -n "Git user name: "
 read name || exit 1
