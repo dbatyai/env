@@ -41,10 +41,10 @@ help: ## print this help message
 	@sed -n 's/^\([[:alnum:]-]*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
 
 .PHONY: user
-user: rcfiles git vim ycm yay ## install user specific configs
+user: config git vim ycm yay ## install user specific configs
 
-.PHONY: rcfiles
-rcfiles: ## common rc files in $HOME
+.PHONY: config
+config: ## common rc files in $HOME
 	$(call link, config/bashrc, ~/.bashrc)
 	$(call link, config/bash_profile, ~/.bash_profile)
 	$(call link, config/inputrc, ~/.inputrc)
