@@ -34,22 +34,6 @@ filetype indent off
 set ffs=unix,dos,mac
 set encoding=utf8
 
-syntax enable
-try
-  colorscheme obscure
-catch
-  hi LineNr      ctermfg=DarkGray  guifg=DarkGray
-  hi FoldColumn  ctermbg=None
-  hi SignColumn  ctermbg=None
-  hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
-  hi ErrorMsg    ctermfg=DarkRed   ctermbg=None cterm=None
-  hi WarningMsg  ctermfg=DarkYellow  ctermbg=None cterm=None
-
-  hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
-  hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
-  hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=Bold,Reverse
-endtry
-
 set wildmenu
 set wildmode=longest,list
 set wildignore=*.o,*~,*.pyc,*/build/*
@@ -101,6 +85,25 @@ set novisualbell
 set t_vb=
 
 set lazyredraw " Don't redraw while executing macros
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+try
+  colorscheme obscure
+catch
+  hi LineNr      ctermfg=DarkGray  guifg=DarkGray
+  hi FoldColumn  ctermbg=None
+  hi SignColumn  ctermbg=None
+  hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
+  hi ErrorMsg    ctermfg=DarkRed   ctermbg=None cterm=None
+  hi WarningMsg  ctermfg=DarkYellow  ctermbg=None cterm=None
+
+  hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=Bold,Reverse
+endtry
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
