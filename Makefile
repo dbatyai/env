@@ -1,3 +1,5 @@
+XDG_CONFIG_HOME ?= ~/.config
+
 # Create a symlink if target is not yet a link, backing up the original
 ifndef HARDCOPY
 define link
@@ -48,7 +50,7 @@ rcfiles: ## common rc files in $HOME
 	$(call link, config/inputrc, ~/.inputrc)
 	$(call link, config/nanorc, ~/.nanorc)
 	$(call link, config/screenrc, ~/.screenrc)
-	$(call link, config/tmux.conf, ~/.config/tmux/tmux.conf)
+	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
 
 .PHONY: git
 git: ## git config and template
@@ -81,40 +83,40 @@ vim: vim-config vim-plugins ## everything vim related
 
 .PHONY: nvim
 nvim: vim ## neovim config
-	$(call link, config/nvim.vim, ~/.config/nvim/init.vim)
+	$(call link, config/nvim.vim, ${XDG_CONFIG_HOME}/nvim/init.vim)
 
 .PHONY: alacritty
 alacritty: ## alacritty terminal config
-	$(call link, config/alacritty.yml, ~/.config/alacritty/alacritty.yml)
+	$(call link, config/alacritty.yml, ${XDG_CONFIG_HOME}/alacritty/alacritty.yml)
 
 .PHONY: kitty
 kitty: ## kitty terminal config and screen terminfo
-	$(call link, config/kitty.conf, ~/.config/kitty/kitty.conf)
+	$(call link, config/kitty.conf, ${XDG_CONFIG_HOME}/kitty/kitty.conf)
 
 .PHONY: yay
 yay: ## install yay pacman wrapper
-	$(call link, config/yay.json, ~/.config/yay/config.json)
+	$(call link, config/yay.json, ${XDG_CONFIG_HOME}/yay/config.json)
 	@git clone https://aur.archlinux.org/yay /tmp/yay
 	@cd /tmp/yay && yes | makepkg -sircC
 
 .PHONY: sway
 sway: i3status ## sway and mako config files
-	$(call link, sway/config, ~/.config/sway/config)
-	$(call link, config/mako, ~/.config/mako/config)
-	$(call install, sway/config.d/10-monitor.conf, ~/.config/sway/config.d/10-monitor.conf)
-	$(call install, sway/config.d/20-input.conf, ~/.config/sway/config.d/20-input.conf)
-	$(call install, sway/config.d/30-idle.conf, ~/.config/sway/config.d/30-idle.conf)
-	$(call install, sway/config.d/40-mako.conf, ~/.config/sway/config.d/40-mako.conf)
+	$(call link, sway/config, ${XDG_CONFIG_HOME}/sway/config)
+	$(call link, config/mako, ${XDG_CONFIG_HOME}/mako/config)
+	$(call install, sway/config.d/10-monitor.conf, ${XDG_CONFIG_HOME}/sway/config.d/10-monitor.conf)
+	$(call install, sway/config.d/20-input.conf, ${XDG_CONFIG_HOME}/sway/config.d/20-input.conf)
+	$(call install, sway/config.d/30-idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/30-idle.conf)
+	$(call install, sway/config.d/40-mako.conf, ${XDG_CONFIG_HOME}/sway/config.d/40-mako.conf)
 	$(call copy, sway/displayrc, ~/.displayrc)
 
 .PHONY: i3status
 i3status: ## i3status config
-	$(call link, config/i3status.conf, ~/.config/i3status/config)
+	$(call link, config/i3status.conf, ${XDG_CONFIG_HOME}/i3status/config)
 
 .PHONY: i3
 i3: i3status ## i3 and dunst config files
-	$(call link, i3/config, ~/.config/i3/config)
-	$(call link, config/dunstrc, ~/.config/dunst/dunstrc)
+	$(call link, i3/config, ${XDG_CONFIG_HOME}/i3/config)
+	$(call link, config/dunstrc, ${XDG_CONFIG_HOME}/dunst/dunstrc)
 	$(call link, i3/lock.sh, ~/.lock.sh)
 	$(call copy, i3/displayrc, ~/.displayrc)
 
@@ -151,7 +153,7 @@ zram: root ## zram config
 
 .PHONY: htop
 htop: ## htop config
-	$(call copy, config/htoprc, ~/.config/htop/htoprc)
+	$(call copy, config/htoprc, ${XDG_CONFIG_HOME}/htop/htoprc)
 
 .PHONY: root
 root:
