@@ -46,7 +46,7 @@ user: config git vim ycm yay ## install user specific configs
 .PHONY: config
 config: ## common rc files in $HOME
 	$(call link, config/bashrc, ~/.bashrc)
-	$(call link, config/bash_profile, ~/.bash_profile)
+	$(call link, config/profile, ~/.profile)
 	$(call link, config/inputrc, ~/.inputrc)
 	$(call link, config/screenrc, ~/.screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
