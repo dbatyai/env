@@ -110,7 +110,7 @@ sway: i3status ## sway and mako config files
 	$(call install, sway/config.d/20-input.conf, ${XDG_CONFIG_HOME}/sway/config.d/20-input.conf)
 	$(call install, sway/config.d/30-idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/30-idle.conf)
 	$(call install, sway/config.d/40-mako.conf, ${XDG_CONFIG_HOME}/sway/config.d/40-mako.conf)
-	$(call copy, sway/displayrc, ~/.displayrc)
+	$(call copy, sway/desktoprc, ${XDG_CONFIG_HOME}/desktoprc)
 
 .PHONY: i3status
 i3status: ## i3status config
@@ -121,7 +121,7 @@ i3: i3status ## i3 and dunst config files
 	$(call link, i3/config, ${XDG_CONFIG_HOME}/i3/config)
 	$(call link, config/dunstrc, ${XDG_CONFIG_HOME}/dunst/dunstrc)
 	$(call link, i3/lock.sh, ~/.lock.sh)
-	$(call copy, i3/displayrc, ~/.displayrc)
+	$(call copy, i3/desktoprc, ${XDG_CONFIG_HOME}/desktoprc)
 
 .PHONY: x11
 x11: root ## x11 config files
