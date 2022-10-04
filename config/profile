@@ -9,6 +9,11 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # Source environment
 [[ -f $XDG_CONFIG_HOME/environment ]] && . $XDG_CONFIG_HOME/environment
 
+# Source bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   [[ -f $XDG_CONFIG_HOME/displayrc ]] && . $XDG_CONFIG_HOME/displayrc
 fi
+
+# vim: ft=bash
