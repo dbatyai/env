@@ -16,7 +16,7 @@
 [push]
   default = simple
 [init]
-  templatedir = git-template
+  templatedir = ~/.config/git/git-template
 [color]
   ui = auto
 [include]
