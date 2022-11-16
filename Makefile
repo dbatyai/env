@@ -143,6 +143,10 @@ network: root ## systemd-networkd config
 	$(call install, etc/network/20-wired.network, /etc/systemd/network/20-wired.network)
 	$(call install, etc/network/25-wireless.network, /etc/systemd/network/25-wireless.network)
 
+.PHONY: polkit
+polkit: root ## polkit rules
+	$(call install, etc/polkit/wheel.rules, /etc/polkit-1/rules.d/wheel.rules)
+
 .PHONY: grub
 grub: root ## install grub config
 	$(call install, etc/grub, /etc/default/grub)

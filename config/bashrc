@@ -41,7 +41,6 @@ then
   alias mount="sudo mount"
   alias umount="sudo umount"
   alias pacman="sudo pacman"
-  alias systemctl="sudo systemctl"
 fi
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then

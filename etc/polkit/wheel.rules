@@ -1,0 +1,6 @@
+/* Allow users in wheel group to do anything */
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
