@@ -106,11 +106,11 @@ yay: ## install yay pacman wrapper
 sway: i3status ## sway and mako config files
 	$(call link, sway/config, ${XDG_CONFIG_HOME}/sway/config)
 	$(call link, config/mako, ${XDG_CONFIG_HOME}/mako/config)
-	$(call install, sway/config.d/10-monitor.conf, ${XDG_CONFIG_HOME}/sway/config.d/10-monitor.conf)
-	$(call install, sway/config.d/20-input.conf, ${XDG_CONFIG_HOME}/sway/config.d/20-input.conf)
-	$(call install, sway/config.d/30-idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/30-idle.conf)
-	$(call install, sway/config.d/40-mako.conf, ${XDG_CONFIG_HOME}/sway/config.d/40-mako.conf)
-	$(call install, sway/config.d/50-i3status.conf, ${XDG_CONFIG_HOME}/sway/config.d/50-i3status.conf)
+	$(call install, sway/config.d/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
+	$(call install, sway/config.d/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
+	$(call install, sway/config.d/idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/idle.conf)
+	$(call install, sway/config.d/mako.conf, ${XDG_CONFIG_HOME}/sway/config.d/mako.conf)
+	$(call install, sway/config.d/i3status.conf, ${XDG_CONFIG_HOME}/sway/config.d/i3status.conf)
 	$(call copy, sway/desktoprc, ${XDG_CONFIG_HOME}/desktoprc)
 
 .PHONY: i3status
