@@ -7,7 +7,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Source environment
-[[ -f $XDG_CONFIG_HOME/environment ]] && . $XDG_CONFIG_HOME/environment
+if [[ -d $XDG_CONFIG_HOME/env ]]; then
+  for config in $XDG_CONFIG_HOME/env; do
+    [[ -r "$config" ]] && . "$config"
+  done
+  unset config
+fi
 
 # Source bashrc
 [[ -f ~/.bashrc ]] && . ~/.bashrc
