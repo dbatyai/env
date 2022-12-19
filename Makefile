@@ -73,8 +73,6 @@ vim-plugins: vim-config ## vim plugins
 	@mkdir -p ~/.vim/bundle
 	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	@vim +PluginInstall +qall
-	$(call link, vim/lightlinecolors.vim, \
-        ~/.vim/bundle/lightline.vim/autoload/lightline/colorscheme/lightlinecolors.vim)
 
 .PHONY: ycm
 ycm: vim-plugins ## install ycm completer

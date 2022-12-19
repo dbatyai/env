@@ -170,20 +170,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 let g:typescript_indent_disable = 1
 
-Plugin 'itchyny/lightline.vim'
-let g:lightline = {
-      \   'colorscheme': 'lightlinecolors',
-      \   'component': {
-      \     'lineinfo': '%4l:%-2v|%4L%<',
-      \     'modified': '[%M]',
-      \   },
-      \   'active': {
-      \     'left': [
-      \       ['mode', 'paste'], ['readonly', 'modified'], ['filename']
-      \     ]
-      \   }
-      \ }
-
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -324,3 +310,60 @@ function! VisualSelection() range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => StatusLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi StatusLine            ctermfg=White       ctermbg=None        cterm=None
+hi StatusLineNormal      ctermfg=0           ctermbg=76          cterm=None
+hi StatusLineInsert      ctermfg=0           ctermbg=75          cterm=None
+hi StatusLineVisual      ctermfg=0           ctermbg=214         cterm=None
+hi StatusLineReplace     ctermfg=0           ctermbg=203         cterm=None
+hi StatusLineCommand     ctermfg=0           ctermbg=DarkYellow  cterm=None
+hi StatusLineFlags       ctermfg=203         ctermbg=None        cterm=None
+hi StatusLinePercent     ctermfg=235         ctermbg=248         cterm=None
+hi StatusLineLocation    ctermfg=248         ctermbg=238         cterm=None
+
+hi StatusLineNC          ctermfg=DarkGray    ctermbg=None        cterm=None
+hi StatusLineFlagsNC     ctermfg=DarkGray    ctermbg=None        cterm=None
+hi StatusLinePercentNC   ctermfg=235         ctermbg=241         cterm=None
+hi StatusLineLocationNC  ctermfg=235         ctermbg=238         cterm=None
+
+let g:sl_modemap = {
+    \ 'n': 'Normal',
+    \ 'i': 'Insert',
+    \ 'R': 'Replace',
+    \ 'v': 'Visual',
+    \ 'V': 'Visual',
+    \ "\<c-v>": 'Visual',
+    \ 's': 'Visual',
+    \ 'S': 'Visual',
+    \ "\<c-s>": 'Visual',
+    \ 'c': 'Command',
+    \ 'r': 'Command',
+    \ 't': 'Command',
+    \ '!': 'Command',
+  \}
+
+fun! StatusLineColor(name)
+  return '%#StatusLine'.a:name.(g:statusline_winid ==# win_getid() ? '' : 'NC').'#'
+endf
+
+fun! StatusLineMode()
+  let l:mode=get(g:sl_modemap, mode(), '')
+  return StatusLineColor(l:mode).(g:statusline_winid ==# win_getid() ? ' '.toupper(l:mode).' ' : '').(&paste ? '| PASTE ' : '').'%*'
+endf
+
+fun! StatusLineFlags()
+  return StatusLineColor('Flags').'%h%w%r%m%*'
+endf
+
+fun! StatusLineLocation()
+  return StatusLineColor('Percent').' %3p%% '.StatusLineColor('Location').' %4l:%-2c | %L '
+endf
+
+fun! StatusLine()
+  return StatusLineMode().' %f '.StatusLineFlags().'%=%{&fileformat} | %{&encoding} | %{!empty(&ft) ? &ft : "none"} '.StatusLineLocation()
+endf
+
+set statusline=%!StatusLine()
