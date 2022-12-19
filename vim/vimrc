@@ -125,6 +125,11 @@ Plugin 'amix/open_file_under_cursor.vim'
 
 Plugin 'preservim/nerdcommenter'
 Plugin 'kqito/vim-easy-replace'
+Plugin 'preservim/nerdtree'
+let g:NERDTreeShowHidden=1
+let g:NERDTreeHijackNetrw=0
+let g:NERDTreeWinSize=45
+let g:NERDTreeMapJumpParent='-'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
@@ -188,10 +193,6 @@ let c_space_errors = 1
 let python_space_error_highlight = 1
 
 let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 15
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
