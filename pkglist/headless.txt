@@ -12,9 +12,9 @@ make
 man-db
 man-pages
 meson
+neovim
+python-pynvim
 ripgrep
-screen
 sudo
 tmux
 vim
-wget
