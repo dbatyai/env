@@ -45,7 +45,7 @@ fi
 
 if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
-  tmux new -A -s ssh-`echo $SSH_CONNECTION | cut -d ' ' -f 1`
+  tmux new -A -s ssh
 fi
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
