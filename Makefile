@@ -62,25 +62,12 @@ git: ## git config and template
 	$(call link, git/ctags-hook, ${XDG_CONFIG_HOME}/git/ctags-hook)
 	@test -f ${XDG_CONFIG_HOME}/git/git-user || sh git/git-user.sh
 
-.PHONY: vim-config
-vim-config: ## vim config, colorscheme, syntax highlight
+.PHONY: vim
+vim: ## vim config, colorscheme, syntax highlight
 	$(call link, vim/vimrc, ~/.vimrc)
 	$(call link, vim/obscure.vim, ~/.vim/colors/obscure.vim)
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
-
-.PHONY: vim-plugins
-vim-plugins: vim-config ## vim plugins
-	@mkdir -p ~/.vim/bundle
-	@test -d ~/.vim/bundle/Vundle.vim || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	@vim +PluginInstall +qall
-
-.PHONY: ycm
-ycm: vim-plugins ## install ycm completer
-	@vim +PluginUpdate +qall
-	@python3 ~/.vim/bundle/YouCompleteMe/install.py --clangd-completer
-
-.PHONY: vim
-vim: vim-config vim-plugins ## everything vim related
+	@curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 .PHONY: nvim
 nvim: vim ## neovim config

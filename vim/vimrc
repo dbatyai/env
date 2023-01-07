@@ -112,30 +112,27 @@ endtry
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
-Plugin 'ap/vim-buftabline'
-Plugin 'preservim/tagbar'
-Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'tpope/vim-fugitive'
-Plugin 'amix/open_file_under_cursor.vim'
+Plug 'ap/vim-buftabline'
+Plug 'preservim/tagbar'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'tpope/vim-fugitive'
+Plug 'amix/open_file_under_cursor.vim'
 
-Plugin 'preservim/nerdcommenter'
-Plugin 'kqito/vim-easy-replace'
-Plugin 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'kqito/vim-easy-replace'
+Plug 'preservim/nerdtree'
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw=0
 let g:NERDTreeWinSize=45
 let g:NERDTreeMapJumpParent='-'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_match_window='min:10,max:10'
 let g:ctrlp_line_prefix='  '
 
-Plugin 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 fun! EnableAutoFormat()
   if !empty(findfile('.clang-format', '.;'))
     execute 'ClangFormatAutoEnable'
@@ -145,11 +142,11 @@ fun! EnableAutoFormat()
 endfun
 au FileType c,cc,cpp call EnableAutoFormat()
 
-Plugin 'github/copilot.vim'
+Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
 
-Plugin 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_diagnostics_to_display = 100
 let g:ycm_open_loclist_on_ycm_diags = 0
@@ -162,15 +159,15 @@ nmap <silent> <leader>d <plug>(YCMHover)
 nmap <silent> <leader>D :exe "YcmDiags" <bar> ll1 <CR>
 nmap <silent> <leader>f :YcmCompleter FixIt<CR>
 
-Plugin 'tikhomirov/vim-glsl'
 au BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
+Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 
-Plugin 'rust-lang/rust.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 let g:typescript_indent_disable = 1
 
-call vundle#end()
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Config variables
