@@ -21,8 +21,6 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-PS1='\[\033[0;90m\]\t \[\033[32m\]$_SSH_HOST\[\033[01;32m\]\u\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(parse_git_branch)\[\033[00m\]$ '
-
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
@@ -47,5 +45,25 @@ if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then
   _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
   tmux new -A -s ssh
 fi
+
+make_prompt() {
+  local RESET="\[\e[0m\]"
+  local BOLD="\[\e[1m\]"
+
+  local TIME="\[\e[90m\]\t"
+  local HOST="\[\e[32m\]$_SSH_HOST"
+  local USERCOLOR="\[\e[32m\]"
+  if [ "$EUID" -eq 0 ]; then
+    USERCOLOR="\[\e[31m\]"
+  fi
+  local USER="$USERCOLOR\u"
+  local DIR="\[\e[34m\]\w"
+  local BRANCH="\[\e[31m\]\$(parse_git_branch)"
+
+  PS1="$RESET$TIME $HOST$BOLD$USER$RESET:$DIR$BRANCH$RESET\$ "
+}
+
+make_prompt
+unset -f make_prompt
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
