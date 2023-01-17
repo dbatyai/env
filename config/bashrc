@@ -26,7 +26,8 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 if command -v nvim &> /dev/null
 then
-  export EDITOR='nvim'
+  export EDITOR=nvim
+  alias vim=nvim
 fi
 
 alias ls='ls --color=auto'
