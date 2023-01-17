@@ -4,14 +4,11 @@ bash-completion
 clang
 cmake
 ctags
-gcc
-gdb
 git
 htop
 make
 man-db
 man-pages
-meson
 neovim
 python-pynvim
 ripgrep

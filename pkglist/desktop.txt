@@ -1,12 +1,7 @@
 alacritty
-dmenu
-dunst
-i3-wm
-i3lock
-i3status
-numlockx
+libnotify
 pipewire
+pipewire-pulse
+polkit
 ttf-dejavu
-xautolock
-xorg
-xorg-xinit
+wireplumber

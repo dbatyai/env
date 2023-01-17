@@ -1,0 +1,7 @@
+bemenu
+i3status
+mako
+sway
+swaybg
+wl-clipboard
+xorg-xwayland
