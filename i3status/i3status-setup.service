@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup device links for i3status
+Before=graphical-session.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/.config/i3status
+ExecStart=/bin/sh i3status.sh
+
+[Install]
+WantedBy=default.target
