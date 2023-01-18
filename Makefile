@@ -84,6 +84,7 @@ kitty: ## kitty terminal config and screen terminfo
 .PHONY: yay
 yay: ## install yay pacman wrapper
 	$(call link, config/yay.json, ${XDG_CONFIG_HOME}/yay/config.json)
+	@rm -rf /tmp/yay
 	@git clone https://aur.archlinux.org/yay /tmp/yay
 	@cd /tmp/yay && yes | makepkg -sircC
 
