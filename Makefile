@@ -130,8 +130,8 @@ pacman: root ## pacman config
 
 .PHONY: network
 network: root ## systemd-networkd config
-	$(call install, etc/network/20-wired.network, /etc/systemd/network/20-wired.network)
-	$(call install, etc/network/25-wireless.network, /etc/systemd/network/25-wireless.network)
+	$(call install, etc/network/wired.network, /etc/systemd/network/wired.network)
+	$(call install, etc/network/wireless.network, /etc/systemd/network/wireless.network)
 
 .PHONY: polkit
 polkit: root ## polkit rules
