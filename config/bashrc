@@ -21,11 +21,14 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+have() {
+  command -v $1 &> /dev/null
+}
+
 export EDITOR=vim
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
-if command -v nvim &> /dev/null
-then
+if have nvim; then
   export EDITOR=nvim
   alias vim=nvim
 fi
@@ -35,36 +38,44 @@ alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclu
 alias e='$EDITOR'
 alias v='$EDITOR'
 
-if command -v sudo &> /dev/null && [[ $EUID -ne 0 ]]
-then
+if have sudo && [[ $EUID -ne 0 ]]; then
   alias mount="sudo mount"
   alias umount="sudo umount"
   alias pacman="sudo pacman"
 fi
 
-if [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" ]; then
-  _SSH_HOST="(`echo $SSH_CONNECTION | cut -d ' ' -f 3`) "
-  tmux new -A -s ssh
-fi
-
 make_prompt() {
   local RESET="\[\e[0m\]"
   local BOLD="\[\e[1m\]"
+  local RED="\[\e[31m\]"
+  local GREEN="\[\e[32m\]"
+
+  local USERCOLOR="$GREEN"
+  if [ "$EUID" -eq 0 ]; then
+    USERCOLOR="$RED"
+  fi
+
+  local HOST=""
+  if [ -n "$SSH_CONNECTION" ]; then
+    HOST=" $GREEN(\h)$RESET"
+  elif have systemd-detect-virt && systemd-detect-virt -q; then
+    HOST=" $RED($(systemd-detect-virt))$RESET"
+  fi
 
   local TIME="\[\e[90m\]\t"
-  local HOST="\[\e[32m\]$_SSH_HOST"
-  local USERCOLOR="\[\e[32m\]"
-  if [ "$EUID" -eq 0 ]; then
-    USERCOLOR="\[\e[31m\]"
-  fi
-  local USER="$USERCOLOR\u"
   local DIR="\[\e[34m\]\w"
+  local USER=" $BOLD$USERCOLOR\u$RESET"
   local BRANCH="\[\e[31m\]\$(parse_git_branch)"
 
-  PS1="$RESET$TIME $HOST$BOLD$USER$RESET:$DIR$BRANCH$RESET\$ "
+  PS1="$RESET$TIME$USER$HOST:$DIR$BRANCH$RESET\$ "
 }
 
 make_prompt
 unset -f make_prompt
 
+if have tmux && [ -n "$SSH_CONNECTION" -a -z "$STY" -a -z "$TMUX" -a "$EUID" -ne 0 ]; then
+  tmux new -A -s ssh
+fi
+
+unset -f have
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
