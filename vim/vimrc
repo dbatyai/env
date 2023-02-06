@@ -118,6 +118,7 @@ Plug 'ap/vim-buftabline'
 Plug 'preservim/tagbar'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-fugitive'
+Plug 'jremmen/vim-ripgrep'
 Plug 'amix/open_file_under_cursor.vim'
 
 Plug 'preservim/nerdcommenter'
