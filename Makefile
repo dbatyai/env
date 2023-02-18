@@ -155,3 +155,7 @@ htop: ## htop config
 .PHONY: root
 root:
 	@if ! [ "$(shell id -u)" = 0 ]; then echo "This target requires root priviledge"; exit 1; fi
+
+.PHONY: clean
+clean:
+	@find ${HOME} -xtype l | xargs -L1 unlink
