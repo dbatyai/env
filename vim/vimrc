@@ -71,7 +71,7 @@ set nosi
 
 set linebreak
 set textwidth=120
-set formatoptions="croqbj"
+set formatoptions=croqbj
 set backspace=eol,start,indent
 set wrap
 set whichwrap+=<,>,h,l
@@ -260,7 +260,7 @@ if has("autocmd")
 endif
 
 " :W sudo saves the file
-command! W execute 'silent! w !sudo tee % > /dev/null' <bar> e!
+command! W execute 'silent! w !sudo -S tee % > /dev/null' <bar> e!
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufferClose()
