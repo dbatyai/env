@@ -148,6 +148,7 @@ let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
 
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
+let g:ycm_python_binary_path = 'python3'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_diagnostics_to_display = 100
 let g:ycm_open_loclist_on_ycm_diags = 0
