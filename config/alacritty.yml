@@ -748,6 +748,9 @@ cursor:
 key_bindings:
 - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
 - { key: Return,   mods: Control, chars: "\x1b[13;5u" }
+- { key: Home,           mods: Control|Shift,     action: ResetFontSize    }
+- { key: NumpadAdd,      mods: Control|Shift,     action: IncreaseFontSize }
+- { key: NumpadSubtract, mods: Control|Shift,     action: DecreaseFontSize }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
