@@ -147,7 +147,7 @@ Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
 
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
+Plug 'ycm-core/YouCompleteMe', { 'do': ':YcmBuild'}
 let g:ycm_python_binary_path = 'python3'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_diagnostics_to_display = 100
@@ -160,6 +160,22 @@ let g:ycm_warning_symbol = '--'
 nmap <silent> <leader>d <plug>(YCMHover)
 nmap <silent> <leader>D :exe "YcmDiags" <bar> ll1 <CR>
 nmap <silent> <leader>f :YcmCompleter FixIt<CR>
+
+fun! YcmBuild()
+  let l:cmd = [g:plugs['YouCompleteMe']['dir'] . 'install.py']
+
+  call add(l:cmd, '--clangd-completer')
+  if executable('rustc') | call add(l:cmd, "--rust-completer") | endif
+  if executable('npm') | call add(l:cmd, "--ts-completer") | endif
+
+  let l:cmd = join(l:cmd, ' ')
+  echom l:cmd
+
+  let l:result = system(l:cmd)
+  if v:shell_error == 0 | let l:result = 'Done' | endif
+  redraw | echom l:result
+endfun
+:com! YcmBuild call YcmBuild()
 
 au BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
 Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
