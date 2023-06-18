@@ -141,7 +141,8 @@ fun! EnableAutoFormat()
     execute 'ClangFormatAutoDisable'
   endif
 endfun
-au FileType c,cc,cpp call EnableAutoFormat()
+
+au FileType c,cc,cpp if exists(':ClangFormat') | call EnableAutoFormat() | endif
 
 Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
