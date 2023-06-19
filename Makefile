@@ -64,7 +64,7 @@ git: ## git config and template
 
 .PHONY: vim
 vim: ## vim config, colorscheme, syntax highlight
-	$(call link, vim/vimrc, ~/.vimrc)
+	$(call link, vim/vimrc, ~/.vim/vimrc)
 	$(call link, vim/obscure.vim, ~/.vim/colors/obscure.vim)
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
 	@curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
