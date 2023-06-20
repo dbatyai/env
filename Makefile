@@ -47,10 +47,11 @@ user: config git vim ycm yay ## install user specific configs
 config: ## common rc files in $HOME
 	$(call link, config/bashrc, ~/.bashrc)
 	$(call link, config/profile, ~/.profile)
-	$(call link, config/inputrc, ~/.inputrc)
-	$(call link, config/screenrc, ~/.screenrc)
-	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
+	$(call install, config/env.conf, ~/.config/env.conf)
 	$(call link, config/xdg.conf, ~/.config/environment.d/xdg.conf)
+	$(call link, config/inputrc, ${XDG_CONFIG_HOME}/readline/inputrc)
+	$(call link, config/screenrc, ${XDG_CONFIG_HOME}/screen/screenrc)
+	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
 
 .PHONY: nano
 nano: ## nano config
