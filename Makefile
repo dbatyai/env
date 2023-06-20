@@ -50,6 +50,7 @@ config: ## common rc files in $HOME
 	$(call link, config/inputrc, ~/.inputrc)
 	$(call link, config/screenrc, ~/.screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
+	$(call link, config/xdg.conf, ~/.config/environment.d/xdg.conf)
 
 .PHONY: nano
 nano: ## nano config
