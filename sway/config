@@ -128,4 +128,6 @@ bar {
 }
 
 include config.d/*
+include /etc/sway/config.d/*
+
 workspace 1
