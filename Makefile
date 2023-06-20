@@ -96,7 +96,6 @@ sway: i3status ## sway and mako config files
 	$(call install, sway/config.d/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
 	$(call install, sway/config.d/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
 	$(call install, sway/config.d/idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/idle.conf)
-	$(call install, sway/config.d/mako.conf, ${XDG_CONFIG_HOME}/sway/config.d/mako.conf)
 	$(call copy, sway/desktoprc, ${XDG_CONFIG_HOME}/desktoprc)
 
 .PHONY: i3status
