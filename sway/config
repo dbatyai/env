@@ -25,9 +25,9 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+c reload
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?     ' \
-                                  -B 'Power Off' 'systemctl poweroff' \
-                                  -B 'Suspend' 'systemctl suspend' \
-                                  -B 'Exit' 'swaymsg exit'
+                                  -Z 'Power Off' 'systemctl poweroff' \
+                                  -Z 'Suspend' 'systemctl suspend' \
+                                  -Z 'Exit' 'swaymsg exit'
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
