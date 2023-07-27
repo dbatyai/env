@@ -27,6 +27,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?     ' \
                                   -Z 'Power Off' 'systemctl poweroff' \
                                   -Z 'Suspend' 'systemctl suspend' \
+                                  -Z 'Reboot' 'systemctl reboot' \
                                   -Z 'Exit' 'swaymsg exit'
 
 # Pulse Audio controls
