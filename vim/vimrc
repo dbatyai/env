@@ -1,115 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
-let g:mapleader = ","
-
-set grepprg=rg\ --vimgrep\ -S
-
-set nocompatible
-
-execute "silent! set <xUp>=\<Esc>[1;*A"
-execute "silent! set <xDown>=\<Esc>[1;*B"
-execute "silent! set <xRight>=\<Esc>[1;*C"
-execute "silent! set <xLeft>=\<Esc>[1;*D"
-
-set history=5000
-set tags^=./.git/tags;
-set scrolloff=7 " Minimum number of line above or below the cursor
-set shm+=I "Don't show intro screen
-set guicursor=i:block
-
-if empty($STY) " Enable mouse support if not running in ssh
-  set mouse=a
-  set clipboard=unnamed,unnamedplus
-endif
-
-if !has('nvim')
-  set viminfofile=$HOME/.vim/viminfo
-endif
-
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-filetype plugin on
-filetype indent off
-
-set ffs=unix,dos,mac
-set encoding=utf8
-
-set wildmenu
-set wildmode=longest,list
-set wildignore=*.o,*~,*.pyc,*/build/*
-set completeopt=menuone
-
-set showtabline=2
-set laststatus=2
-set cmdheight=1
-set foldcolumn=1
-
-set switchbuf=useopen,usetab
-set hidden " Hide buffer when abandoned
-set nobackup
-set nowb
-set noswapfile
-set viminfo='1024,<1000,% "Re-open buffers on startup
-set autoread "Auto read when a file is changed from the outside
-set autowriteall
-
-set updatetime=1000
-set timeoutlen=500
-set ttimeoutlen=5
-
-set number " Line numbers
-set expandtab " Use spaces instead of tabs
-set smarttab " Enable smart tabs
-set shiftwidth=2
-set tabstop=2
-set noai
-set nosi
-
-set linebreak
-set textwidth=120
-set formatoptions=croqbj
-set backspace=eol,start,indent
-set wrap
-set whichwrap+=<,>,h,l
-
-set hlsearch
-set smartcase
-set ignorecase
-set incsearch
-set magic " Enable special characters in regex
-set showmatch " Show matching brackets
-set matchtime=2
-
-set noerrorbells
-set novisualbell
-set t_vb=
-
-set lazyredraw " Don't redraw while executing macros
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-try
-  colorscheme obscure
-catch
-  hi LineNr      ctermfg=DarkGray  guifg=DarkGray
-  hi FoldColumn  ctermbg=None
-  hi SignColumn  ctermbg=None
-  hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
-  hi ErrorMsg    ctermfg=DarkRed   ctermbg=None cterm=None
-  hi WarningMsg  ctermfg=DarkYellow  ctermbg=None cterm=None
-
-  hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
-  hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
-  hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=Bold,Reverse
-endtry
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
@@ -189,10 +78,124 @@ let g:typescript_indent_disable = 1
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+let g:mapleader = ","
+
+set grepprg=rg\ --vimgrep\ -S
+
+set nocompatible
+
+execute "silent! set <xUp>=\<Esc>[1;*A"
+execute "silent! set <xDown>=\<Esc>[1;*B"
+execute "silent! set <xRight>=\<Esc>[1;*C"
+execute "silent! set <xLeft>=\<Esc>[1;*D"
+
+set history=5000
+set tags^=./.git/tags;
+set scrolloff=7 " Minimum number of line above or below the cursor
+set shm+=I "Don't show intro screen
+set guicursor=i:block
+
+if empty($STY) " Enable mouse support if not running in ssh
+  set mouse=a
+  set clipboard=unnamed,unnamedplus
+endif
+
+if !has('nvim')
+  set viminfofile=$HOME/.vim/viminfo
+endif
+
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+filetype plugin on
+filetype indent on
+
+set ffs=unix,dos,mac
+set encoding=utf8
+
+set wildmenu
+set wildmode=longest,list
+set wildignore=*.o,*~,*.pyc,*/build/*
+set completeopt=menuone
+
+set showtabline=2
+set laststatus=2
+set cmdheight=1
+set foldcolumn=1
+
+set switchbuf=useopen,usetab
+set hidden " Hide buffer when abandoned
+set nobackup
+set nowb
+set noswapfile
+set viminfo='1024,<1000,% "Re-open buffers on startup
+set autoread "Auto read when a file is changed from the outside
+set autowriteall
+
+set updatetime=1000
+set timeoutlen=500
+set ttimeoutlen=5
+
+set number " Line numbers
+set expandtab " Use spaces instead of tabs
+set smarttab " Enable smart tabs
+set shiftwidth=2
+set tabstop=2
+set ai
+set si
+
+set linebreak
+set textwidth=120
+set formatoptions=croqbj
+set backspace=eol,start,indent
+set wrap
+set whichwrap+=<,>,h,l
+
+set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+set magic " Enable special characters in regex
+set showmatch " Show matching brackets
+set matchtime=2
+
+set noerrorbells
+set novisualbell
+set t_vb=
+
+set lazyredraw " Don't redraw while executing macros
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+try
+  colorscheme obscure
+catch
+  hi LineNr      ctermfg=DarkGray  guifg=DarkGray
+  hi FoldColumn  ctermbg=None
+  hi SignColumn  ctermbg=None
+  hi Error       ctermfg=DarkRed   ctermbg=None cterm=Bold,Reverse
+  hi ErrorMsg    ctermfg=DarkRed   ctermbg=None cterm=None
+  hi WarningMsg  ctermfg=DarkYellow  ctermbg=None cterm=None
+
+  hi TabLine      ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineFill  ctermfg=Gray       ctermbg=None  cterm=None
+  hi TabLineSel   ctermfg=DarkGreen  ctermbg=None  cterm=Bold,Reverse
+endtry
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Config variables
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let c_space_errors = 1
+
 let python_space_error_highlight = 1
+let g:pyindent_continue = 4
+let g:pyindent_open_paren = 4
 
 let g:netrw_banner = 0
 
