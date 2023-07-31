@@ -9,13 +9,16 @@ shopt -s histappend
 STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 mkdir -p $STATE_HOME/bash
 HISTFILE=$STATE_HOME/bash/history
-HISTCONTROL=ignorespace:erasedups
+HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=10000000
 HISTFILESIZE=10000000
 HISTIGNORE='ls:cd ..:cd ../:cd -:pwd:exit'
 
 PROMPT_COMMAND='history -a'
 PROMPT_DIRTRIM=2
+
+tmpfile=`mktemp`
+tac $HISTFILE | awk '{$1=$1};!a[$0]++' | tac > $tmpfile && mv $tmpfile $HISTFILE
 
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
