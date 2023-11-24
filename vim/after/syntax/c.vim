@@ -1,6 +1,6 @@
 syn match cOps '[+\-*%&|^!=~]'
 syn match cOps '\s/\s'
-syn match cParens '[(){}[\]<>]'
+syn match cParens '[(){}[\]<>]' containedin=cParen,cBracket
 syn match cMacroInvoc "\<[0-9A-Z_]\+\>" containedin=cPreCondit
 syn match cMemberAccess "\.\|->\|::"
 syn match cCommentTag '@\S*' contained containedin=cComment

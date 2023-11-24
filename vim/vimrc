@@ -154,6 +154,8 @@ set formatoptions=croqbj
 set backspace=eol,start,indent
 set wrap
 set whichwrap+=<,>,h,l
+set list
+set listchars=tab:➛\ ,trail:·,extends:>,precedes:<,nbsp:+
 
 set hlsearch
 set smartcase
@@ -236,6 +238,7 @@ noremap <leader>v :vsplit<CR>
 noremap <leader>s :split<CR>
 
 " Text manipulation
+nnoremap x "_d
 nnoremap xx "_dd
 nnoremap <S-x> "_D
 vnoremap x "_d

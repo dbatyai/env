@@ -70,8 +70,8 @@ hi Cursorline ctermfg=None ctermbg=None cterm=Bold
 
 hi LineNr ctermfg=DarkGray guifg=DarkGray
 hi SignColumn ctermbg=None
-hi VertSplit cterm=none
-hi NonText cterm=bold ctermfg=DarkBlue
+hi VertSplit cterm=None
+hi NonText cterm=None ctermfg=DarkGray
 hi SpecialKey ctermfg=DarkGreen
 
 hi Error ctermfg=DarkRed ctermbg=None cterm=Bold,Reverse
