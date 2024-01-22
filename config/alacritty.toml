@@ -1,0 +1,55 @@
+[colors.bright]
+black = "#767676"
+blue = "#6690fa"
+cyan = "#70d0f0"
+green = "#75f560"
+magenta = "#cd80c5"
+red = "#ff8585"
+white = "#d8d8d8"
+yellow = "#fffa50"
+
+[colors.normal]
+black = "#000000"
+blue = "#4075de"
+cyan = "#20afde"
+green = "#37c030"
+magenta = "#b060be"
+red = "#ff5d5d"
+white = "#bbbbbb"
+yellow = "#e7c730"
+
+[colors.primary]
+background = "#090909"
+foreground = "#c4c4c4"
+
+[cursor.style]
+blinking = "Never"
+shape = "Block"
+
+[bell]
+duration = 0
+
+[font]
+size = 9.5
+
+[font.normal]
+family = "DejaVu Sans Mono"
+
+[selection]
+save_to_clipboard = true
+
+[scrolling]
+history = 100000
+
+[window]
+decorations = "none"
+startup_mode = "Maximized"
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Shift", chars = "\u001B[13;2u" },
+  { key = "Return", mods = "Control", chars = "\u001B[13;5u" },
+  { key = "Home", mods = "Control|Shift", action = "ResetFontSize" },
+  { key = "NumpadAdd", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "NumpadSubtract", mods = "Control|Shift", action = "DecreaseFontSize" },
+]

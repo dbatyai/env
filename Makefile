@@ -77,7 +77,7 @@ nvim: vim ## neovim config
 
 .PHONY: alacritty
 alacritty: ## alacritty terminal config
-	$(call link, config/alacritty.yml, ${XDG_CONFIG_HOME}/alacritty/alacritty.yml)
+	$(call link, config/alacritty.toml, ${XDG_CONFIG_HOME}/alacritty/alacritty.toml)
 
 .PHONY: kitty
 kitty: ## kitty terminal config and screen terminfo
