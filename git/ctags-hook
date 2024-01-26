@@ -5,7 +5,9 @@ exec 2> /dev/null
 
 uuid="`cat /proc/sys/kernel/random/uuid`"
 dir="`git rev-parse --git-dir`"
-
 trap 'rm -f "$dir/$uuid.tags"' EXIT
-git ls-files | ctags --kinds-all=* --fields=* --tag-relative=yes -L - -I - -f"$dir/$uuid.tags" --languages=c,c++,Python
+
+langs="Asm,C,C++,Python,CMake,Make,Meson,Sh,Vim"
+
+git ls-files -co --exclude-standard | ctags --tag-relative=yes --languages=$langs --extras=* --fields=* -f"$dir/$uuid.tags" -L-
 mv "$dir/$uuid.tags" "$dir/tags"
