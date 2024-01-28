@@ -55,6 +55,8 @@ config: ## common rc files in $HOME
 vars: ## environment variables
 	$(call link, vars/10-xdg-dirs.conf, ~/.config/environment.d/10-xdg-dirs.conf)
 	$(call link, vars/20-pkg-dirs.conf, ~/.config/environment.d/20-pkg-dirs.conf)
+	$(call link, vars/moz.conf, ~/.config/environment.d/moz.conf)
+	$(call link, vars/qt.conf, ~/.config/environment.d/qt.conf)
 
 .PHONY: nano
 nano: ## nano config
@@ -101,6 +103,14 @@ sway: i3status ## sway and mako config files
 	$(call install, sway/config.d/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
 	$(call install, sway/config.d/idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/idle.conf)
 	$(call copy, sway/desktop, ${HOME}/.desktop)
+
+.PHONY: sway-nvidia
+sway-nvidia: sway ## sway config for nvidia
+	$(call link, sway/sway-nvidia.conf, ~/.config/environment.d/sway.conf)
+
+.PHONY: sway-intel
+sway-intel: sway ## sway config for intel
+	$(call link, sway/sway-intel.conf, ~/.config/environment.d/sway.conf)
 
 .PHONY: i3status
 i3status: ## i3status config

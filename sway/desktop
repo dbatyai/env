@@ -1,28 +1,9 @@
 #!/bin/sh
-
-# export GBM_BACKEND=nvidia-drm
-# export __GLX_VENDOR_LIBRARY_NAME=nvidia
-# export LIBVA_DRIVER_NAME=nvidia
-# export VDPAU_DRIVER=nvidia
-#
-# export __GL_GSYNC_ALLOWED=0
-# export __GL_VRR_ALLOWED=0
-#
-# export LIBVA_DRIVER_NAME=iHD
-# export VDPAU_DRIVER=va_gl
-#
-# export WLR_NO_HARDWARE_CURSORS=1
-# export WLR_RENDERER=vulkan
-# export WLR_DRM_NO_ATOMIC=1
-
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-
-export MOZ_WAYLAND=1
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_USE_XINPUT2=1
+# vim: ft=sh
 
 export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
-exec sway --unsupported-gpu "$@"
+
+dbus-update-activation-environment --systemd  --all
+exec dbus-run-session sway --unsupported-gpu "$@"
