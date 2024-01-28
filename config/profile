@@ -7,11 +7,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Source environment
-if [[ -r $XDG_CONFIG_HOME/env.conf ]]; then
-  export $(cat $XDG_CONFIG_HOME/env.conf | sed -e '/^#/d' -e '/^$/d' | envsubst)
-fi
-
-# Source environment
 if [[ -d $XDG_CONFIG_HOME/environment.d ]]; then
   for i in $XDG_CONFIG_HOME/environment.d/*; do
     if [ -r $i ]; then

@@ -41,17 +41,20 @@ help: ## print this help message
 	@sed -n 's/^\([[:alnum:]-]*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
 
 .PHONY: user
-user: config git vim ycm yay ## install user specific configs
+user: config vars git vim ycm yay ## install user specific configs
 
 .PHONY: config
 config: ## common rc files in $HOME
 	$(call link, config/bashrc, ~/.bashrc)
 	$(call link, config/profile, ~/.profile)
-	$(call install, config/env.conf, ~/.config/env.conf)
-	$(call link, config/xdg.conf, ~/.config/environment.d/xdg.conf)
 	$(call link, config/inputrc, ${XDG_CONFIG_HOME}/readline/inputrc)
 	$(call link, config/screenrc, ${XDG_CONFIG_HOME}/screen/screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
+
+.PHONY: vars
+vars: ## environment variables
+	$(call link, vars/10-xdg-dirs.conf, ~/.config/environment.d/10-xdg-dirs.conf)
+	$(call link, vars/20-pkg-dirs.conf, ~/.config/environment.d/20-pkg-dirs.conf)
 
 .PHONY: nano
 nano: ## nano config
