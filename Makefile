@@ -53,9 +53,9 @@ config: ## common rc files in $HOME
 
 .PHONY: vars
 vars: ## environment variables
-	$(call link, vars/10-xdg-dirs.conf, ~/.config/environment.d/10-xdg-dirs.conf)
-	$(call link, vars/20-pkg-dirs.conf, ~/.config/environment.d/20-pkg-dirs.conf)
-	$(call link, vars/moz.conf, ~/.config/environment.d/moz.conf)
+	$(call link, vars/00-xdg-init.conf, ~/.config/environment.d/00-xdg-init.conf)
+	$(call link, vars/05-xdg-dirs.conf, ~/.config/environment.d/05-xdg-dirs.conf)
+	$(call link, vars/mozilla.conf, ~/.config/environment.d/mozilla.conf)
 	$(call link, vars/qt.conf, ~/.config/environment.d/qt.conf)
 
 .PHONY: nano
