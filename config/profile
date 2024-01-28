@@ -8,12 +8,10 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 # Source environment
 if [[ -d $XDG_CONFIG_HOME/environment.d ]]; then
-  for i in $XDG_CONFIG_HOME/environment.d/*; do
-    if [ -r $i ]; then
-      . $i
-    fi
+  for file in $XDG_CONFIG_HOME/environment.d/*; do
+    [[ -r $file ]] && export $(cat $file | sed -e '/^#/d' -e '/^$/d' | envsubst)
   done
-  unset i
+  unset file
 fi
 
 # Source bashrc
