@@ -22,6 +22,8 @@ Plug 'amix/open_file_under_cursor.vim'
 
 Plug 'kqito/vim-easy-replace'
 Plug 'preservim/nerdcommenter'
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
 Plug 'preservim/nerdtree'
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw=0
