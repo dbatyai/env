@@ -364,6 +364,7 @@ fun! RemoveTrailingSpaces()
 
   let l:save_cursor = getpos(".")
   keepp %s/\s\+$//e
+  silent! execute prevnonblank('$') + 1 . ',$delete _'
   call setpos('.', l:save_cursor)
 endfun
 
