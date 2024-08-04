@@ -15,7 +15,7 @@
       test -n \"$dir\" && $EDITOR \"$dir/info/exclude\"; \
       unset -f _f;}; \
     _f"
-  bclean = ! git branch -vv | grep -v '\\*' | awk '/: gone]/{print $1}' | xargs git branch -d
+  bclean = ! git branch -vv | grep -v '^\\*' | awk '/: gone]/{print $1}' | xargs git branch -d
 [push]
   default = simple
 [init]
