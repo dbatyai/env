@@ -108,7 +108,7 @@ if has('nvim')
     let s:win = nvim_open_win(buf, 0, opts)
 
     augroup hoverdoc
-      au CursorMoved,CursorMovedI,WinScrolled,WinResized * call s:HideDoc()
+      au CursorMoved,CursorMovedI,WinScrolled * call s:HideDoc()
     augroup END
   endfunction
 
@@ -231,6 +231,8 @@ let g:pyindent_continue = 4
 let g:pyindent_open_paren = 4
 
 let g:netrw_banner = 0
+let g:netrw_fastbrowse = 0
+let g:netrw_liststyle = 3
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors
@@ -270,6 +272,7 @@ nnoremap <silent> <leader><Space> :BufExplorer<CR>
 nnoremap <silent> <C-N> :NERDTreeFocus<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
+nnoremap <silent> <leader>e :enew<CR>
 nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
 
 " Fast saving
