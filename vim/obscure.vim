@@ -81,7 +81,7 @@ hi WarningMsg ctermfg=DarkYellow ctermbg=None
 hi FoldColumn ctermfg=DarkGray ctermbg=None
 hi Folded ctermfg=DarkGray ctermbg=None
 
-hi Search cterm=None ctermfg=None ctermbg=236
+hi Search cterm=None ctermfg=None ctermbg=240
 hi IncSearch cterm=None ctermfg=White ctermbg=DarkGreen
 hi MatchParen ctermfg=75 ctermbg=237
 hi QuickFixLine ctermfg=None ctermbg=235
