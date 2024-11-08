@@ -193,6 +193,8 @@ set shiftwidth=2
 set tabstop=2
 set ai
 set si
+set cino+=g0 " Don't indent access specifiers
+set cino+=l1 " Case label alignment
 
 set linebreak
 set breakindent
