@@ -457,7 +457,7 @@ fun! StatusLineLocation()
 endf
 
 fun! StatusLine()
-  return StatusLineMode().' %f '.StatusLineFlags().'%=%{&fileformat} | %{&encoding} | %{!empty(&ft) ? &ft : "none"} '.StatusLineLocation()
+  return StatusLineMode().' %t '.StatusLineFlags().'%=%{&fileformat} | %{&encoding} | %{!empty(&ft) ? &ft : "none"} '.StatusLineLocation()
 endf
 
 set statusline=%!StatusLine()
