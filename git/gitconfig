@@ -5,7 +5,7 @@
   rb = rebase
   ff = pull -p --ff-only
   fr = pull -p -r
-  fp = push --force-with-lease
+  pf = push --force-with-lease
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   hidden = !git ls-files -v | grep "^[[:lower:]]"
