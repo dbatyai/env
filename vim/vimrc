@@ -45,7 +45,6 @@ endfun
 
 au FileType c,cc,cpp if exists(':ClangFormat') | call EnableAutoFormat() | endif
 
-Plug 'CoderCookE/vim-chatgpt'
 Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
