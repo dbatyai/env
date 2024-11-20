@@ -1,4 +1,4 @@
-bemenu
+wmenu
 i3status
 mako
 sway
