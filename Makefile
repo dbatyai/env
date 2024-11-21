@@ -1,20 +1,11 @@
 XDG_CONFIG_HOME ?= ~/.config
 
 # Create a symlink if target is not yet a link, backing up the original
-ifndef HARDCOPY
 define link
 	@mkdir -p `dirname $2`
 	@test ! -e $2 || test -L $2 || cp $2 $2~
 	@ln -sfvT `readlink -f $1` $2
 endef
-else
-define link
-	@mkdir -p `dirname $2`
-	@test ! -e $2 || test -d $2 || cmp -s $1 $2 || cp $2 $2~
-	@test ! -L $2 || unlink $2
-	@cp -vTr `readlink -f $1` $2
-endef
-endif
 
 # Install target file to a destination, unless the destination is newer
 define install
@@ -50,6 +41,7 @@ config: ## common rc files in $HOME
 	$(call link, config/inputrc, ${XDG_CONFIG_HOME}/readline/inputrc)
 	$(call link, config/screenrc, ${XDG_CONFIG_HOME}/screen/screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
+	$(call copy, config/htoprc, ${XDG_CONFIG_HOME}/htop/htoprc)
 
 .PHONY: vars
 vars: ## environment variables
@@ -74,19 +66,12 @@ vim: ## vim config, colorscheme, syntax highlight
 	$(call link, vim/vimrc, ~/.vim/vimrc)
 	$(call link, vim/obscure.vim, ~/.vim/colors/obscure.vim)
 	$(call link, vim/after/syntax, ~/.vim/after/syntax)
+	$(call link, vim/nvim.vim, ${XDG_CONFIG_HOME}/nvim/init.vim)
 	@curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-.PHONY: nvim
-nvim: vim ## neovim config
-	$(call link, config/nvim.vim, ${XDG_CONFIG_HOME}/nvim/init.vim)
 
 .PHONY: alacritty
 alacritty: ## alacritty terminal config
 	$(call link, config/alacritty.toml, ${XDG_CONFIG_HOME}/alacritty/alacritty.toml)
-
-.PHONY: kitty
-kitty: ## kitty terminal config and screen terminfo
-	$(call link, config/kitty.conf, ${XDG_CONFIG_HOME}/kitty/kitty.conf)
 
 .PHONY: yay
 yay: ## install yay pacman wrapper
@@ -96,42 +81,24 @@ yay: ## install yay pacman wrapper
 	@cd /tmp/yay && yes | makepkg -sircC
 
 .PHONY: sway
-sway: i3status ## sway and mako config files
+sway: ## sway desktop config files
 	$(call link, sway/config, ${XDG_CONFIG_HOME}/sway/config)
+	$(call link, sway/swaylock, ${XDG_CONFIG_HOME}/swaylock/config)
+	$(call link, sway/swayidle, ${XDG_CONFIG_HOME}/swayidle/config)
 	$(call link, config/mako, ${XDG_CONFIG_HOME}/mako/config)
-	$(call install, sway/config.d/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
-	$(call install, sway/config.d/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
-	$(call install, sway/config.d/idle.conf, ${XDG_CONFIG_HOME}/sway/config.d/idle.conf)
+	$(call link, i3status/i3status.conf, ${XDG_CONFIG_HOME}/i3status/config)
+	$(call install, i3status/i3status-run, ${HOME}/.local/bin/i3status-run)
+	$(call install, sway/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
+	$(call install, sway/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
 	$(call copy, sway/desktop, ${HOME}/.desktop)
 
-.PHONY: sway-nvidia
-sway-nvidia: sway ## sway config for nvidia
-	$(call link, sway/sway-nvidia.conf, ~/.config/environment.d/sway.conf)
+.PHONY: nvidia
+nvidia: ## nvidia specific config
+	$(call link, sway/env/nvidia.conf, ${XDG_CONFIG_HOME}/environment.d/graphics.conf)
 
-.PHONY: sway-intel
-sway-intel: sway ## sway config for intel
-	$(call link, sway/sway-intel.conf, ~/.config/environment.d/sway.conf)
-
-.PHONY: i3status
-i3status: ## i3status config
-	$(call link, i3status/i3status.conf, ${XDG_CONFIG_HOME}/i3status/config)
-	$(call install, i3status/i3status.sh, ${XDG_CONFIG_HOME}/i3status/i3status.sh)
-	$(call install, sway/config.d/i3status-setup.conf, ${XDG_CONFIG_HOME}/sway/config.d/i3status-setup.conf)
-
-.PHONY: i3
-i3: i3status ## i3 and dunst config files
-	$(call link, i3/config, ${XDG_CONFIG_HOME}/i3/config)
-	$(call link, config/dunstrc, ${XDG_CONFIG_HOME}/dunst/dunstrc)
-	$(call link, i3/lock.sh, ~/.lock.sh)
-	$(call copy, i3/desktop, ${HOME}/.desktop)
-
-.PHONY: x11
-x11: root ## x11 config files
-	$(call install, x11/xinitrc, /etc/X11/xinit/xinitrc)
-	$(call install, x11/xserverrc, /etc/X11/xinit/xserverrc)
-	$(call install, x11/xorg-conf/00-keyboard.conf, /etc/X11/xorg.conf.d/00-keyboard.conf)
-	$(call install, x11/xorg-conf/10-monitor.conf, /etc/X11/xorg.conf.d/10-monitor.conf)
-	$(call install, x11/xorg-conf/20-mouse.conf, /etc/X11/xorg.conf.d/20-mouse.conf)
+.PHONY: intel
+intel: ## intel specific config
+	$(call link, sway/env/intel.conf, ${XDG_CONFIG_HOME}/environment.d/graphics.conf)
 
 .PHONY: etc
 etc: pacman network grub ## config files in /etc
@@ -159,10 +126,6 @@ zram: root ## zram config
 	$(call append, /etc/modules-load.d/zram.conf, "zram")
 	$(call append, /etc/fstab, "/dev/zram0 none swap sw 0 0")
 	@modprobe zram && sleep 0.5 && swapon -a # sleep is needed to allow udev to initialize device
-
-.PHONY: htop
-htop: ## htop config
-	$(call copy, config/htoprc, ${XDG_CONFIG_HOME}/htop/htoprc)
 
 .PHONY: root
 root:

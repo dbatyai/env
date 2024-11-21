@@ -1,11 +1,5 @@
 # ~/.bash_profile
 
-# Export XDG directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-
 # Source environment
 if [[ -d $XDG_CONFIG_HOME/environment.d ]]; then
   for file in $XDG_CONFIG_HOME/environment.d/*; do
@@ -14,13 +8,13 @@ if [[ -d $XDG_CONFIG_HOME/environment.d ]]; then
   unset file
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Source bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   [[ -r $HOME/.desktop ]] && . $HOME/.desktop
 fi
-
-export PATH="$HOME/.local/bin:$PATH"
 
 # vim: ft=bash

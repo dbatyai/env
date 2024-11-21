@@ -6,12 +6,11 @@ cmake
 ctags
 git
 htop
-make
 man-db
 man-pages
+vim
 neovim
 python-pynvim
 ripgrep
 sudo
 tmux
-vim

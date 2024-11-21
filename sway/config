@@ -24,12 +24,15 @@ bindsym $mod+Return exec alacritty
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# exit i3 (logs you out of your X session)
+
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?     ' \
-                                  -Z 'Power Off' 'systemctl poweroff' \
+                                  -Z 'Shutdown' 'systemctl poweroff' \
                                   -Z 'Suspend' 'systemctl suspend' \
                                   -Z 'Reboot' 'systemctl reboot' \
-                                  -Z 'Exit' 'swaymsg exit'
+                                  -Z 'Logout' 'swaymsg exit'
+
+exec swayidle -w
+bindsym $mod+Shift+l exec pgrep swayidle | xargs kill -s USR1
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -109,10 +112,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# resize window (you can also use the mouse for that)
+# resize window
 mode "resize" {
-  # These bindings trigger as soon as you enter the resize mode
-
   bindsym Right resize grow width 5 px or 5 ppt
   bindsym Left resize shrink width 5 px or 5 ppt
   bindsym Down resize grow height 5 px or 5 ppt
@@ -127,10 +128,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-  status_command i3status
+  status_command i3status-run
 }
 
 include config.d/*

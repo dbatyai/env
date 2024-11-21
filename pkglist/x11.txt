@@ -1,9 +1,0 @@
-dmenu
-dunst
-i3-wm
-i3lock
-i3status
-numlockx
-xautolock
-xorg
-xorg-xinit

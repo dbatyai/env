@@ -5,3 +5,10 @@ pipewire-pulse
 polkit
 ttf-dejavu
 wireplumber
+wmenu
+i3status
+mako
+sway
+swaybg
+sway-contrib
+xorg-xwayland

@@ -94,7 +94,7 @@ hi WildMenu ctermfg=0 ctermbg=3
 hi Title ctermfg=5
 hi Directory ctermfg=DarkCyan
 
-hi Visual cterm=Reverse
+hi Visual cterm=Reverse ctermfg=None ctermbg=None
 hi VisualNOS cterm=Bold,Underline
 
 " Diff
