@@ -9,7 +9,7 @@ let g:colors_name="obscure"
 
 " Syntax
 hi Comment cterm=None ctermfg=69
-" hi Todo
+hi Todo cterm=bold ctermbg=Yellow ctermfg=Black
 
 hi Constant ctermfg=203
 hi String ctermfg=172
@@ -21,7 +21,7 @@ hi Boolean ctermfg=99
 hi Identifier ctermfg=6
 " hi Function
 
-hi Statement ctermfg=3
+hi Statement ctermfg=3 cterm=None gui=None
 " hi Conditional
 " hi Repeat
 " hi Label
@@ -58,7 +58,10 @@ hi TabLineFill ctermfg=Gray ctermbg=None cterm=None
 hi TabLineSel ctermfg=DarkGreen ctermbg=None cterm=Bold,Reverse
 
 " YCM
-hi Pmenu ctermfg=DarkCyan ctermbg=Black
+hi Pmenu cterm=None ctermfg=DarkCyan ctermbg=Black
+hi PmenuSel cterm=reverse ctermfg=none ctermbg=none
+hi NormalFloat ctermfg=Blue ctermbg=236
+
 hi YcmErrorSection ctermfg=Black ctermbg=DarkRed
 hi YcmErrorSign ctermfg=Black ctermbg=DarkRed
 hi YcmWarningSection ctermfg=Black ctermbg=DarkBlue
@@ -83,6 +86,7 @@ hi Folded ctermfg=DarkGray ctermbg=None
 
 hi Search cterm=None ctermfg=None ctermbg=240
 hi IncSearch cterm=None ctermfg=White ctermbg=DarkGreen
+hi CurSearch cterm=None ctermfg=None ctermbg=DarkGrey
 hi MatchParen ctermfg=75 ctermbg=237
 hi QuickFixLine ctermfg=None ctermbg=235
 
