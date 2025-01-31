@@ -3,7 +3,8 @@
 # Read `man 5 sway` for a complete reference.
 
 set $mod Mod4
-set $menu wmenu-run
+set $menu wmenu
+set $launcher $menu-run
 
 default_border pixel 1
 focus_follows_mouse no
@@ -17,7 +18,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start program launcher
-bindsym $mod+d exec $menu
+bindsym $mod+d exec $launcher
 
 # start a terminal
 bindsym $mod+Return exec alacritty
@@ -38,10 +39,10 @@ bindsym $mod+Shift+l exec pgrep swayidle | xargs kill -s USR1
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl -a next
+bindsym XF86AudioPrev exec --no-startup-id playerctl -a previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl -a play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl -a pause
 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
@@ -100,6 +101,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+bindsym $mod+tab exec echo | $menu -p "" | xargs swaymsg workspace
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -111,6 +114,8 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Shift+tab exec echo | $menu -p "" | xargs swaymsg move container workspace
 
 # resize window
 mode "resize" {
