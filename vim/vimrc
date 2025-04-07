@@ -13,26 +13,50 @@ let g:python3_host_prog = "/usr/bin/python3"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
 
-Plug 'ap/vim-buftabline'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/tagbar'
 Plug 'jremmen/vim-ripgrep'
-Plug 'amix/open_file_under_cursor.vim'
+
+Plug 'jlanzarotta/bufexplorer'
+nnoremap <silent> <leader><Space> :BufExplorer<CR>
+
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  Plug 'stevearc/oil.nvim'
+  nnoremap <silent> <C-E> :Oil<CR>
+
+  Plug 'romgrk/barbar.nvim'
+
+  Plug 'nvim-tree/nvim-tree.lua'
+  nnoremap <silent> <C-N> :NvimTreeToggle<CR>
+
+  Plug 'nvim-telescope/telescope.nvim'
+  nnoremap <silent> <C-P> :Telescope find_files<CR>
+  nnoremap <silent> <C-F> :Telescope live_grep<CR>
+  nnoremap <silent> <leader>t :Telescope tags<CR>
+else
+  Plug 'ap/vim-buftabline'
+  Plug 'amix/open_file_under_cursor.vim'
+
+  Plug 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_match_window='min:10,max:10'
+  let g:ctrlp_line_prefix='  '
+
+  Plug 'preservim/nerdtree'
+  let g:NERDTreeShowHidden=1
+  let g:NERDTreeHijackNetrw=0
+  let g:NERDTreeWinSize=45
+  let g:NERDTreeMapJumpParent='-'
+  nnoremap <silent> <C-N> :NERDTreeFocus<CR>
+endif
 
 Plug 'kqito/vim-easy-replace'
 Plug 'preservim/nerdcommenter'
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
-Plug 'preservim/nerdtree'
-let g:NERDTreeShowHidden=1
-let g:NERDTreeHijackNetrw=0
-let g:NERDTreeWinSize=45
-let g:NERDTreeMapJumpParent='-'
-
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_match_window='min:10,max:10'
-let g:ctrlp_line_prefix='  '
 
 Plug 'rhysd/vim-clang-format'
 fun! EnableAutoFormat()
@@ -44,6 +68,13 @@ fun! EnableAutoFormat()
 endfun
 
 au FileType c,cc,cpp if exists(':ClangFormat') | call EnableAutoFormat() | endif
+
+au BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
+Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+let g:typescript_indent_disable = 1
 
 Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
@@ -116,14 +147,52 @@ else
   nnoremap <silent> <leader>d <plug>(YCMHover)
 endif
 
-au BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp set filetype=glsl
-Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-let g:typescript_indent_disable = 1
-
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if has('nvim')
+  let g:loaded_netrw = 1
+  let g:barbar_auto_setup = v:false
+
+lua << EOF
+  xpcall(function()
+    require("oil").setup()
+  end, function(err)
+  end)
+
+  xpcall(function()
+    require("nvim-tree").setup()
+  end, function(err)
+  end)
+
+  xpcall(function()
+    require'barbar'.setup {
+      animation = false,
+      clickable = false,
+      icons = {
+        buffer_index = false,
+        buffer_number = false,
+        button = '',
+        modified = { button = '' },
+        separator = { left = '', right = '' },
+        separator_at_end = false,
+        filetype = { enabled = false },
+        alternate = { separator = { left = '', right = '' } },
+        inactive = { separator = { left = '', right = '' } },
+        visible = { separator = { left = '', right = '' } },
+      },
+      insert_at_end = true,
+      maximum_padding = 1,
+      maximum_length = 32,
+      no_name_title = '*',
+    }
+  end, function(err)
+  end)
+EOF
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Configuration
@@ -259,8 +328,6 @@ endtry
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tags
-noremap <leader>g <C-]>
-noremap <leader>t <C-T>
 noremap <C-g> <C-]>
 
 " Lists
@@ -270,12 +337,12 @@ nmap <silent> <leader>c :cnext<CR>
 " Buffer management
 nnoremap <silent> <M-Left> <Esc>:bp<CR>
 nnoremap <silent> <M-Right> <Esc>:bn<CR>
-nnoremap <silent> <leader><Space> :BufExplorer<CR>
-nnoremap <silent> <C-N> :NERDTreeFocus<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <silent> <leader>e :enew<CR>
 nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
+nnoremap <silent> <M-Up> <Esc>:tabnext<CR>
+nnoremap <silent> <M-Down> <Esc>:tabprevious<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
