@@ -413,6 +413,8 @@ if has("autocmd")
   augroup END
 
   au FileType qf :call QuickfixHighlight()
+
+  au BufLeave * :call BufferPrune()
 endif
 
 " :W sudo saves the file
@@ -456,6 +458,13 @@ fun! <SID>BufferClose()
   endif
 
   exe "bdelete! ".l:currentBufNum
+endfun
+
+fun! BufferPrune()
+  let l:buf = bufnr("%")
+  if getbufvar(l:buf, "&mod") == 0 && empty(bufname(l:buf))
+    set nobuflisted
+  endif
 endfun
 
 fun! VisualSelection() range
