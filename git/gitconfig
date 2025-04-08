@@ -7,6 +7,7 @@
   ff = pull -p --ff-only
   fr = pull -p -r
   pf = push --force-with-lease
+  pu = push -u origin HEAD
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   hidden = !git ls-files -v | grep "^[[:lower:]]"
@@ -16,7 +17,7 @@
       test -n \"$dir\" && $EDITOR \"$dir/info/exclude\"; \
       unset -f _f;}; \
     _f"
-  bclean = ! git branch -vv | grep -v '^\\*' | awk '/: gone]/{print $1}' | xargs git branch -d
+  bclean = ! git branch -vv | grep -v '^\\*' | awk '/: gone]/{print $1}' | xargs git branch -D
 [push]
   default = simple
 [init]
