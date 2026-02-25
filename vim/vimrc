@@ -8,9 +8,109 @@ let g:mapleader = ","
 
 let g:python3_host_prog = "/usr/bin/python3"
 
+filetype plugin on
+filetype indent on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set grepprg=rg\ --vimgrep\ -S
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+
+execute "silent! set <xUp>=\<Esc>[1;*A"
+execute "silent! set <xDown>=\<Esc>[1;*B"
+execute "silent! set <xRight>=\<Esc>[1;*C"
+execute "silent! set <xLeft>=\<Esc>[1;*D"
+
+set history=5000
+set tags^=./.git/tags;
+set scrolloff=7 " Minimum number of line above or below the cursor
+set shm+=I "Don't show intro screen
+set guicursor=i:block
+
+if empty($STY) " Enable mouse support if not running in ssh
+  set mouse=a
+  set clipboard=unnamed,unnamedplus
+endif
+
+if !has('nvim')
+  set viminfofile=$HOME/.vim/viminfo
+endif
+
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+set ffs=unix,dos,mac
+set encoding=utf8
+
+set wildmenu
+set wildmode=longest,list
+set wildignore=*.o,*~,*.pyc
+set completeopt=menuone,noselect,noinsert,popup
+
+set showtabline=2
+set laststatus=2
+set cmdheight=1
+set foldcolumn=1
+
+set switchbuf=useopen,usetab
+set hidden " Hide buffer when abandoned
+set nobackup
+set nowb
+set noswapfile
+set viminfo='1024,<1000,% "Re-open buffers on startup
+set autoread "Auto read when a file is changed from the outside
+set autowriteall
+
+set updatetime=1000
+set timeoutlen=500
+set ttimeoutlen=5
+
+set nu " Line numbers
+set rnu " Relative line numbers
+set expandtab " Use spaces instead of tabs
+set smarttab " Enable smart tabs
+set shiftwidth=2
+set tabstop=2
+set ai
+set si
+set cino+=g0 " Don't indent access specifiers
+set cino+=l1 " Case label alignment
+
+set linebreak
+set breakindent
+set showbreak=>
+set cpoptions+=n
+
+set textwidth=120
+set formatoptions=croqbj
+set backspace=eol,start,indent
+set wrap
+set whichwrap+=<,>,h,l
+set list
+set listchars=tab:➛\ ,trail:·,extends:>,precedes:<,nbsp:+
+
+set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+set magic " Enable special characters in regex
+set showmatch " Show matching brackets
+set matchtime=2
+
+set noerrorbells
+set novisualbell
+set t_vb=
+
+set lazyredraw " Don't redraw while executing macros
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:loaded_youcompleteme = 1
+" let g:loaded_copilot = 1
+
 call plug#begin()
 
 Plug 'tpope/vim-fugitive'
@@ -24,9 +124,11 @@ if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-tree/nvim-web-devicons'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-mini/mini.nvim'
+  Plug 'MeanderingProgrammer/render-markdown.nvim'
 
   Plug 'stevearc/oil.nvim'
-  nnoremap <silent> <C-E> :Oil<CR>
+  nnoremap <silent> <leader>o :Oil<CR>
 
   Plug 'romgrk/barbar.nvim'
 
@@ -34,9 +136,14 @@ if has('nvim')
   nnoremap <silent> <C-N> :NvimTreeToggle<CR>
 
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   nnoremap <silent> <C-P> :Telescope find_files<CR>
   nnoremap <silent> <C-F> :Telescope live_grep<CR>
   nnoremap <silent> <leader>t :Telescope tags<CR>
+
+  Plug 'olimorris/codecompanion.nvim'
+
+  Plug 'CopilotC-Nvim/CopilotChat.nvim'
 else
   Plug 'ap/vim-buftabline'
   Plug 'amix/open_file_under_cursor.vim'
@@ -80,6 +187,7 @@ let g:typescript_indent_disable = 1
 Plug 'github/copilot.vim'
 let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<CR>")
+
 
 Plug 'ycm-core/YouCompleteMe', { 'do': ':YcmBuild'}
 let g:ycm_python_binary_path = 'python'
@@ -157,15 +265,38 @@ call plug#end()
 if has('nvim')
   let g:loaded_netrw = 1
   let g:barbar_auto_setup = v:false
+  let g:markdown_fenced_languages = ['python', 'vim', 'sh', 'c', 'cpp']
 
 lua << EOF
   xpcall(function()
-    require("oil").setup()
+    require("oil").setup({
+      keymaps = {
+        ["q"] = { "actions.close", mode = "n" },
+        ["?"] = { "actions.show_help", mode = "n" },
+      },
+      view_options = {
+        show_hidden = true,
+      },
+    })
   end, function(err)
   end)
 
   xpcall(function()
     require("nvim-tree").setup()
+  end, function(err)
+  end)
+
+  xpcall(function()
+    require("telescope").setup {
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+          }
+        }
+      }
+    }
+
+    require("telescope").load_extension("ui-select")
   end, function(err)
   end)
 
@@ -192,105 +323,32 @@ lua << EOF
     }
   end, function(err)
   end)
+
+  xpcall(function()
+    require('CopilotChat').setup({
+    })
+  end, function(err)
+  end)
+
+  require('render-markdown').setup({})
+  require("codecompanion").setup({
+    strategies = {
+      chat = {
+        adapter = "copilot",
+        model = "claude-sonnet-4",
+      },
+      inline = {
+        adapter = "copilot",
+        model = "claude-sonnet-4",
+      },
+      cmd = {
+        adapter = "copilot",
+        model = "claude-sonnet-4",
+      }
+    },
+  })
 EOF
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Configuration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set grepprg=rg\ --vimgrep\ -S
-set grepformat=%f:%l:%c:%m,%f:%l:%m
-
-execute "silent! set <xUp>=\<Esc>[1;*A"
-execute "silent! set <xDown>=\<Esc>[1;*B"
-execute "silent! set <xRight>=\<Esc>[1;*C"
-execute "silent! set <xLeft>=\<Esc>[1;*D"
-
-set history=5000
-set tags^=./.git/tags;
-set scrolloff=7 " Minimum number of line above or below the cursor
-set shm+=I "Don't show intro screen
-set guicursor=i:block
-
-if empty($STY) " Enable mouse support if not running in ssh
-  set mouse=a
-  set clipboard=unnamed,unnamedplus
-endif
-
-if !has('nvim')
-  set viminfofile=$HOME/.vim/viminfo
-endif
-
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-filetype plugin on
-filetype indent on
-
-set ffs=unix,dos,mac
-set encoding=utf8
-
-set wildmenu
-set wildmode=longest,list
-set wildignore=*.o,*~,*.pyc
-set completeopt=menuone
-
-set showtabline=2
-set laststatus=2
-set cmdheight=1
-set foldcolumn=1
-
-set switchbuf=useopen,usetab
-set hidden " Hide buffer when abandoned
-set nobackup
-set nowb
-set noswapfile
-set viminfo='1024,<1000,% "Re-open buffers on startup
-set autoread "Auto read when a file is changed from the outside
-set autowriteall
-
-set updatetime=1000
-set timeoutlen=500
-set ttimeoutlen=5
-
-set nu " Line numbers
-set rnu " Relative line numbers
-set expandtab " Use spaces instead of tabs
-set smarttab " Enable smart tabs
-set shiftwidth=2
-set tabstop=2
-set ai
-set si
-set cino+=g0 " Don't indent access specifiers
-set cino+=l1 " Case label alignment
-
-set linebreak
-set breakindent
-set showbreak=>
-set cpoptions+=n
-
-set textwidth=120
-set formatoptions=croqbj
-set backspace=eol,start,indent
-set wrap
-set whichwrap+=<,>,h,l
-set list
-set listchars=tab:➛\ ,trail:·,extends:>,precedes:<,nbsp:+
-
-set hlsearch
-set smartcase
-set ignorecase
-set incsearch
-set magic " Enable special characters in regex
-set showmatch " Show matching brackets
-set matchtime=2
-
-set noerrorbells
-set novisualbell
-set t_vb=
-
-set lazyredraw " Don't redraw while executing macros
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Config variables
@@ -341,7 +399,7 @@ nnoremap <silent> <M-Right> <Esc>:bn<CR>
 nnoremap <silent> <leader>x :Bclose<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <silent> <leader>e :enew<CR>
-nnoremap <silent> <leader>o :%bd <bar> e# <bar> bd# <CR>
+nnoremap <silent> <leader>l :%bd <bar> e# <bar> bd# <CR>
 nnoremap <silent> <M-Up> <Esc>:tabnext<CR>
 nnoremap <silent> <M-Down> <Esc>:tabprevious<CR>
 
@@ -370,6 +428,7 @@ vnoremap x "_d
 vnoremap <S-x> "_D
 noremap <silent> <S-Up> <Esc>:m .-2<CR>
 noremap <silent> <S-Down> <Esc>:m .+1<CR>
+nnoremap <leader>y yiw
 
 " Remove the Windows ^M
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
