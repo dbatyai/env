@@ -3,7 +3,7 @@ XDG_CONFIG_HOME ?= ~/.config
 # Create a symlink if target is not yet a link, backing up the original
 define link
 	@mkdir -p `dirname $2`
-	@test ! -e $2 || test -L $2 || cp $2 $2~
+	@test ! -e $2 || test -L $2 || mv -fT $2 $2~
 	@ln -sfvT `readlink -f $1` $2
 endef
 
@@ -32,7 +32,7 @@ help: ## print this help message
 	@sed -n 's/^\([[:alnum:]-]*\):.*##\(.*\)/\1: \2/p' Makefile | column -t -s ':'
 
 .PHONY: user
-user: config vars git vim ycm yay ## install user specific configs
+user: config vars git nvim ycm yay ## install user specific configs
 
 .PHONY: config
 config: ## common rc files in $HOME
@@ -60,6 +60,20 @@ git: ## git config and template
 	$(call link, git/git-template, ${XDG_CONFIG_HOME}/git/git-template)
 	$(call link, git/ctags-hook, ${XDG_CONFIG_HOME}/git/ctags-hook)
 	@test -f ${XDG_CONFIG_HOME}/git/git-user || sh git/git-user.sh
+
+.PHONY: nvim
+nvim: ## nvim config
+	$(call link, nvim/init.lua, ${XDG_CONFIG_HOME}/nvim/init.lua)
+	$(call link, nvim/bindings.vim, ${XDG_CONFIG_HOME}/nvim/bindings.vim)
+	$(call link, nvim/color.vim, ${XDG_CONFIG_HOME}/nvim/color.vim)
+	$(call link, nvim/commands.vim, ${XDG_CONFIG_HOME}/nvim/commands.vim)
+	$(call link, nvim/options.vim, ${XDG_CONFIG_HOME}/nvim/options.vim)
+	$(call link, nvim/plugins.vim, ${XDG_CONFIG_HOME}/nvim/plugins.vim)
+	$(call link, nvim/statusline.vim, ${XDG_CONFIG_HOME}/nvim/statusline.vim)
+	$(call link, nvim/lua, ${XDG_CONFIG_HOME}/nvim/lua)
+	$(call link, nvim/colors, ${XDG_CONFIG_HOME}/nvim/colors)
+	$(call link, nvim/after, ${XDG_CONFIG_HOME}/nvim/after)
+	@curl -fLo ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 .PHONY: vim
 vim: ## vim config, colorscheme, syntax highlight
