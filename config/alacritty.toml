@@ -1,12 +1,6 @@
-[colors.bright]
-black = "#767676"
-blue = "#6690fa"
-cyan = "#70d0f0"
-green = "#75f560"
-magenta = "#cd80c5"
-red = "#ff8585"
-white = "#d8d8d8"
-yellow = "#fffa50"
+[colors.primary]
+background = "#090909"
+foreground = "#c4c4c4"
 
 [colors.normal]
 black = "#000000"
@@ -18,9 +12,25 @@ red = "#ff5d5d"
 white = "#bbbbbb"
 yellow = "#e7c730"
 
-[colors.primary]
-background = "#090909"
-foreground = "#c4c4c4"
+[colors.bright]
+black = "#767676"
+blue = "#6690fa"
+cyan = "#70d0f0"
+green = "#75f560"
+magenta = "#cd80c5"
+red = "#ff8585"
+white = "#d8d8d8"
+yellow = "#fffa50"
+
+[colors.dim]
+black = "#767676"
+blue = "#6690fa"
+cyan = "#70d0f0"
+green = "#75f560"
+magenta = "#cd80c5"
+red = "#ff8585"
+white = "#d8d8d8"
+yellow = "#fffa50"
 
 [cursor.style]
 blinking = "Never"
