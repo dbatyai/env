@@ -49,6 +49,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # Screenshot
 bindsym $mod+Shift+s exec slurp | grim -g- - | wl-copy -t image/png
+bindsym $mod+Shift+a exec slurp -p | grim -t ppm -g- - | convert - -format '#%[hex:p{0,0}]' info:- | wl-copy
 
 # kill focused window
 bindsym $mod+Shift+q kill
