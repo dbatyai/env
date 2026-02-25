@@ -2,8 +2,8 @@ vim.loader.enable()
 
 local utils = require("utils")
 
-local expected_version = "0.11.6"
-utils.is_compatible_version(expected_version)
+-- local expected_version = "0.11.6"
+-- utils.is_compatible_version(expected_version)
 
 vim.cmd("runtime options.vim")
 vim.cmd("runtime plugins.vim")

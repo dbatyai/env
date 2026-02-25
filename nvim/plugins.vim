@@ -63,8 +63,6 @@ let g:loaded_netrw = 1
 let g:barbar_auto_setup = v:false
 let g:markdown_fenced_languages = ['python', 'vim', 'sh', 'c', 'cpp', 'lua', 'rust', 'javascript', 'typescript']
 
-lua require'colorizer'.setup()
-
 lua << EOF
 xpcall(function()
   require("oil").setup({
@@ -86,6 +84,11 @@ end)
 
 xpcall(function()
   require("render-markdown").setup()
+end, function(err)
+end)
+
+xpcall(function()
+  require("colorizer").setup()
 end, function(err)
 end)
 
