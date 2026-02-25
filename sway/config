@@ -14,6 +14,8 @@ titlebar_padding 4 1
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
 
+include quirks/*
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 

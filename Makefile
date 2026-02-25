@@ -105,6 +105,7 @@ sway: ## sway desktop config files
 	$(call install, sway/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
 	$(call install, sway/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
 	$(call copy, sway/desktop, ${HOME}/.desktop)
+	@mkdir -p ${XDG_CONFIG_HOME}/sway/quirks
 
 .PHONY: nvidia
 nvidia: ## nvidia specific config
