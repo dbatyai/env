@@ -91,10 +91,10 @@ hi TabLine cterm=none ctermfg=none ctermbg=none gui=none guifg=none guibg=none
 hi TabLineFill cterm=none ctermfg=none ctermbg=none gui=none guifg=none guibg=none
 hi TabLineSel cterm=bold,reverse ctermfg=green ctermbg=none gui=bold,reverse guifg=#37c030 guibg=none
 
-hi Search cterm=none ctermfg=none ctermbg=240
-hi IncSearch cterm=none ctermfg=White ctermbg=darkgreen
-hi CurSearch cterm=none ctermfg=none ctermbg=darkgrey
-hi MatchParen ctermfg=75 ctermbg=237
+hi Search cterm=none ctermfg=none ctermbg=240 gui=none guifg=none guibg=#878787
+hi IncSearch cterm=none ctermfg=white ctermbg=darkgreen gui=none guifg=white guibg=#37c030
+hi CurSearch cterm=none ctermfg=none ctermbg=darkgrey gui=none guifg=none guibg=#878787
+hi MatchParen ctermfg=75 ctermbg=237 guifg=#4f7fff guibg=#3a3a3a
 hi QuickFixLine ctermfg=none ctermbg=235
 
 hi DiffAdd cterm=bold ctermfg=black ctermbg=darkgreen
