@@ -13,6 +13,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'stevearc/conform.nvim'
 Plug 'andymass/vim-matchup'
 Plug 'machakann/vim-sandwich'
 Plug 'catgoose/nvim-colorizer.lua'
@@ -73,6 +74,21 @@ xpcall(function()
       ["q"] = { "actions.close", mode = "n" },
       ["?"] = { "actions.show_help", mode = "n" },
     },
+  })
+end, function(err)
+end)
+
+xpcall(function()
+  require("conform").setup({
+    formatters_by_ft = {
+      python = { "black" },
+      cpp = { "clang-format" },
+      c = { "clang-format" },
+    },
+    format_on_save = {
+        timeout_ms = 100,
+        lsp_format = "fallback",
+      },
   })
 end, function(err)
 end)
