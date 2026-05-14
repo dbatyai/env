@@ -46,6 +46,10 @@ alias grep='grep -I --color=auto --exclude-dir=.git --exclude-dir=.cache --exclu
 alias e='$EDITOR'
 alias v='$EDITOR'
 
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
 if have sudo && [[ $EUID -ne 0 ]]; then
   alias mount="sudo mount"
   alias umount="sudo umount"
