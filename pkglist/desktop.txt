@@ -12,3 +12,4 @@ sway
 swaybg
 sway-contrib
 xorg-xwayland
+vm-clipboard
