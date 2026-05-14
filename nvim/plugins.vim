@@ -12,7 +12,6 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
-Plug 'neovim/nvim-lspconfig'
 Plug 'stevearc/conform.nvim'
 Plug 'andymass/vim-matchup'
 Plug 'machakann/vim-sandwich'
@@ -50,10 +49,13 @@ let g:NERDDefaultAlign = 'left'
 
 Plug 'github/copilot.vim'
 Plug 'olimorris/codecompanion.nvim'
+let g:copilot_no_tab_map = v:true
 let g:copilot_assume_mapped = v:true
 imap <silent><script><expr> <C-Cr> copilot#Accept("\<cr>")
 
-
+Plug 'neovim/nvim-lspconfig'
+nnoremap <silent> <leader>d :lua vim.diagnostic.open_float(nil, {focus=false})<cr>
+nnoremap <silent> <leader>f :lua vim.lsp.buf.code_action()<cr>
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +67,19 @@ let g:barbar_auto_setup = v:false
 let g:markdown_fenced_languages = ['python', 'vim', 'sh', 'c', 'cpp', 'lua', 'rust', 'javascript', 'typescript']
 
 lua << EOF
+vim.lsp.enable("clangd")
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  },
+})
+
 xpcall(function()
   require("oil").setup({
     view_options = {
