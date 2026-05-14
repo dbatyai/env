@@ -43,6 +43,17 @@ hi Type cterm=none ctermfg=40 ctermbg=none gui=none guifg=#00d700 guibg=none
 " hi Structure
 " hi Typedef
 
+hi @lsp.type.struct gui=none guifg=none guibg=none
+hi @lsp.type.class gui=none guifg=none guibg=none
+hi @lsp.type.enum gui=none guifg=none guibg=none
+hi @lsp.type.interface gui=none guifg=none guibg=none
+hi @lsp.type.namespace gui=none guifg=none guibg=none
+hi @lsp.type.method gui=none guifg=none guibg=none
+hi @lsp.type.variable gui=none guifg=none guibg=none
+hi @lsp.type.parameter gui=none guifg=#9f77af guibg=none
+
+hi @lsp.typemod.variable.readonly.cpp guifg=#d06060
+
 hi Special cterm=none ctermfg=135 ctermbg=none gui=none guifg=#af5fff guibg=none
 " hi SpecialChar
 " hi Tag
@@ -101,6 +112,13 @@ hi DiffAdd cterm=bold ctermfg=black ctermbg=darkgreen
 hi DiffChange ctermfg=black ctermbg=darkgray
 hi DiffDelete ctermfg=black ctermbg=darkred
 hi DiffText cterm=bold ctermfg=black ctermbg=darkblue
+
+hi DiagnosticError guifg=#ff5f5f
+hi DiagnosticUnderlineError gui=reverse guifg=#ff5f5f guisp=#ff5f5f
+hi DiagnosticWarn guifg=#f7b730
+hi DiagnosticUnderlineWarn gui=reverse guifg=#f7b730 guisp=#f7b730
+hi DiagnosticInfo guifg=#5f87ff
+hi DiagnosticHint guifg=#5f87ff
 
 hi YcmErrorSection ctermfg=black ctermbg=darkred
 hi YcmErrorSign ctermfg=black ctermbg=darkred
