@@ -4,8 +4,9 @@ bash-completion
 clang
 cmake
 ctags
-fd
+find-fd
 git
+tig
 htop
 man-db
 man-pages
