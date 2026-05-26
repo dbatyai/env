@@ -19,10 +19,7 @@ set shm+=I "Don't show intro screen
 set guicursor=i:block
 
 set mouse=a
-
-if !empty(provider#clipboard#Executable())
-  set clipboard+=unnamedplus
-endif
+set clipboard+=unnamed
 
 if !empty($STY) " Disable mouse support if running in ssh
   set mouse=
