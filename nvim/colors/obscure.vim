@@ -114,11 +114,12 @@ hi DiffDelete ctermfg=black ctermbg=darkred
 hi DiffText cterm=bold ctermfg=black ctermbg=darkblue
 
 hi DiagnosticError guifg=#ff5f5f
-hi DiagnosticUnderlineError gui=reverse guifg=#ff5f5f guisp=#ff5f5f
+hi DiagnosticUnderlineError gui=underline guibg=none guifg=none guisp=#ff5f5f
 hi DiagnosticWarn guifg=#f7b730
-hi DiagnosticUnderlineWarn gui=reverse guifg=#f7b730 guisp=#f7b730
+hi DiagnosticUnderlineWarn gui=underline guibg=none guifg=none guisp=#f7b730
 hi DiagnosticInfo guifg=#5f87ff
 hi DiagnosticHint guifg=#5f87ff
+hi DiagnosticUnnecessary guifg=#5f87ff
 
 hi YcmErrorSection ctermfg=black ctermbg=darkred
 hi YcmErrorSign ctermfg=black ctermbg=darkred
