@@ -12,7 +12,7 @@ HISTFILE=$STATE_HOME/bash/history
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=10000000
 HISTFILESIZE=10000000
-HISTIGNORE='ls:cd ..:cd ../:cd -:pwd:exit'
+HISTIGNORE='ls:cd ..:cd ../:cd -:pwd:exit:clear:reset:history:fg:jobs:kill:ps:top:man*:[0-9]*'
 
 PROMPT_COMMAND='history -a'
 PROMPT_DIRTRIM=2
