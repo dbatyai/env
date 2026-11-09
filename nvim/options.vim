@@ -11,7 +11,7 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-set tags^=./.git/tags;
+set tags^=.git/tags;
 
 set history=5000
 set scrolloff=7 " Minimum number of line above or below the cursor
