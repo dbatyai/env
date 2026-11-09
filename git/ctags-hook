@@ -8,6 +8,7 @@ dir="`git rev-parse --git-dir`"
 trap 'rm -f "$dir/$uuid.tags"' EXIT
 
 langs="Asm,C,C++,Python,CMake,Make,Meson,Sh,Vim"
+args="--tag-relative=yes --languages=$langs --extra=* --c++-kinds=+p "
 
-git ls-files -co --exclude-standard | ctags --tag-relative=yes --languages=$langs --extra=* -f"$dir/$uuid.tags" -L-
+git ls-files -co --exclude-standard | ctags $args -f$dir/$uuid.tags -L-
 mv "$dir/$uuid.tags" "$dir/tags"
