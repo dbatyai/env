@@ -51,7 +51,9 @@ Plug 'github/copilot.vim'
 Plug 'olimorris/codecompanion.nvim'
 let g:copilot_no_tab_map = v:true
 let g:copilot_assume_mapped = v:true
-imap <silent><script><expr> <C-Cr> copilot#Accept("\<cr>")
+inoremap <silent><script><expr> <C-Cr> copilot#Accept("\<cr>")
+inoremap <silent><script><expr> <S-Cr> copilot#AcceptLine()
+inoremap <silent><script><expr> <M-Cr> copilot#AcceptWord()
 
 Plug 'neovim/nvim-lspconfig'
 nnoremap <silent> <leader>d :lua vim.diagnostic.open_float(nil, {focus=false})<cr>
