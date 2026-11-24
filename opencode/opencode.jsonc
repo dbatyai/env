@@ -15,7 +15,15 @@
     { "action": "grep", "resource": "*", "effect": "allow" },
     { "action": "edit", "resource": "*", "effect": "allow" },
     { "action": "question", "resource": "*", "effect": "allow" },
+
+    { "action": "subagent", "resource": "explore", "effect": "allow" },
+    { "action": "subagent", "resource": "prototype", "effect": "allow" },
+    { "action": "subagent", "resource": "implement", "effect": "allow" },
+    { "action": "subagent", "resource": "refine", "effect": "allow" },
+
     { "action": "skill", "resource": "customize-opencode", "effect": "allow" },
+    { "action": "skill", "resource": "epic-description", "effect": "allow" },
+    { "action": "skill", "resource": "ticket-description", "effect": "allow" },
 
     { "action": "shell", "resource": "*", "effect": "allow" },
 
@@ -63,11 +71,6 @@
     { "action": "shell", "resource": "git branch --list *", "effect": "allow" },
 
     { "action": "external_directory", "resource": "/tmp/opencode", "effect": "allow" },
-    { "action": "external_directory", "resource": "/tmp/opencode/*", "effect": "allow" },
-
-    { "action": "subagent", "resource": "explore", "effect": "allow" },
-    { "action": "subagent", "resource": "prototype", "effect": "allow" },
-    { "action": "subagent", "resource": "implement", "effect": "allow" },
-    { "action": "subagent", "resource": "refine", "effect": "allow" }
+    { "action": "external_directory", "resource": "/tmp/opencode/*", "effect": "allow" }
   ]
 }
