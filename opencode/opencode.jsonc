@@ -46,16 +46,17 @@
       "git stash show*": "allow",
       "git stash list*": "allow",
 
+      "git mv*": "ask",
+      "git rm*": "ask",
+
       "git add*": "deny",
       "git branch*": "deny",
       "git checkout*": "deny",
       "git clean*": "deny",
       "git commit*": "deny",
-      "git mv*": "deny",
       "git push*": "deny",
       "git reset*": "deny",
       "git restore*": "deny",
-      "git rm*": "deny",
       "git -C*": "deny"
     },
     "external_directory": {
