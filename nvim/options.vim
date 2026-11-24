@@ -19,7 +19,7 @@ set shm+=I "Don't show intro screen
 set guicursor=i:block
 
 set mouse=a
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 
 if !empty($STY) " Disable mouse support if running in ssh
   set mouse=
@@ -77,7 +77,7 @@ set breakindent
 set showbreak=>
 set cpoptions+=n
 
-set textwidth=120
+set textwidth=110
 set formatoptions=croqbjmM
 set backspace=eol,start,indent
 set wrap
