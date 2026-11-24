@@ -213,7 +213,7 @@ grub: /etc/default/grub ## install grub config
 
 zram: /etc/udev/rules.d/99-zram.rules | sudo ## zram config
 	$(Q) $(SUDO) $(DOT) append /etc/modules-load.d/zram.conf "zram"
-	$(Q) $(SUDO) $(DOT) append /etc/fstab "/dev/zram0 none swap sw 0 0"
+	$(Q) $(SUDO) $(DOT) append /etc/fstab "/dev/zram0 none swap sw,pri=100 0 0"
 	$(Q) $(SUDO) modprobe zram && sleep 0.5 && $(SUDO) swapon -a # sleep lets udev initialize the device
 
 /etc/udev/rules.d/99-zram.rules: | sudo

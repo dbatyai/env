@@ -5,7 +5,8 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-echo -n "zram disk size: "
+echo -n "zram disk size [16G]: "
 read size || exit 1
+size=${size:-16G}
 
-echo "KERNEL==\"zram0\", ATTR{disksize}=\"$size\" RUN=\"/usr/bin/mkswap /dev/zram0\", TAG+=\"systemd\"" > $1
+echo "KERNEL==\"zram0\", ATTR{disksize}=\"$size\" RUN=\"/usr/sbin/mkswap /dev/zram0\", TAG+=\"systemd\"" > $1
