@@ -16,6 +16,7 @@ Ops:
   fetch   <url> <dest>          download url to dest, creating parent dirs
   prune   <repo> <dir[:depth]>...
                                 remove broken symlinks under dirs pointing into repo
+  unbackup <dir[:depth]>...     interactively remove *~ backups under dirs
 
 Environment:
   DRY_RUN=1                     print actions without performing them
@@ -154,6 +155,44 @@ dot_prune() {
 	done
 }
 
+# Interactively remove '*~' backups (files, links, dirs) under each <dir[:depth]>.
+dot_unbackup() {
+	[ $# -ge 1 ] || usage
+	if ! (: </dev/tty) 2>/dev/null; then
+		echo "unbackup: /dev/tty not readable, cannot prompt" >&2
+		exit 1
+	fi
+	for arg in "$@"; do
+		dir=$arg
+		depth=
+		case $arg in
+		*:*)
+			d=${arg##*:}
+			case $d in
+			'' | *[!0-9]*) ;;
+			*)
+				dir=${arg%:*}
+				depth=$d
+				;;
+			esac
+			;;
+		esac
+		[ -d "$dir" ] || continue
+		find "$dir" ${depth:+-maxdepth "$depth"} -name '*~' -print -prune |
+			while IFS= read -r b; do
+				printf "remove '%s'? [y/N] " "$b" >/dev/tty
+				ans=
+				read -r ans </dev/tty || :
+				case $ans in
+				y | Y)
+					act "remove '$b'" || continue
+					rm -rf "$b"
+					;;
+				esac
+			done
+	done
+}
+
 [ $# -ge 1 ] || usage
 op=$1
 shift
@@ -164,5 +203,6 @@ install) dot_install "$@" ;;
 append) dot_append "$@" ;;
 fetch) dot_fetch "$@" ;;
 prune) dot_prune "$@" ;;
+unbackup) dot_unbackup "$@" ;;
 *) usage ;;
 esac

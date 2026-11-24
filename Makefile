@@ -6,14 +6,18 @@ SUDO ?= sudo
 STAMPS := .stamps
 Q := $(if $(V),,@)
 
-# Directories scanned by 'clean' for broken links into this repo.
+# Directories scanned by 'clean-links' for broken links into this repo.
 # Optional ':<depth>' suffix limits search depth (passed through to 'dot prune').
 PRUNE_DIRS := $(HOME):1 $(XDG_CONFIG_HOME)
+
+# Directories scanned by 'clean-backups' for '*~' backups (same ':<depth>' syntax).
+BACKUP_DIRS := $(PRUNE_DIRS) $(HOME)/.local:2
 
 PLUG_URL := https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 .PHONY: help user config vars git nvim opencode sway alacritty nano yay \
-	$(Q) nvidia intel etc pacman network polkit grub zram sudo clean
+	nvidia intel etc pacman network polkit grub zram sudo clean \
+	clean-links clean-backups
 
 help: ## print this help message
 	$(Q) echo "Usage: make [V=1] TARGET..."
@@ -22,7 +26,7 @@ help: ## print this help message
 	$(Q) awk '/^[[:alnum:]_.-]+:.*## / { \
 		t = substr($$0, 1, index($$0, ":") - 1); \
 		d = substr($$0, index($$0, "## ") + 3); \
-		printf "  %-12s %s\n", t, d }' $(firstword $(MAKEFILE_LIST))
+		printf "  %-16s %s\n", t, d }' $(firstword $(MAKEFILE_LIST))
 
 $(STAMPS):
 	$(Q) mkdir -p $@
@@ -138,10 +142,10 @@ $(STAMPS)/yay: | $(STAMPS)
 # --- sway -------------------------------------------------------------------
 
 SWAY_FILES := \
-	$(Q) $(HOME)/.local/bin/i3status-run \
-	$(Q) $(XDG_CONFIG_HOME)/sway/config.d/output.conf \
-	$(Q) $(XDG_CONFIG_HOME)/sway/config.d/input.conf \
-	$(Q) $(HOME)/.desktop
+	$(HOME)/.local/bin/i3status-run \
+	$(XDG_CONFIG_HOME)/sway/config.d/output.conf \
+	$(XDG_CONFIG_HOME)/sway/config.d/input.conf \
+	$(HOME)/.desktop
 
 sway: $(STAMPS)/sway $(SWAY_FILES) ## sway desktop config files
 
@@ -221,6 +225,11 @@ zram: /etc/udev/rules.d/99-zram.rules | sudo ## zram config
 
 # --- clean ------------------------------------------------------------------
 
-clean: ## remove broken links into this repo and reset stamps
-	$(Q) $(DOT) prune $(CURDIR) $(PRUNE_DIRS)
+clean: ## remove stamp files
 	$(Q) rm -rf $(STAMPS)
+
+clean-links: ## remove broken links pointing into this repo
+	$(Q) $(DOT) prune $(CURDIR) $(PRUNE_DIRS)
+
+clean-backups: ## interactively remove *~ backups
+	$(Q) $(DOT) unbackup $(BACKUP_DIRS)
