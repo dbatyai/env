@@ -13,6 +13,7 @@ titlebar_padding 4 1
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
+seat * xcursor_theme Adwaita 16
 
 include quirks/*
 
@@ -92,6 +93,13 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+bindsym $mod+Prior workspace next_on_output
+bindsym $mod+Next workspace prev_on_output
+
+bindsym $mod+tab exec echo | $menu -p "" | xargs swaymsg workspace
+bindsym $mod+Shift+tab exec echo | $menu -p "" | xargs swaymsg move container workspace
+bindsym $mod+Ctrl+tab exec echo | $menu -p "" | xargs swaymsg rename workspace to
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -104,8 +112,6 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $mod+tab exec echo | $menu -p "" | xargs swaymsg workspace
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -117,8 +123,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-
-bindsym $mod+Shift+tab exec echo | $menu -p "" | xargs swaymsg move container workspace
 
 # resize window
 mode "resize" {
