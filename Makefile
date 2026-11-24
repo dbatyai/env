@@ -45,10 +45,11 @@ config: ## common rc files in $HOME
 
 .PHONY: vars
 vars: ## environment variables
-	$(call link, vars/00-xdg-init.conf, ~/.config/environment.d/00-xdg-init.conf)
-	$(call link, vars/05-xdg-dirs.conf, ~/.config/environment.d/05-xdg-dirs.conf)
-	$(call link, vars/mozilla.conf, ~/.config/environment.d/mozilla.conf)
-	$(call link, vars/qt.conf, ~/.config/environment.d/qt.conf)
+	$(call link, vars/00-xdg-init.conf, ${XDG_CONFIG_HOME}/environment.d/00-xdg-init.conf)
+	$(call link, vars/05-xdg-dirs.conf, ${XDG_CONFIG_HOME}/environment.d/05-xdg-dirs.conf)
+	$(call link, vars/mozilla.conf, ${XDG_CONFIG_HOME}/environment.d/mozilla.conf)
+	$(call link, vars/qt.conf, ${XDG_CONFIG_HOME}/environment.d/qt.conf)
+	$(call link, vars/pyenv.conf, ${XDG_CONFIG_HOME}/environment.d/pyenv.conf)
 
 .PHONY: nano
 nano: ## nano config
@@ -105,6 +106,7 @@ sway: ## sway desktop config files
 	$(call install, sway/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
 	$(call install, sway/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
 	$(call copy, sway/desktop, ${HOME}/.desktop)
+	$(call link, sway/env/sway.conf, ${XDG_CONFIG_HOME}/environment.d/sway.conf)
 	@mkdir -p ${XDG_CONFIG_HOME}/sway/quirks
 
 .PHONY: nvidia
