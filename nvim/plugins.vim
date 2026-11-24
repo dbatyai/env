@@ -16,6 +16,9 @@ Plug 'stevearc/conform.nvim'
 Plug 'andymass/vim-matchup'
 Plug 'machakann/vim-sandwich'
 Plug 'catgoose/nvim-colorizer.lua'
+Plug 'dbatyai/deconflict.nvim'
+nnoremap <silent> ]x :DeconflictNext<cr>
+nnoremap <silent> [x :DeconflictPrev<cr>
 
 Plug 'echasnovski/mini.nvim', {'branch': 'stable'}
 Plug 'MeanderingProgrammer/render-markdown.nvim', {'for': 'markdown'}
@@ -48,7 +51,6 @@ let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign = 'left'
 
 Plug 'github/copilot.vim'
-Plug 'olimorris/codecompanion.nvim'
 let g:copilot_no_tab_map = v:true
 let g:copilot_assume_mapped = v:true
 inoremap <silent><script><expr> <C-Cr> copilot#Accept("\<cr>")
@@ -121,12 +123,7 @@ end, function(err)
 end)
 
 xpcall(function()
-  require("colorizer").setup()
-end, function(err)
-end)
-
-xpcall(function()
-  require("codecompanion").setup()
+  require("deconflict").setup()
 end, function(err)
 end)
 
