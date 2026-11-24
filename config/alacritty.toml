@@ -43,7 +43,6 @@ duration = 0
 size = 9.5
 normal = { family = "DejaVuSansM Nerd Font Mono" }
 
-
 [selection]
 save_to_clipboard = true
 
