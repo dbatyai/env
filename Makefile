@@ -13,12 +13,6 @@ define install
 	@cmp -s $1 $2 || cp -buv $1 $2
 endef
 
-# Install target file to destination, replacing if present
-define copy
-	@mkdir -p `dirname $2`
-	@cmp -s $1 $2 || cp -v $1 $2
-endef
-
 # Append line to file if it not yet contains it
 define append
 	@test -e $1 && grep -Fqx $2 $1 || echo $2 >> $1
@@ -41,7 +35,7 @@ config: ## common rc files in $HOME
 	$(call link, config/inputrc, ${XDG_CONFIG_HOME}/readline/inputrc)
 	$(call link, config/screenrc, ${XDG_CONFIG_HOME}/screen/screenrc)
 	$(call link, config/tmux.conf, ${XDG_CONFIG_HOME}/tmux/tmux.conf)
-	$(call copy, config/htoprc, ${XDG_CONFIG_HOME}/htop/htoprc)
+	$(call install, config/htoprc, ${XDG_CONFIG_HOME}/htop/htoprc)
 
 .PHONY: vars
 vars: ## environment variables
@@ -61,6 +55,14 @@ git: ## git config and template
 	$(call link, git/git-template, ${XDG_CONFIG_HOME}/git/git-template)
 	$(call link, git/ctags-hook, ${XDG_CONFIG_HOME}/git/ctags-hook)
 	@test -f ${XDG_CONFIG_HOME}/git/git-user || sh git/git-user.sh
+
+.PHONY: opencode
+opencode: ## opencode config
+	$(call link, opencode/AGENTS.md, ${XDG_CONFIG_HOME}/opencode/AGENTS.md)
+	$(call link, opencode/opencode.jsonc, ${XDG_CONFIG_HOME}/opencode/opencode.jsonc)
+	$(call link, opencode/skill/, ${XDG_CONFIG_HOME}/opencode/skill/)
+	$(call link, opencode/agent/, ${XDG_CONFIG_HOME}/opencode/agent/)
+	$(call link, opencode/plugins/, ${XDG_CONFIG_HOME}/opencode/plugins/)
 
 .PHONY: nvim
 nvim: ## nvim config
@@ -105,7 +107,7 @@ sway: ## sway desktop config files
 	$(call install, i3status/i3status-run, ${HOME}/.local/bin/i3status-run)
 	$(call install, sway/output.conf, ${XDG_CONFIG_HOME}/sway/config.d/output.conf)
 	$(call install, sway/input.conf, ${XDG_CONFIG_HOME}/sway/config.d/input.conf)
-	$(call copy, sway/desktop, ${HOME}/.desktop)
+	$(call install, sway/desktop, ${HOME}/.desktop)
 	$(call link, sway/env/sway.conf, ${XDG_CONFIG_HOME}/environment.d/sway.conf)
 	@mkdir -p ${XDG_CONFIG_HOME}/sway/quirks
 

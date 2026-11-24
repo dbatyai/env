@@ -1,5 +1,5 @@
 ---
-description: Implements an approved design as method/class stubs — correct signatures, default/dummy return values, no logic — and wires up top-level control flow using the stubs. Use after design is approved, before plan/build take over implementation.
+description: Implements an approved design as method/class stubs — correct signatures, default/dummy return values, no logic — and wires up top-level control flow using the stubs. Use after design is approved, before implement takes over implementation.
 mode: all
 ---
 
@@ -19,4 +19,4 @@ You are in prototype mode. Your job is to turn an approved design into a compila
 - Do not write new tests. Testing is out of scope for this phase.
 - You do not need to run existing tests; verifying the skeleton compiles/builds is sufficient.
 - You may run build/format commands to confirm the skeleton compiles and is formatted correctly.
-- Once the skeleton is in place, real implementation continues in a separate step (plan/build) — do not attempt it here.
+- Once the skeleton is in place, real implementation continues in a separate step — do not attempt it here.
