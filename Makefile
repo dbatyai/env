@@ -91,8 +91,8 @@ opencode: $(STAMPS)/opencode ## opencode config
 $(STAMPS)/opencode: | $(STAMPS)
 	$(Q) $(DOT) link opencode/AGENTS.md $(XDG_CONFIG_HOME)/opencode/AGENTS.md
 	$(Q) $(DOT) link opencode/opencode.jsonc $(XDG_CONFIG_HOME)/opencode/opencode.jsonc
-	$(Q) $(DOT) link opencode/skill/ $(XDG_CONFIG_HOME)/opencode/skill/
-	$(Q) $(DOT) link opencode/agent/ $(XDG_CONFIG_HOME)/opencode/agent/
+	$(Q) $(DOT) link opencode/skills/ $(XDG_CONFIG_HOME)/opencode/skills/
+	$(Q) $(DOT) link opencode/agents/ $(XDG_CONFIG_HOME)/opencode/agents/
 	$(Q) $(DOT) link opencode/plugins/ $(XDG_CONFIG_HOME)/opencode/plugins/
 	$(Q) $(DOT) link opencode/opencode.conf $(XDG_CONFIG_HOME)/environment.d/opencode.conf
 	$(Q) touch $@

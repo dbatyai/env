@@ -3,72 +3,71 @@
   "formatter": true,
   "lsp": false,
   "default_agent": "design",
-  "instructions": [
-  ],
-  "permission": {
-    "*": "ask",
-    "read": "allow",
-    "glob": "allow",
-    "grep": "allow",
-    "edit": "allow",
-    "explore": "allow",
-    "todowrite": "allow",
-    "question": "allow",
-    "lsp": "allow",
-    "skill": {
-      "customize-opencode": "allow"
-    },
-    "bash": {
-      "*": "allow",
+  "instructions": [],
+  "experimental": {
+    "todo": true
+  },
+  // Ordered rules: the last matching rule wins.
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "ask" },
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "glob", "resource": "*", "effect": "allow" },
+    { "action": "grep", "resource": "*", "effect": "allow" },
+    { "action": "edit", "resource": "*", "effect": "allow" },
+    { "action": "question", "resource": "*", "effect": "allow" },
+    { "action": "skill", "resource": "customize-opencode", "effect": "allow" },
 
-      "rm*": "ask",
-      "mv*": "ask",
-      "dd*": "ask",
-      "shred*": "ask",
-      "truncate*": "ask",
+    { "action": "shell", "resource": "*", "effect": "allow" },
 
-      "git *": "ask",
+    { "action": "shell", "resource": "rm*", "effect": "ask" },
+    { "action": "shell", "resource": "mv*", "effect": "ask" },
+    { "action": "shell", "resource": "dd*", "effect": "ask" },
+    { "action": "shell", "resource": "shred*", "effect": "ask" },
+    { "action": "shell", "resource": "truncate*", "effect": "ask" },
 
-      "git status*": "allow",
-      "git log*": "allow",
-      "git ls-files*": "allow",
-      "git ls-tree*": "allow",
-      "git rev-list*": "allow",
-      "git show-ref*": "allow",
-      "git cat-file*": "allow",
-      "git diff*": "allow",
-      "git show*": "allow",
-      "git format-patch*": "allow",
-      "git branch *-[a|l]*": "allow",
-      "git rev-parse*": "allow",
-      "git grep*": "allow",
-      "git merge-base*": "allow",
-      "git describe*": "allow",
-      "git stash show*": "allow",
-      "git stash list*": "allow",
+    { "action": "shell", "resource": "git *", "effect": "ask" },
 
-      "git mv*": "ask",
-      "git rm*": "ask",
+    { "action": "shell", "resource": "git status*", "effect": "allow" },
+    { "action": "shell", "resource": "git log*", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-files*", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-tree*", "effect": "allow" },
+    { "action": "shell", "resource": "git rev-list*", "effect": "allow" },
+    { "action": "shell", "resource": "git show-ref*", "effect": "allow" },
+    { "action": "shell", "resource": "git cat-file*", "effect": "allow" },
+    { "action": "shell", "resource": "git diff*", "effect": "allow" },
+    { "action": "shell", "resource": "git show*", "effect": "allow" },
+    { "action": "shell", "resource": "git format-patch*", "effect": "allow" },
+    { "action": "shell", "resource": "git rev-parse*", "effect": "allow" },
+    { "action": "shell", "resource": "git grep*", "effect": "allow" },
+    { "action": "shell", "resource": "git merge-base*", "effect": "allow" },
+    { "action": "shell", "resource": "git describe*", "effect": "allow" },
+    { "action": "shell", "resource": "git stash show*", "effect": "allow" },
+    { "action": "shell", "resource": "git stash list*", "effect": "allow" },
 
-      "git add*": "deny",
-      "git branch*": "deny",
-      "git checkout*": "deny",
-      "git clean*": "deny",
-      "git commit*": "deny",
-      "git push*": "deny",
-      "git reset*": "deny",
-      "git restore*": "deny",
-      "git -C*": "deny"
-    },
-    "external_directory": {
-      "/tmp/opencode": "allow",
-      "/tmp/opencode/*": "allow",
-      "/tmp/opencode/**": "allow"
-    },
-    "task": {
-      "explore": "allow",
-      "scout": "allow",
-      "code-reviewer": "allow"
-    }
-  }
+    { "action": "shell", "resource": "git mv*", "effect": "ask" },
+    { "action": "shell", "resource": "git rm*", "effect": "ask" },
+
+    { "action": "shell", "resource": "git add*", "effect": "deny" },
+    { "action": "shell", "resource": "git branch*", "effect": "deny" },
+    { "action": "shell", "resource": "git checkout*", "effect": "deny" },
+    { "action": "shell", "resource": "git clean*", "effect": "deny" },
+    { "action": "shell", "resource": "git commit*", "effect": "deny" },
+    { "action": "shell", "resource": "git push*", "effect": "deny" },
+    { "action": "shell", "resource": "git reset*", "effect": "deny" },
+    { "action": "shell", "resource": "git restore*", "effect": "deny" },
+    { "action": "shell", "resource": "git -C*", "effect": "deny" },
+
+    // Read-only branch listing; must follow the "git branch*" deny.
+    { "action": "shell", "resource": "git branch -a *", "effect": "allow" },
+    { "action": "shell", "resource": "git branch -l *", "effect": "allow" },
+    { "action": "shell", "resource": "git branch --list *", "effect": "allow" },
+
+    { "action": "external_directory", "resource": "/tmp/opencode", "effect": "allow" },
+    { "action": "external_directory", "resource": "/tmp/opencode/*", "effect": "allow" },
+
+    { "action": "subagent", "resource": "explore", "effect": "allow" },
+    { "action": "subagent", "resource": "prototype", "effect": "allow" },
+    { "action": "subagent", "resource": "implement", "effect": "allow" },
+    { "action": "subagent", "resource": "refine", "effect": "allow" }
+  ]
 }
