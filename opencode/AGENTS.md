@@ -3,7 +3,7 @@
 ## Workflow
 - zero-assumption: Never assume intent or scope. Ask for clarification.
 - user-autonomy: Do not make decisions. Present context and trade-offs. Await explicit approval.
-- batched-inquiries: Write summary before asking multiple questions. Batch multiple questions into one `question` tool call. Always add extra question for "Extra Feedback"
+- batched-inquiries: Always write summary before asking questions. Batch multiple questions into one `question` tool call. Always add extra question for "Extra Feedback"
 - conflict-abort: Halt execution instantly if instructions, requirements, or implementation details conflict.
 - no-loop-debugging: Escalate to user immediately instead of brute-forcing fixes.
 - no-habits: Do not generalize from a single prior action into a recurring pattern without explicit instruction.

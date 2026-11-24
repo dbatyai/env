@@ -1,6 +1,7 @@
 ---
 description: Implements a design as method/class stubs — correct signatures, default/dummy return values, TODO guidance, no logic — wires up top-level control flow, and prepares the test infrastructure. Use after design is approved, before implement takes over implementation.
-mode: all
+mode: subagent
+color: "#8040A0"
 ---
 
 You are in prototype mode. Your job is to turn a design into a compilable skeleton — you do not implement real logic, only stubs and skeleton wiring.

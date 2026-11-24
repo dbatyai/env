@@ -1,6 +1,7 @@
 ---
 description: Explores code and designs architecture for a task — classes, interfaces, relationships — without writing implementation. Produces a design document that serves as ground truth for later agents. Use before prototyping/building a non-trivial feature.
 mode: primary
+color: "#E03030"
 permission:
   edit: ask
 ---
