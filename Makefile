@@ -91,6 +91,7 @@ opencode: $(STAMPS)/opencode ## opencode config
 $(STAMPS)/opencode: | $(STAMPS)
 	$(Q) $(DOT) link opencode/AGENTS.md $(XDG_CONFIG_HOME)/opencode/AGENTS.md
 	$(Q) $(DOT) link opencode/opencode.jsonc $(XDG_CONFIG_HOME)/opencode/opencode.jsonc
+	$(Q) $(DOT) link opencode/cli.json $(XDG_CONFIG_HOME)/opencode/cli.json
 	$(Q) $(DOT) link opencode/skills/ $(XDG_CONFIG_HOME)/opencode/skills/
 	$(Q) $(DOT) link opencode/agents/ $(XDG_CONFIG_HOME)/opencode/agents/
 	$(Q) $(DOT) link opencode/plugins/ $(XDG_CONFIG_HOME)/opencode/plugins/

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "show"
+  },
+  "animations": true,
+  "keybinds": {
+    "leader": "alt+,",
+    "session.tab.next": "ctrl+tab,alt+right",
+    "session.tab.previous": "ctrl+shift+tab,alt+left",
+    "session.tab.close": "alt+q",
+    "session.new": "alt+e",
+    "session.list": "alt+space"
+  }
+}
